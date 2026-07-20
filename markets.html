@@ -37,15 +37,6 @@
   .sec{margin:8px 0 14px; display:flex; align-items:center; gap:12px;}
   .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
   .sec .bar{height:1px; background:var(--line); flex:1;}
-  .widget-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:6px; box-shadow:var(--shadow); overflow:hidden; min-height:80px; display:flex; align-items:center; justify-content:center; color:var(--faint); font-size:13px;}
-  .widget-card .tradingview-widget-container, .widget-card .tradingview-widget-container__widget{height:100%; width:100%;}
-  /* TradingView's embed script appends its own iframe wrapper to <body> rather than into our container (observed behavior on this widget script) — so style it wherever it lands via :has(), matching our reading column instead of fighting the escape. */
-  body > div:has(> iframe[src*="tradingview"]){
-    max-width:960px; margin:18px auto 40px; padding:0 22px; box-sizing:border-box;
-  }
-  body > div:has(> iframe[src*="tradingview"]) iframe{
-    border-radius:12px; border:1px solid var(--line); box-shadow:var(--shadow); display:block;
-  }
   .note{font-size:13px; color:var(--muted); padding:14px 2px 30px; line-height:1.6;}
   .note b{color:var(--ink);}
   footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
@@ -76,11 +67,11 @@
   </header>
 
   <div class="sec"><h2>AI Basket — Performance Comparison</h2><div class="bar"></div></div>
-  <div class="widget-card">Loading live chart…</div>
   <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
   </div>
-  <div class="note">This is a <b>normalized percentage-change comparison</b> (not raw share price) so all nine names plot on one scale. Use the range buttons in the chart's bottom toolbar (1D / 5D / 1M / 3M / 6M / YTD / 1Y / 5Y / All) to change the window, or drag directly on the chart. Click a name in the legend to toggle it on/off. Basket: <b>Nvidia (NVDA)</b>, <b>Microsoft (MSFT)</b>, <b>Alphabet (GOOGL)</b>, <b>Meta (META)</b>, <b>Amazon (AMZN)</b>, <b>Apple (AAPL)</b>, <b>Oracle (ORCL)</b>, <b>Palantir (PLTR)</b>, <b>AMD (AMD)</b> — the public companies most directly exposed to the AI buildout. Anthropic and OpenAI aren't included since neither is publicly traded. Data and chart courtesy of TradingView; prices are typically delayed slightly and this is not investment advice. <i>(If the chart appears below the footer, that's a quirk of how TradingView embeds itself on this page — just scroll down.)</i></div>
+  <div class="note">This is a <b>normalized percentage-change comparison</b> (not raw share price) so all nine names plot on one scale. Use the range buttons in the chart's own toolbar (1D / 5D / 1M / 3M / 6M / YTD / 1Y / 5Y / All) to change the window, or drag directly on the chart. Click a name in the legend to toggle it on/off. Basket: <b>Nvidia (NVDA)</b>, <b>Microsoft (MSFT)</b>, <b>Alphabet (GOOGL)</b>, <b>Meta (META)</b>, <b>Amazon (AMZN)</b>, <b>Apple (AAPL)</b>, <b>Oracle (ORCL)</b>, <b>Palantir (PLTR)</b>, <b>AMD (AMD)</b> — the public companies most directly exposed to the AI buildout. Anthropic and OpenAI aren't included since neither is publicly traded. Data and chart courtesy of TradingView; prices are typically delayed slightly and this is not investment advice.</div>
+  <div class="note" style="padding-top:0;">↓ The interactive chart itself loads full-width below the footer — that's simply how TradingView's embed places itself on the page.</div>
 
   <footer>
     <b>The AI Brief</b> · Markets view · sourced live from TradingView on each page load.
