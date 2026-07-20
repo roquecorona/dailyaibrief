@@ -37,8 +37,8 @@
   .sec{margin:8px 0 14px; display:flex; align-items:center; gap:12px;}
   .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
   .sec .bar{height:1px; background:var(--line); flex:1;}
-  .widget-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:6px; box-shadow:var(--shadow); overflow:hidden; min-height:572px; position:relative; transform:translateZ(0); contain:layout;}
-  .widget-card iframe{position:relative !important; width:100% !important; height:560px !important; left:auto !important; top:auto !important;}
+  .widget-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:6px; box-shadow:var(--shadow); overflow:hidden; height:610px;}
+  .widget-card .tradingview-widget-container, .widget-card .tradingview-widget-container__widget{height:100%; width:100%;}
   .note{font-size:13px; color:var(--muted); padding:14px 2px 30px; line-height:1.6;}
   .note b{color:var(--ink);}
   footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
@@ -71,10 +71,10 @@
   <div class="sec"><h2>AI Basket — Performance Comparison</h2><div class="bar"></div></div>
   <div class="widget-card">
     <div class="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget" id="tv-symbol-overview"></div>
+      <div class="tradingview-widget-container__widget"></div>
     </div>
   </div>
-  <div class="note">Click any range button (1D / 5D / 1M / 3M / 6M / YTD / 1Y / 5Y / All) on the chart to change the window. Basket: <b>Nvidia (NVDA)</b>, <b>Microsoft (MSFT)</b>, <b>Alphabet (GOOGL)</b>, <b>Meta (META)</b>, <b>Amazon (AMZN)</b>, <b>Apple (AAPL)</b>, <b>Oracle (ORCL)</b>, <b>Palantir (PLTR)</b>, <b>AMD (AMD)</b> — the public companies most directly exposed to the AI buildout. Anthropic and OpenAI aren't included since neither is publicly traded. Data and chart courtesy of TradingView; prices are typically delayed slightly and this is not investment advice.</div>
+  <div class="note">This is a <b>normalized percentage-change comparison</b> (not raw share price) so all nine names plot on one scale. Use the range buttons in the chart's bottom toolbar (1D / 5D / 1M / 3M / 6M / YTD / 1Y / 5Y / All) to change the window, or drag directly on the chart. Click a name in the legend to toggle it on/off. Basket: <b>Nvidia (NVDA)</b>, <b>Microsoft (MSFT)</b>, <b>Alphabet (GOOGL)</b>, <b>Meta (META)</b>, <b>Amazon (AMZN)</b>, <b>Apple (AAPL)</b>, <b>Oracle (ORCL)</b>, <b>Palantir (PLTR)</b>, <b>AMD (AMD)</b> — the public companies most directly exposed to the AI buildout. Anthropic and OpenAI aren't included since neither is publicly traded. Data and chart courtesy of TradingView; prices are typically delayed slightly and this is not investment advice.</div>
 
   <footer>
     <b>The AI Brief</b> · Markets view · sourced live from TradingView on each page load.
@@ -105,45 +105,29 @@
   })();
 </script>
 
-<script src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
 {
-  "symbols": [
-    ["Nvidia", "NASDAQ:NVDA|1M"],
-    ["Microsoft", "NASDAQ:MSFT|1M"],
-    ["Alphabet", "NASDAQ:GOOGL|1M"],
-    ["Meta", "NASDAQ:META|1M"],
-    ["Amazon", "NASDAQ:AMZN|1M"],
-    ["Apple", "NASDAQ:AAPL|1M"],
-    ["Oracle", "NYSE:ORCL|1M"],
-    ["Palantir", "NASDAQ:PLTR|1M"],
-    ["AMD", "NASDAQ:AMD|1M"]
-  ],
-  "chartOnly": false,
-  "width": "100%",
-  "height": 560,
+  "autosize": true,
+  "symbol": "NASDAQ:NVDA",
+  "interval": "D",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "2",
   "locale": "en",
-  "colorTheme": "light",
-  "autosize": false,
-  "showVolume": false,
-  "showMA": false,
-  "hideDateRanges": false,
-  "hideMarketStatus": false,
-  "hideSymbolLogo": false,
-  "scalePosition": "right",
-  "scaleMode": "Normal",
-  "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-  "fontSize": "10",
-  "noTimeScale": false,
-  "valuesTracking": "1",
-  "changeMode": "percent",
-  "chartType": "area",
-  "maLineColor": "#2962FF",
-  "maLineWidth": 1,
-  "maLength": 9,
-  "headerFontSize": "medium",
-  "lineWidth": 2,
-  "lineType": 0,
-  "dateRanges": ["1d|1", "1m|30", "3m|60", "12m|1D", "60m|1W", "all|1M"]
+  "range": "12M",
+  "hide_side_toolbar": true,
+  "allow_symbol_change": true,
+  "compareSymbols": [
+    { "symbol": "NASDAQ:MSFT", "position": "SameScale" },
+    { "symbol": "NASDAQ:GOOGL", "position": "SameScale" },
+    { "symbol": "NASDAQ:META", "position": "SameScale" },
+    { "symbol": "NASDAQ:AMZN", "position": "SameScale" },
+    { "symbol": "NASDAQ:AAPL", "position": "SameScale" },
+    { "symbol": "NYSE:ORCL", "position": "SameScale" },
+    { "symbol": "NASDAQ:PLTR", "position": "SameScale" },
+    { "symbol": "NASDAQ:AMD", "position": "SameScale" }
+  ],
+  "support_host": "https://www.tradingview.com"
 }
 </script>
 </body>
