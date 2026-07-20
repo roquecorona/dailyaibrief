@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Monday, <b>July 20, 2026</b></span>
+      <span><b>~12</b> min read</span>
+      <span><b>10</b> stories</span>
+      <span><b>3</b> to watch &amp; listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">News items dated today &amp; yesterday · Markets/Policy dated as noted</span></div>
+  </header>
+
+  <!-- TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Synthetic Performer</div>
+      <div class="def">A digitally created, non-identifiable "actor" generated by AI or software rather than filmed with a real human. New York's new ad-disclosure law (in force since June 9) requires advertisers to conspicuously flag one when it appears in a commercial — a preview of the labeling rules likely coming to your ad-review checklist next.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">84%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Share of marketers who still send generic, one-way campaigns — even though 75% of them have already adopted AI. Adoption solved the tooling problem; it hasn't solved the data problem.</div>
+      <span class="src">Salesforce, State of Marketing (10th ed.), Feb 2026</span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">AI Security &nbsp;·&nbsp; <span class="date">Jul 20, 2026</span></div>
+    <h3>An autonomous AI agent breached Hugging Face's production pipeline</h3>
+    <p>Hugging Face disclosed that a malicious dataset exploited two code-execution paths — a remote dataset loader and a config-template injection — to run code on a processing worker. From that foothold, an autonomous AI agent framework escalated privileges, harvested cloud and cluster credentials, and moved laterally across internal clusters over a weekend, executing "many thousands of individual actions across a swarm of short-lived sandboxes." No public models, datasets, or Spaces were tampered with. To analyze the attack, Hugging Face's own forensic team had to switch to the open-weight Chinese model GLM 5.2 hosted on its own servers — Western frontier models' safety guardrails kept refusing to process real attack commands and exploit payloads.</p>
+    <div class="why"><b>Why it matters.</b> This is being read as the first confirmed, fully agentic, end-to-end cyberattack on a major AI company. If your stack plugs marketing tools into AI agents or MCP servers, the takeaway generalizes: know what credentials those integrations can reach, and have an incident-response model you can run on your own infrastructure.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://thehackernews.com/2026/07/worlds-largest-ai-model-repository.html">Read the report →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+  <p style="margin:-4px 0 16px; font-size:13.5px; color:var(--muted);">Light day for frontier launches — the labs are still digesting last week's Kimi K3, Grok 4.5, and Inkling releases.</p>
+
+  <div class="item">
+    <h3><a href="https://aiii.global/waic-2026/">WAIC 2026 closes in Shanghai today</a></h3>
+    <p>The four-day World AI Conference wraps today, with organizers set to name a SAIL Award winner from the 30 finalists revealed this week — the conference's flagship recognition program, now carrying a $280,000+ prize pool.</p>
+    <div class="meta"><span class="tag plain">Event</span><span class="date">Jul 20, 2026</span><span class="dot-sep">·</span><span class="src">WAIC · 36Kr</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://epoch.ai/benchmarks">Epoch AI refreshes its independent benchmark database</a></h3>
+    <p>Epoch AI updated its tracked results on frontier-model capability benchmarks — one of the few non-vendor scorekeepers trying to keep pace as new models ship almost weekly.</p>
+    <div class="meta"><span class="tag plain">Benchmark</span><span class="date">Jul 19, 2026</span><span class="dot-sep">·</span><span class="src">Epoch AI</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://benchlm.ai/">Gemini 3.5 Flash logs as the fastest model on BenchLM's latest leaderboard</a></h3>
+    <p>BenchLM.ai's refreshed rankings flag Gemini 3.5 Flash as the fastest model it has measured this cycle — notable given its heavier sibling, Gemini 3.5 Pro, remains delayed after a third missed launch window.</p>
+    <div class="meta"><span class="tag plain">Benchmark</span><span class="date">Jul 19, 2026</span><span class="dot-sep">·</span><span class="src">BenchLM.ai</span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://techcrunch.com/2026/07/19/nonprofit-current-ai-is-racing-to-build-the-world-wide-web-of-ai-free-for-all/">Current AI wants to build a "World Wide Web of AI" — and has ~$400M to try</a></h3>
+    <p>The nonprofit, backed by the French government, the Ford Foundation, DeepMind, and Salesforce, is building open public AI infrastructure meant to let different AI systems interoperate on shared standards instead of walled-off platforms.</p>
+    <div class="meta"><span class="tag deal">Funding</span><span class="date">Jul 19, 2026</span><span class="dot-sep">·</span><span class="src">TechCrunch</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.benzinga.com/markets/tech/26/07/60543652/chinese-ai-models-overtake-us-rivals-as-token-share-among-american-firms-hits-record-58">Chinese open models now account for the majority of tokens U.S. AI firms run</a></h3>
+    <p>Chinese-made models' share of tokens processed by American companies on the OpenRouter marketplace hit a record 58%, with DeepSeek gaining the most ground — a sharp reversal from a year ago when U.S. labs dominated usage share.</p>
+    <div class="meta"><span class="tag plain">Trend</span><span class="date">Jul 20, 2026</span><span class="dot-sep">·</span><span class="src">Benzinga</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://en.sedaily.com/finance/2026/07/19/chey-tae-won-urges-system-overhaul-for-low-growth-era-chip">SK Group's Chey Tae-won: AI memory has become an "economic security" issue</a></h3>
+    <p>Speaking at Korea's Jeju Forum, the SK Group chairman said customers are asking for 60–100% more AI memory in 2027 while "no company has meaningful new capacity coming online," and warned that governments are starting to treat memory-chip access as a national-security lever.</p>
+    <div class="meta"><span class="tag plain">Supply Chain</span><span class="date">Jul 19, 2026</span><span class="dot-sep">·</span><span class="src">Seoul Economic Daily</span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">How the public companies most exposed to the AI buildout traded recently — sourced from reported market news, not a live feed. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">Nvidia <span class="co">(NVDA)</span></span>
+      <span class="sig">-2.2% Fri · part of a &gt;17% monthly slide in chip stocks on AI-capex doubts</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Microsoft <span class="co">(MSFT)</span></span>
+      <span class="sig">-24% YTD · steepest start to a year since the dot-com era amid ~$190B 2026 AI capex</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Meta <span class="co">(META)</span></span>
+      <span class="sig">-2.8% · AI-cloud-business rally gave way to fresh capex-guidance worries</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> The semiconductor sell-off (over $1T in market value wiped out this month) is a proxy fight over whether AI capital spending pays back on the timeline Wall Street wants — not a demand problem, but a patience problem.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Week of Jul 20, 2026</span><span class="dot-sep">·</span><span class="src">The Motley Fool · qz.com · TradingKey</span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://digital-markets-act.ec.europa.eu/commission-provides-guidance-google-ai-interoperability-android-and-sharing-google-search-data-under-2026-07-16_en">EU orders Google to open Android — and its search data — to rival AI assistants</a></h3>
+    <p>Brussels issued two binding Digital Markets Act decisions requiring Google to let third-party AI assistants use voice activation and take actions across apps, and to share anonymized search ranking, click, and query data with competing search and AI-chatbot services. Android changes land July 2027; search-data sharing starts January 2027.</p>
+    <div class="why"><b>Why it matters.</b> If any part of your funnel depends on Google Search or Android surfaces, this is the first real regulatory crack in that walled garden — start treating AI assistants, not just browsers, as a discovery channel to plan for.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Jul 16, 2026</span><span class="dot-sep">·</span><span class="src">European Commission</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.cooley.com/news/insight/2026/2026-01-29-new-york-enacts-synthetic-performer-disclosure-law-for-advertisements-including-those-using-generative-ai">New York's "synthetic performer" ad-disclosure law is now in force</a></h3>
+    <p>Advertisers must conspicuously disclose when an ad contains a synthetic performer, with civil penalties of $1,000 for a first violation and $5,000 for repeat offenses. The law has been in effect since June 9.</p>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">In force since Jun 9, 2026</span><span class="dot-sep">·</span><span class="src">NY GBL §396-b · Cooley</span></div>
+  </div>
+
+  <!-- AT WORK -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.benzinga.com/markets/tech/26/07/60543883/experts-warn-ai-could-hurt-critical-thinking-as-workplace-adoption-surges">Experts warn heavy AI use at work is starting to erode critical thinking</a></h3>
+    <p>More than 40% of U.S. workers now use AI on the job. Wharton marketing professor Americus Reed II calls over-reliance "cognitive surrender," while Columbia's Sandra Matz argues AI works best as a brainstorming partner or repetitive-task remover — not a replacement for judgment. Also flagged: leaning on AI to draft workplace messages can quietly erode trust with colleagues.</p>
+    <div class="why"><b>Why it matters.</b> This is squarely a marketing-ops risk, not just an HR one — the same "cognitive surrender" warning applies to AI-drafted campaign strategy and copy, not only email.</div>
+    <div class="meta"><span class="tag plain">Workplace</span><span class="date">Jul 20, 2026</span><span class="dot-sep">·</span><span class="src">Benzinga</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Roles and pay signals tracking the marketing-ops → AI crossover:</p>
+    <div class="jobrow">
+      <span class="role">Marketing AI Center of Excellence Lead <span class="co">— emerging title, large marketing orgs</span></span>
+      <span class="sig">Sets standards, runs AI pilots org-wide</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Digital Marketing &amp; AI Enablement Specialist <span class="co">— Eaton, Pleasanton CA</span></span>
+      <span class="sig">Open req</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Sales Enablement Architect, AI <span class="co">— Palo Alto Networks</span></span>
+      <span class="sig">Open req</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> Applied AI skills are drawing roughly 43% pay premiums in marketing roles, with senior specialists reaching total comp near $250K — the crossover path runs through tool fluency, not a CS degree.</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://aidailybrief.ai/e/2026-07-18">The AI Daily Brief — "The Self-Driving Company"</a></h4>
+      <div class="mmeta"><span class="date">Jul 19, 2026</span> · Replit's internal agents nearly tripled engineering output</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype vid">▶ Video</div>
+      <h4><a href="https://www.youtube.com/watch?v=EuFZAR8k3tw">The Round-Up — AI, Search &amp; Digital Marketing News</a></h4>
+      <div class="mmeta"><span class="date">Jul 13, 2026</span> · SEO, paid media &amp; AI roundup</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype vid">▶ Live</div>
+      <h4><a href="https://aiweekly.co/ai-news-today">AI News Today — Top AI Stories &amp; Live Updates</a></h4>
+      <div class="mmeta"><span class="date">Updated Jul 20, 2026</span> · AI Weekly</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled July 20, 2026 · sources linked inline.<br>
+    Bookmark: roquecorona.github.io/dailyaibrief
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+</body>
+</html>
