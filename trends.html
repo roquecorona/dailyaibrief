@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Trends</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    --c1:#1f5fd6; --c2:#e0762e; --c3:#2e9e6b; --c4:#9457c9;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    --c1:#7aa7ff; --c2:#f0985a; --c3:#5cc999; --c4:#bb8ae0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg); color:var(--body); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; transition:background .25s ease,color .25s ease;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 22px 90px;}
+  .topbar{display:flex; justify-content:space-between; align-items:center; padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none; background:var(--panel); border:1px solid var(--line); color:var(--muted); padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600; transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 18px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+  header{padding:6px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:28px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:40px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14px; margin-top:12px; font-style:italic; font-family:var(--serif);}
+  .sec{margin:8px 0 14px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:34px;}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px 18px; box-shadow:var(--shadow);}
+  .stat .n{font-family:var(--serif); font-size:28px; font-weight:700; color:var(--ink);}
+  .stat .l{font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.6px; margin-top:2px;}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px; box-shadow:var(--shadow); margin-bottom:34px;}
+  .card h3{font-family:var(--serif); font-size:17px; color:var(--ink); margin-bottom:14px;}
+  canvas{max-height:320px;}
+  .note{font-size:13px; color:var(--muted); padding:6px 2px 0; line-height:1.6;}
+  .empty{font-size:14px; color:var(--muted); text-align:center; padding:40px 0;}
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+    <a class="active" href="trends.html">Trends</a>
+    <a href="markets.html">Markets</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">Trends</div>
+    <div class="tagline">What the coverage itself says about where AI is heading.</div>
+  </header>
+
+  <div id="statsRow" class="stats"></div>
+
+  <div class="card">
+    <h3>Stories covered per day</h3>
+    <canvas id="volumeChart"></canvas>
+    <div class="note">Count of distinct stories included in each day's edition. Gaps mean no edition ran that day.</div>
+  </div>
+
+  <div class="card">
+    <h3>Coverage by topic</h3>
+    <canvas id="topicChart"></canvas>
+    <div class="note">Approximate — topic is inferred from keywords in each headline (model/research, funding &amp; business, marketing &amp; work, other), not hand-tagged. Treat as directional.</div>
+  </div>
+
+  <div id="emptyState" class="empty" style="display:none;">Not enough history yet to chart trends — check back after a few more editions.</div>
+
+  <footer>
+    <b>The AI Brief</b> · Trends · built from every story ever covered, updated automatically.
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    var charts = [];
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+      charts.forEach(function(c){ c.destroy(); });
+      charts = [];
+      renderCharts(window.__historyData || []);
+    });
+
+    function cssVar(name){ return getComputedStyle(root).getPropertyValue(name).trim(); }
+
+    function categorize(headline){
+      var h = (headline || '').toLowerCase();
+      if(/model|benchmark|paper|research|release[sd]?\b|gpt|claude|gemini|llama|reasoning|open.?source/.test(h)) return 'Research & Models';
+      if(/fund|raise[sd]?|valuation|acqui|ipo|merger|invest|revenue|earnings|layoff|hir(e|ing)|ceo|regulat|lawsuit|antitrust/.test(h)) return 'Funding & Business';
+      if(/market(ing)?|ad(vertis| campaign)|brand|martech|workplace|job|career|productivity|workflow/.test(h)) return 'Marketing & Work';
+      return 'Other';
+    }
+
+    function renderCharts(items){
+      var statsRow = document.getElementById('statsRow');
+      var empty = document.getElementById('emptyState');
+      if(!items.length){
+        empty.style.display='block';
+        return;
+      }
+      empty.style.display='none';
+
+      var byDate = {};
+      items.forEach(function(it){
+        var d = it.date;
+        if(!d) return;
+        byDate[d] = (byDate[d]||0) + 1;
+      });
+      var dates = Object.keys(byDate).sort();
+      var last30 = dates.slice(-30);
+
+      var totalStories = items.length;
+      var totalDays = dates.length;
+      var avgPerDay = totalDays ? (totalStories/totalDays).toFixed(1) : '0';
+      var firstDate = dates[0], lastDate = dates[dates.length-1];
+
+      statsRow.innerHTML =
+        '<div class="stat"><div class="n">'+totalStories+'</div><div class="l">Stories tracked</div></div>' +
+        '<div class="stat"><div class="n">'+totalDays+'</div><div class="l">Editions logged</div></div>' +
+        '<div class="stat"><div class="n">'+avgPerDay+'</div><div class="l">Avg stories / edition</div></div>' +
+        '<div class="stat"><div class="n" style="font-size:16px;">'+(firstDate||'—')+'</div><div class="l">Tracking since</div></div>';
+
+      var ink = cssVar('--ink'), muted = cssVar('--muted'), line = cssVar('--line2');
+      Chart.defaults.color = muted;
+      Chart.defaults.borderColor = line;
+      Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif";
+
+      var volCtx = document.getElementById('volumeChart').getContext('2d');
+      charts.push(new Chart(volCtx, {
+        type: 'bar',
+        data: {
+          labels: last30,
+          datasets: [{
+            label: 'Stories',
+            data: last30.map(function(d){ return byDate[d]; }),
+            backgroundColor: cssVar('--c1'),
+            borderRadius: 4,
+            maxBarThickness: 26
+          }]
+        },
+        options: {
+          plugins:{ legend:{ display:false } },
+          scales: {
+            x:{ grid:{ display:false } },
+            y:{ beginAtZero:true, ticks:{ precision:0 } }
+          }
+        }
+      }));
+
+      var topicCounts = { 'Research & Models':0, 'Funding & Business':0, 'Marketing & Work':0, 'Other':0 };
+      items.forEach(function(it){ topicCounts[categorize(it.headline)]++; });
+      var topicCtx = document.getElementById('topicChart').getContext('2d');
+      charts.push(new Chart(topicCtx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(topicCounts),
+          datasets: [{
+            data: Object.values(topicCounts),
+            backgroundColor: [cssVar('--c1'), cssVar('--c2'), cssVar('--c3'), cssVar('--c4')],
+            borderColor: cssVar('--panel'),
+            borderWidth: 2
+          }]
+        },
+        options: {
+          plugins:{ legend:{ position:'bottom', labels:{ boxWidth:12, padding:16 } } }
+        }
+      }));
+    }
+
+    fetch('ai-brief-history.json', { cache: 'no-store' })
+      .then(function(r){ if(!r.ok) throw new Error('no history file'); return r.json(); })
+      .then(function(data){
+        window.__historyData = data;
+        renderCharts(data);
+      })
+      .catch(function(){
+        document.getElementById('emptyState').style.display = 'block';
+      });
+  })();
+</script>
+</body>
+</html>
