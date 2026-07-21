@@ -1,136 +1,742 @@
 [
-  {"date":"2026-06-30","headline":"Anthropic takes Claude into the lab with its AI for Science briefing","url":"https://www.anthropic.com/events/the-briefing-ai-for-science-virtual-event"},
-  {"date":"2026-06-30","headline":"GPT-5.6 Sol sets a new Terminal-Bench record","url":"https://llm-stats.com/llm-updates"},
-  {"date":"2026-06-30","headline":"Google's Gemini 3.5 Pro slips to July","url":"https://www.buildfastwithai.com/blogs/ai-news-today-june-29-2026"},
-  {"date":"2026-06-30","headline":"8090 Labs raises $135M Series A for enterprise AI","url":"https://techstartups.com/2026/06/29/venture-capital-startup-funding-roundup-june-29-2026/"},
-  {"date":"2026-06-30","headline":"Straiker lands $64M for AI-agent security","url":"https://techstartups.com/2026/06/29/venture-capital-startup-funding-roundup-june-29-2026/"},
-  {"date":"2026-06-30","headline":"X Square Robot Series C tops a $2.8B valuation","url":"https://techstartups.com/2026/06/29/venture-capital-startup-funding-roundup-june-29-2026/"},
-  {"date":"2026-06-30","headline":"GitHub Copilot moves to metered billing","url":"https://www.buildfastwithai.com/blogs/ai-news-today-june-30-2026"},
-  {"date":"2026-07-01","headline":"Anthropic launches Claude Sonnet 5 — near-Opus agents at a mid-tier price","url":"https://www.anthropic.com/news/claude-sonnet-5"},
-  {"date":"2026-07-01","headline":"Anthropic ships Claude Science, a research workbench for the lab","url":"https://techcrunch.com/2026/06/30/anthropics-claude-science-bets-on-workflow-not-a-new-model-to-win-over-scientists/"},
-  {"date":"2026-07-01","headline":"LeapXpert raises $180M to govern enterprise AI communications","url":"https://techstartups.com/2026/06/30/venture-capital-startup-funding-roundup-june-30-2026/"},
-  {"date":"2026-07-01","headline":"Flare Therapeutics closes $85M Series C for AI-guided drug discovery","url":"https://techstartups.com/2026/06/30/venture-capital-startup-funding-roundup-june-30-2026/"},
-  {"date":"2026-07-01","headline":"Stathera's Series B is a reminder AI infrastructure isn't just GPUs","url":"https://techstartups.com/2026/06/30/venture-capital-startup-funding-roundup-june-30-2026/"},
-  {"date":"2026-07-01","headline":"Klaviyo puts Composer AI agent into public beta","url":"https://www.klaviyo.com/newsroom/CRM-agents"},
-  {"date":"2026-07-01","headline":"Klaviyo CMO Jamie Domenici on the NYSE floor: how AI agents reshape CX","url":"https://www.stocktitan.net/news/ICE/update-to-video-new-york-stock-66donwfga9nj.html"},
-  {"date":"2026-07-01","headline":"The AI Daily Brief (NLW) — daily AI news & analysis","url":"https://aidailybrief.ai/"},
-  {"date":"2026-07-02","headline":"Fable 5 and Mythos 5 are back: US lifts export controls on Anthropic's frontier models","url":"https://www.coindesk.com/tech/2026/07/01/anthropic-restores-ai-models-fable-mythos-after-the-u-s-lifts-export-controls"},
-  {"date":"2026-07-02","headline":"Update: Claude Sonnet 5 becomes the default for all Free & Pro users — full benchmarks published","url":"https://www.buildfastwithai.com/blogs/ai-news-today-july-1-2026"},
-  {"date":"2026-07-02","headline":"South Korea announces $880B national semiconductor and AI investment plan","url":"https://unrot.co/blogs/today-top-10-ai-news-july-1-2026"},
-  {"date":"2026-07-02","headline":"Claude goes GA in Microsoft Foundry on Azure, running on Nvidia GB300 Blackwell Ultra","url":"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"},
-  {"date":"2026-07-02","headline":"UN scientific panel warns AI progress is outpacing oversight","url":"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"},
-  {"date":"2026-07-02","headline":"National Grid puts $1.75B into AI data-center power with 35% Joulent stake","url":"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"},
-  {"date":"2026-07-02","headline":"Dominion Dynamics raises $100M — Canada's largest defense-tech Series A","url":"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"},
-  {"date":"2026-07-02","headline":"Bending Spoons goes public on Nasdaq at an $18.4B valuation","url":"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"},
-  {"date":"2026-07-02","headline":"HubSpot acquires Warmly — CRM shifts from contact records to real-time buyer intent","url":"https://martech.org/hubspots-warmly-deal-points-to-the-next-generation-of-crm/"},
-  {"date":"2026-07-02","headline":"Microsoft 365 commercial price increases take effect as AI gets bundled into the suite","url":"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"},
-  {"date":"2026-07-02","headline":"Google Cloud unveils agentic AI, skills, and infrastructure push in Africa","url":"https://www.googlecloudpresscorner.com/2026-07-01-Google-Cloud-Summit-in-Africa-Highlights-the-Continents-Digital-Transformation-and-Unveils-New-Agentic-AI-and-Infrastructure-Investments"},
-  {"date":"2026-07-02","headline":"The AI Daily Brief — Fable is Back: Here's What You Should Try First","url":"https://aidailybrief.ai/"},
-  {"date":"2026-07-02","headline":"UN press conference: launch of the Scientific Panel's preliminary AI report (video)","url":"https://webtv.un.org/en/asset/k1v/k1v0ss6l5a"},
-  {"date":"2026-07-02","headline":"Latent Space — Matei Zaharia & Reynold Xin on Omnigent, Lakebase & agent security","url":"https://www.latent.space/podcast"},
-  {"date":"2026-07-03","headline":"OpenAI reportedly floats giving the U.S. government a 5% stake","url":"https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"},
-  {"date":"2026-07-03","headline":"Fable 5 tops the Remote Labor Index at 16.1% — first independent real-work benchmark win","url":"https://safe.ai/blog/significant-increase-in-digital-labor-automation"},
-  {"date":"2026-07-03","headline":"Update: GPT-5.6 Sol, Terra & Luna in government-gated preview; GA expected mid-July","url":"https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"},
-  {"date":"2026-07-03","headline":"xAI launches Voice Agent Builder — no-code phone agents at $0.05/minute","url":"https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"},
-  {"date":"2026-07-03","headline":"White House pushes voluntary AI model standards — announcement possible next week","url":"https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"},
-  {"date":"2026-07-03","headline":"Microsoft launches Frontier Company, a $2.5B AI consulting firm","url":"https://techstartups.com/2026/07/02/microsoft-launches-frontier-company-with-2-5b-to-help-enterprises-choose-the-best-ai-models-and-maximize-roi/"},
-  {"date":"2026-07-03","headline":"Together AI raises $800M at an $8.3B valuation for open-source AI infrastructure","url":"https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"},
-  {"date":"2026-07-03","headline":"Meta stock jumps ~9% on plan to sell excess AI compute as a cloud business","url":"https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"},
-  {"date":"2026-07-03","headline":"TwelveLabs raises $100M Series B as Amazon backs video AI","url":"https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"},
-  {"date":"2026-07-03","headline":"Attentive ships Brand Voice 2.0 — marketer control over AI-generated messaging","url":"https://agilebrandguide.com/attentive-launches-brand-voice-2-0-to-give-marketers-more-control-over-how-ai-reflects-their-brand/"},
-  {"date":"2026-07-03","headline":"AWS creates a $1B Forward Deployed Engineering org to embed AI builders inside customers","url":"https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"},
-  {"date":"2026-07-03","headline":"Cisco is rolling out AI agents to all 90,000 employees","url":"https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"},
-  {"date":"2026-07-03","headline":"Microsoft Teams adds admin controls to keep unauthorized AI bots out of meetings","url":"https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"},
-  {"date":"2026-07-03","headline":"The AI Daily Brief — AI Companies Are Hiring More","url":"https://podcasts.apple.com/us/podcast/the-ai-daily-brief-artificial-intelligence-news/id1680633614"},
-  {"date":"2026-07-03","headline":"This Week in Marketing Technology, AI & CX Podcasts — July 2 roundup","url":"https://agilebrandguide.com/this-week-in-marketing-technology-ai-and-cx-podcasts-july-2-2026/"},
-  {"date":"2026-07-03","headline":"Tech-Reader AI Digest — July 2 video briefing","url":"https://youtu.be/EPzT4ZmBFsQ"},
-  {"date":"2026-07-04","headline":"Anthropic moves to shut down Chinese loopholes for accessing Claude","url":"https://www.investing.com/news/stock-market-news/anthropic-targets-loopholes-used-by-chinese-firms-to-access-claude-ft-reports-4774998"},
-  {"date":"2026-07-04","headline":"Zuckerberg tells staff Meta's AI agent progress is slower than expected","url":"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"},
-  {"date":"2026-07-04","headline":"Nvidia rolls out compute now, pay later for AI startups","url":"https://thenextweb.com/news/nvidia-offers-ai-startups-compute-now-payment-later"},
-  {"date":"2026-07-04","headline":"Kuaishou's Kling raises $2.8B at ~$18B as AI video heats up","url":"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"},
-  {"date":"2026-07-04","headline":"Google loses final appeal against €4.1B EU Android antitrust fine","url":"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"},
-  {"date":"2026-07-04","headline":"Quantum Systems raises $1.2B at $8B as defense AI accelerates","url":"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"},
-  {"date":"2026-07-04","headline":"Unitree wins approval for $619M Shanghai IPO","url":"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"},
-  {"date":"2026-07-04","headline":"Claude Enterprise gets spend caps, model entitlements, and usage analytics","url":"https://claude.com/blog/giving-admins-more-visibility-and-control-over-claude-usage-and-spend"},
-  {"date":"2026-07-04","headline":"June jobs report: 57K added — lowest since 2024 — as tech shifts spend to AI","url":"https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"},
-  {"date":"2026-07-04","headline":"FTC seeks comment on AI accuracy and manipulated outputs","url":"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"},
-  {"date":"2026-07-04","headline":"MarketingProfs AI Update: the week in AI for marketers","url":"https://www.marketingprofs.com/opinions/2026/55197/ai-update-july-3-2026-ai-news-and-views-from-the-past-week"},
-  {"date":"2026-07-04","headline":"The Artificial Intelligence Show — weekly AI news for marketers (Jun 30 episode)","url":"https://podcast.smarterx.ai/shownotes"},
-  {"date":"2026-07-05","headline":"Alibaba bans Claude Code, calls Anthropic's tool \"high-risk spyware\"","url":"https://techcrunch.com/2026/07/04/alibaba-reportedly-bans-employees-from-using-claude-code/"},
-  {"date":"2026-07-05","headline":"Tesla caps employee AI spending at $200/week — but not for Grok","url":"https://electrek.co/2026/07/02/tesla-caps-employee-ai-spending-200-week/"},
-  {"date":"2026-07-05","headline":"Update: Samsung's 2nm chip talks widen from Anthropic to Meta","url":"https://www.sammobile.com/2026/07/04/samsung-talks-make-2nm-ai-chips-anthropic-meta/"},
-  {"date":"2026-07-05","headline":"Connecticut becomes 4th state to join AI workforce initiative RAISE US","url":"https://bristoledition.org/blog/2026/07/04/connecticut-joins-national-ai-workforce-initiative/"},
-  {"date":"2026-07-05","headline":"AI News — Fri, July 3 2026 daily roundup (video)","url":"https://www.youtube.com/watch?v=d_t9DD_-7bU"},
-  {"date":"2026-07-05","headline":"Grant Sanderson (3Blue1Brown) — AI and the future of math","url":"https://www.dwarkesh.com/p/grant-sanderson-2"},
-  {"date":"2026-07-06","headline":"Inaugural UN Global Dialogue on AI Governance opens in Geneva","url":"https://www.un.org/en/delegate-delegate-gva-delegate-nyc/inaugural-global-dialogue-ai-governance-convenes-geneva"},
-  {"date":"2026-07-06","headline":"Meta shakes up marketing leadership as it figures out AI's role in the data stack","url":"https://www.adexchanger.com/daily-news-roundup/monday-06072026/"},
-  {"date":"2026-07-06","headline":"Opening Sessions — Global Dialogue on AI Governance, Day 1 (video)","url":"https://webtv.un.org/en/asset/k1y/k1yd3dlebq"},
-  {"date":"2026-07-06","headline":"The UN Global Dialogue on AI Governance, Explained (video)","url":"https://webtv.un.org/en/asset/k1v/k1vqmc2dm7"},
-  {"date":"2026-07-07","headline":"Anthropic finds \"J-Space\" — the hidden room where Claude thinks before it speaks","url":"https://www.axios.com/2026/07/06/anthropic-claude-ai-conscious"},
-  {"date":"2026-07-07","headline":"OpenAI ships gpt-realtime-2.1, cuts voice-agent latency 25%","url":"https://www.marktechpost.com/2026/07/06/openai-gpt-realtime-2-1-mini-reasoning-realtime-api/"},
-  {"date":"2026-07-07","headline":"Claude Fable 5's bundled usage window closes today","url":"https://www.anthropic.com/news/redeploying-fable-5"},
-  {"date":"2026-07-07","headline":"Even Realities raises $150M, becomes a wearables unicorn","url":"https://techstartups.com/2026/07/06/apple-veterans-ai-smart-glasses-startup-even-realities-hits-1b-valuation-in-150m-funding-round/"},
-  {"date":"2026-07-07","headline":"Bespoke Labs raises $40M to build training grounds for reliable agents","url":"https://www.businesswire.com/news/home/20260706827813/en/Bespoke-Labs-Announces-%2440M-to-Build-the-Environments-That-Train-Reliable-Agents"},
-  {"date":"2026-07-07","headline":"Update: UN's first Global Dialogue on AI Governance closes in Geneva","url":"https://webtv.un.org/en/asset/k1e/k1ejkb0bkv"},
-  {"date":"2026-07-07","headline":"AI-in-advertising spend is set to triple by 2030","url":"https://www.globenewswire.com/news-release/2026/07/06/3322346/0/en/AI-in-Advertising-Market-Set-to-Skyrocket-From-11-17-Billion-in-2025-to-36-34-Billion-by-2030.html"},
-  {"date":"2026-07-07","headline":"The AI Daily Brief — Mythos Returns and GPT-5.6 Ships, But Both Stay Locked","url":"https://aidailybrief.ai/"},
-  {"date":"2026-07-07","headline":"UN Web TV — Closing Sessions, Global Dialogue on AI Governance Day 2 (video)","url":"https://webtv.un.org/en/asset/k1e/k1ejkb0bkv"},
-  {"date":"2026-07-07","headline":"Anthropic's J-Space explainer (video)","url":"https://x.com/AnthropicAI/status/2074185358678364414"},
-  {"date":"2026-07-08","headline":"Update: OpenAI ends government-gated preview — GPT-5.6 goes fully public Thursday","url":"https://www.cnbc.com/2026/07/08/openai-expanding-gpt-5point6-ai-model-release-ending-government-limits.html"},
-  {"date":"2026-07-08","headline":"SpaceXAI confirms Grok 4.5 public launch Thursday, calls it \"Opus-class\"","url":"https://finance.yahoo.com/technology/ai/articles/spacexai-launch-grok-4-5-105609519.html"},
-  {"date":"2026-07-08","headline":"Update: Anthropic extends Fable 5 in paid plans through July 12","url":"https://www.androidauthority.com/claude-fable-5-free-extension-3685103/"},
-  {"date":"2026-07-08","headline":"UST partners with Anthropic, will certify 20,000 employees on Claude","url":"https://www.morningstar.com/news/pr-newswire/20260708io00270/ust-partners-with-anthropic-to-bring-claude-into-usts-platforms-engineering-and-operations-and-train-20000-ust-employees-globally"},
-  {"date":"2026-07-08","headline":"Norm AI raises $120M Series C for AI-native law firms","url":"https://techstartups.com/2026/07/07/venture-capital-startup-funding-roundup-july-7-2026/"},
-  {"date":"2026-07-08","headline":"Monogram raises $40M seed for a voice-driven AI interface","url":"https://techstartups.com/2026/07/07/venture-capital-startup-funding-roundup-july-7-2026/"},
-  {"date":"2026-07-08","headline":"Meta brings Muse image AI into Advantage+ ad creative","url":"https://bestmediainfo.com/mediainfo/mediainfo-digital/meta-brings-muse-image-ai-to-advantage-creative-to-help-advertisers-generate-smarter-ad-creatives-12144269"},
-  {"date":"2026-07-08","headline":"Is AI becoming the CMO's best employee? Inside FMCG's AI rollout","url":"https://bestmediainfo.com/mediainfo/mediainfo-marketing/is-ai-becoming-cmos-best-employee-in-fmcg-12144204"},
-  {"date":"2026-07-08","headline":"China's AI Ban?!, Qwen 4, GPT-5.6 Thursday, Grok 4.5 Today & Claude AGI (video)","url":"https://www.youtube.com/watch?v=xjt7ulpGTZ4"},
-  {"date":"2026-07-08","headline":"The AI Daily Brief — The Job Positions of the AI Future","url":"https://aidailybrief.ai/e/2026-07-05"},
-  {"date":"2026-07-08","headline":"The Agile Brand — ReflexAI's Sam Dorison on AI sales-training gaps","url":"https://agilebrandguide.com/reflexai-ceo-sam-dorison-on-the-gap-between-sales-training-and-what-happens-in-the-real-world/"},
-  {"date":"2026-07-09","headline":"Update: GPT-5.6 Sol, Terra, and Luna are now fully public","url":"https://www.engadget.com/2210308/openai-rolls-out-gpt5-6-july-9/"},
-  {"date":"2026-07-09","headline":"Update: Grok 4.5 goes live, trained in part on Cursor's coding data","url":"https://techcrunch.com/2026/07/08/spacexai-releases-grok-4-5-which-elon-describes-as-an-opus-class-model/"},
-  {"date":"2026-07-09","headline":"New prompt-caching system ships across all three GPT-5.6 tiers","url":"https://llm-stats.com/llm-updates"},
-  {"date":"2026-07-09","headline":"Prime Intellect raises $130M Series A for its \"open superintelligence stack\"","url":"https://www.pymnts.com/news/investment-tracker/2026/prime-intellect-raises-130-million-to-help-companies-train-ai-agents/"},
-  {"date":"2026-07-09","headline":"Kaon AI raises $60M to build a \"personalized story engine\"","url":"https://variety.com/2026/digital/news/ai-startup-kaon-ai-raises-60-million-funding-round-1236803914/"},
-  {"date":"2026-07-09","headline":"Superhuman launches Superhuman Docs, folding Coda into an AI-native collaboration surface","url":"https://blog.superhuman.com/superhuman-launches-superhuman-docs/"},
-  {"date":"2026-07-09","headline":"Perficient and Gradial partner to bring agentic marketing execution to Fortune 500 brands","url":"https://www.businesswire.com/news/home/20260708865751/en/Perficient-and-Gradial-Partner-to-Accelerate-Agentic-Marketing-in-the-Enterprise"},
-  {"date":"2026-07-09","headline":"The AI Daily Brief — EP 615: AI Is Stressing Your Workforce. Are You Managing?","url":"https://johnsviokla.substack.com/p/ep-615-daily-ai-news-july-8-2026"},
-  {"date":"2026-07-09","headline":"AI News — Wed, July 8 2026 daily roundup (video)","url":"https://www.tech-reader.blog/2026/07/ai-news-wed-july-8-2026.html"},
-  {"date":"2026-07-17","headline":"China unveils WAICO, a 29-nation AI governance bloc, as Xi Jinping opens WAIC with first keynote","url":"https://www.cnbc.com/2026/07/17/x-china-ai-summit-risks-security.html"},
-  {"date":"2026-07-17","headline":"Moonshot AI ships Kimi K3, the largest open-weight model ever released","url":"https://fortune.com/2026/07/16/moonshots-kimi-k3-pushes-chinese-ai-into-fable-level-territory/"},
-  {"date":"2026-07-17","headline":"Update: Google scraps and rebuilds Gemini 3.5 Pro, missing its third launch deadline","url":"https://www.techtimes.com/articles/320736/20260716/rebuilt-gemini-35-pro-misses-third-deadline-google-eyes-stopgap-release.htm"},
-  {"date":"2026-07-17","headline":"Apple Intelligence clears China, running on Alibaba's Qwen","url":"https://techcrunch.com/2026/07/16/apple-intelligence-approved-for-launch-in-china-with-alibabas-qwen-ai/"},
-  {"date":"2026-07-17","headline":"Nvidia forms a Japanese physical-AI coalition with Fujitsu, Hitachi, and Kawasaki","url":"https://www.cnbc.com/2026/07/16/nvidia-reveals-new-ai-model-and-expands-japans-physical-ai-ecosystem.html"},
-  {"date":"2026-07-17","headline":"Anthropic and OpenAI split on AI regulation: state ratchet vs. federal preemption","url":"https://thehill.com/policy/technology/5918733-openai-anthropic-ai-regulation/"},
-  {"date":"2026-07-17","headline":"Sable raises $45M, microagi raises $55M seed in a busy funding day","url":"https://techstartups.com/2026/07/16/venture-capital-startup-funding-roundup-july-16-2026-8vc-accel-ark-invest-gv-khosla-ventures-mark-cuban-and-sequoia-capital/"},
-  {"date":"2026-07-17","headline":"Brunner acquires AdSkate, adding AI creative analytics to its agency stack","url":"https://www.prweb.com/releases/brunner-acquires-adskate-expanding-ai-powered-marketing-intelligence-and-creative-performance-capabilities-302826198.html"},
-  {"date":"2026-07-17","headline":"Coinbase: 95-100% of our code is now AI-written","url":"https://cointelegraph.com/news/over-95-of-coinbases-code-is-now-written-with-ai"},
-  {"date":"2026-07-17","headline":"DX Today AI Daily Brief — Jensen Huang declares the beginning of Japanese AI (video)","url":"https://www.youtube.com/watch?v=Df_aJfqPlLg"},
-  {"date":"2026-07-17","headline":"The AI Daily Brief — EP 621: 6 Hours of Compliance Work in 15 Minutes","url":"https://johnsviokla.substack.com/p/ep-621-daily-ai-news-july-16-2026"},
-  {"date":"2026-07-17","headline":"AI News — Thu, July 16 2026 daily roundup","url":"https://www.tech-reader.blog/2026/07/ai-news-thu-july-16-2026.html"},
-  {"date":"2026-07-18","headline":"Anthropic is in early talks to lease $10B in compute — from Meta","url":"https://www.cnbc.com/2026/07/17/anthropic-meta-ai-compute.html"},
-  {"date":"2026-07-18","headline":"A mystery \"Claude Honeycomb\" briefly surfaced in Cursor — fueling Opus 5 rumors","url":"https://aitoolsrecap.com/Blog/fable-5-deadline-july-19-opus-5-fourth-extension-2026"},
-  {"date":"2026-07-18","headline":"Microsoft preps \"Project Perception,\" an AI security tool built to undercut Anthropic's Mythos","url":"https://www.techrepublic.com/article/news-microsoft-project-perception-ai-security-tool/"},
-  {"date":"2026-07-18","headline":"Suno hack exposes source code confirming mass YouTube, Deezer & Genius scraping","url":"https://musicnews.com/news/2026-07-17-suno-hack-exposes-massive-scraping-of-streaming-platforms-for-ai-training"},
-  {"date":"2026-07-18","headline":"MarketingProfs: retail leans into agents, Meta's own detector can't catch its own fakes","url":"https://www.marketingprofs.com/opinions/2026/55273/ai-update-july-17-2026-ai-news-and-views-from-the-past-week"},
-  {"date":"2026-07-18","headline":"The AI Daily Brief — EP 622: Do You Have an AI Learning Operating System?","url":"https://johnsviokla.substack.com/p/ep-622-daily-ai-news-july-17-2026"},
-  {"date":"2026-07-18","headline":"AI News — Fri, July 17 2026 daily roundup","url":"https://www.tech-reader.blog/2026/07/ai-news-fri-july-17-2026.html"},
-  {"date":"2026-07-18","headline":"The Agile Brand with Greg Kihlström — Marketing Technology, AI & CX","url":"https://podcasts.apple.com/ie/podcast/the-agile-brand-with-greg-kihlstr%C3%B6m-expert-mode/id1455031182"},
-  {"date":"2026-07-19","headline":"Claude Fable 5's included access closes tonight — usage credits start tomorrow","url":"https://chatforest.com/guides/fable-5-july-19-deadline-usage-credits-pricing-guide-2026/"},
-  {"date":"2026-07-19","headline":"How AI could create a fiscal crisis","url":"https://www.bloomberg.com/news/newsletters/2026-07-19/how-ai-could-create-a-fiscal-crisis"},
-  {"date":"2026-07-19","headline":"The AI Daily Brief — Is Kimi K3 Really Fable Class?","url":"https://aidailybrief.ai/e/2026-07-17"},
-  {"date":"2026-07-19","headline":"The AI Daily Brief — The New Enterprise Battle Over Who Owns the Model","url":"https://aidailybrief.ai/e/2026-07-16"},
-  {"date":"2026-07-20","headline":"An autonomous AI agent breached Hugging Face's production pipeline","url":"https://thehackernews.com/2026/07/worlds-largest-ai-model-repository.html"},
-  {"date":"2026-07-20","headline":"WAIC 2026 closes in Shanghai today","url":"https://aiii.global/waic-2026/"},
-  {"date":"2026-07-20","headline":"Epoch AI refreshes its independent benchmark database","url":"https://epoch.ai/benchmarks"},
-  {"date":"2026-07-20","headline":"Gemini 3.5 Flash logs as the fastest model on BenchLM's latest leaderboard","url":"https://benchlm.ai/"},
-  {"date":"2026-07-20","headline":"Current AI wants to build a \"World Wide Web of AI\" — and has ~$400M to try","url":"https://techcrunch.com/2026/07/19/nonprofit-current-ai-is-racing-to-build-the-world-wide-web-of-ai-free-for-all/"},
-  {"date":"2026-07-20","headline":"Chinese open models now account for the majority of tokens U.S. AI firms run","url":"https://www.benzinga.com/markets/tech/26/07/60543652/chinese-ai-models-overtake-us-rivals-as-token-share-among-american-firms-hits-record-58"},
-  {"date":"2026-07-20","headline":"SK Group's Chey Tae-won: AI memory has become an \"economic security\" issue","url":"https://en.sedaily.com/finance/2026/07/19/chey-tae-won-urges-system-overhaul-for-low-growth-era-chip"},
-  {"date":"2026-07-20","headline":"Markets Snapshot: Nvidia, Microsoft, Meta","url":"https://www.fool.com/investing/2026/07/20/one-date-nvidia-investors-should-not-overlook-this/"},
-  {"date":"2026-07-20","headline":"EU orders Google to open Android — and its search data — to rival AI assistants","url":"https://digital-markets-act.ec.europa.eu/commission-provides-guidance-google-ai-interoperability-android-and-sharing-google-search-data-under-2026-07-16_en"},
-  {"date":"2026-07-20","headline":"New York's \"synthetic performer\" ad-disclosure law is now in force","url":"https://www.cooley.com/news/insight/2026/2026-01-29-new-york-enacts-synthetic-performer-disclosure-law-for-advertisements-including-those-using-generative-ai"},
-  {"date":"2026-07-20","headline":"Experts warn heavy AI use at work is starting to erode critical thinking","url":"https://www.benzinga.com/markets/tech/26/07/60543883/experts-warn-ai-could-hurt-critical-thinking-as-workplace-adoption-surges"},
-  {"date":"2026-07-20","headline":"The AI Daily Brief — The Self-Driving Company","url":"https://aidailybrief.ai/e/2026-07-18"},
-  {"date":"2026-07-20","headline":"The Round-Up — AI, Search & Digital Marketing News","url":"https://www.youtube.com/watch?v=EuFZAR8k3tw"}
+  {
+    "date": "2026-06-30",
+    "headline": "Anthropic takes Claude into the lab with its AI for Science briefing",
+    "url": "https://www.anthropic.com/events/the-briefing-ai-for-science-virtual-event"
+  },
+  {
+    "date": "2026-06-30",
+    "headline": "GPT-5.6 Sol sets a new Terminal-Bench record",
+    "url": "https://llm-stats.com/llm-updates"
+  },
+  {
+    "date": "2026-06-30",
+    "headline": "Google's Gemini 3.5 Pro slips to July",
+    "url": "https://www.buildfastwithai.com/blogs/ai-news-today-june-29-2026"
+  },
+  {
+    "date": "2026-06-30",
+    "headline": "8090 Labs raises $135M Series A for enterprise AI",
+    "url": "https://techstartups.com/2026/06/29/venture-capital-startup-funding-roundup-june-29-2026/"
+  },
+  {
+    "date": "2026-06-30",
+    "headline": "Straiker lands $64M for AI-agent security",
+    "url": "https://techstartups.com/2026/06/29/venture-capital-startup-funding-roundup-june-29-2026/"
+  },
+  {
+    "date": "2026-06-30",
+    "headline": "X Square Robot Series C tops a $2.8B valuation",
+    "url": "https://techstartups.com/2026/06/29/venture-capital-startup-funding-roundup-june-29-2026/"
+  },
+  {
+    "date": "2026-06-30",
+    "headline": "GitHub Copilot moves to metered billing",
+    "url": "https://www.buildfastwithai.com/blogs/ai-news-today-june-30-2026"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "Anthropic launches Claude Sonnet 5 \u2014 near-Opus agents at a mid-tier price",
+    "url": "https://www.anthropic.com/news/claude-sonnet-5"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "Anthropic ships Claude Science, a research workbench for the lab",
+    "url": "https://techcrunch.com/2026/06/30/anthropics-claude-science-bets-on-workflow-not-a-new-model-to-win-over-scientists/"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "LeapXpert raises $180M to govern enterprise AI communications",
+    "url": "https://techstartups.com/2026/06/30/venture-capital-startup-funding-roundup-june-30-2026/"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "Flare Therapeutics closes $85M Series C for AI-guided drug discovery",
+    "url": "https://techstartups.com/2026/06/30/venture-capital-startup-funding-roundup-june-30-2026/"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "Stathera's Series B is a reminder AI infrastructure isn't just GPUs",
+    "url": "https://techstartups.com/2026/06/30/venture-capital-startup-funding-roundup-june-30-2026/"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "Klaviyo puts Composer AI agent into public beta",
+    "url": "https://www.klaviyo.com/newsroom/CRM-agents"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "Klaviyo CMO Jamie Domenici on the NYSE floor: how AI agents reshape CX",
+    "url": "https://www.stocktitan.net/news/ICE/update-to-video-new-york-stock-66donwfga9nj.html"
+  },
+  {
+    "date": "2026-07-01",
+    "headline": "The AI Daily Brief (NLW) \u2014 daily AI news & analysis",
+    "url": "https://aidailybrief.ai/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Fable 5 and Mythos 5 are back: US lifts export controls on Anthropic's frontier models",
+    "url": "https://www.coindesk.com/tech/2026/07/01/anthropic-restores-ai-models-fable-mythos-after-the-u-s-lifts-export-controls"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Update: Claude Sonnet 5 becomes the default for all Free & Pro users \u2014 full benchmarks published",
+    "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-1-2026"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "South Korea announces $880B national semiconductor and AI investment plan",
+    "url": "https://unrot.co/blogs/today-top-10-ai-news-july-1-2026"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Claude goes GA in Microsoft Foundry on Azure, running on Nvidia GB300 Blackwell Ultra",
+    "url": "https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "UN scientific panel warns AI progress is outpacing oversight",
+    "url": "https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "National Grid puts $1.75B into AI data-center power with 35% Joulent stake",
+    "url": "https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Dominion Dynamics raises $100M \u2014 Canada's largest defense-tech Series A",
+    "url": "https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Bending Spoons goes public on Nasdaq at an $18.4B valuation",
+    "url": "https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "HubSpot acquires Warmly \u2014 CRM shifts from contact records to real-time buyer intent",
+    "url": "https://martech.org/hubspots-warmly-deal-points-to-the-next-generation-of-crm/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Microsoft 365 commercial price increases take effect as AI gets bundled into the suite",
+    "url": "https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Google Cloud unveils agentic AI, skills, and infrastructure push in Africa",
+    "url": "https://www.googlecloudpresscorner.com/2026-07-01-Google-Cloud-Summit-in-Africa-Highlights-the-Continents-Digital-Transformation-and-Unveils-New-Agentic-AI-and-Infrastructure-Investments"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "The AI Daily Brief \u2014 Fable is Back: Here's What You Should Try First",
+    "url": "https://aidailybrief.ai/"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "UN press conference: launch of the Scientific Panel's preliminary AI report (video)",
+    "url": "https://webtv.un.org/en/asset/k1v/k1v0ss6l5a"
+  },
+  {
+    "date": "2026-07-02",
+    "headline": "Latent Space \u2014 Matei Zaharia & Reynold Xin on Omnigent, Lakebase & agent security",
+    "url": "https://www.latent.space/podcast"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "OpenAI reportedly floats giving the U.S. government a 5% stake",
+    "url": "https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Fable 5 tops the Remote Labor Index at 16.1% \u2014 first independent real-work benchmark win",
+    "url": "https://safe.ai/blog/significant-increase-in-digital-labor-automation"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Update: GPT-5.6 Sol, Terra & Luna in government-gated preview; GA expected mid-July",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "xAI launches Voice Agent Builder \u2014 no-code phone agents at $0.05/minute",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "White House pushes voluntary AI model standards \u2014 announcement possible next week",
+    "url": "https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Microsoft launches Frontier Company, a $2.5B AI consulting firm",
+    "url": "https://techstartups.com/2026/07/02/microsoft-launches-frontier-company-with-2-5b-to-help-enterprises-choose-the-best-ai-models-and-maximize-roi/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Together AI raises $800M at an $8.3B valuation for open-source AI infrastructure",
+    "url": "https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Meta stock jumps ~9% on plan to sell excess AI compute as a cloud business",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "TwelveLabs raises $100M Series B as Amazon backs video AI",
+    "url": "https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Attentive ships Brand Voice 2.0 \u2014 marketer control over AI-generated messaging",
+    "url": "https://agilebrandguide.com/attentive-launches-brand-voice-2-0-to-give-marketers-more-control-over-how-ai-reflects-their-brand/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "AWS creates a $1B Forward Deployed Engineering org to embed AI builders inside customers",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Cisco is rolling out AI agents to all 90,000 employees",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-thu-july-2-2026.html"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Microsoft Teams adds admin controls to keep unauthorized AI bots out of meetings",
+    "url": "https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "The AI Daily Brief \u2014 AI Companies Are Hiring More",
+    "url": "https://podcasts.apple.com/us/podcast/the-ai-daily-brief-artificial-intelligence-news/id1680633614"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "This Week in Marketing Technology, AI & CX Podcasts \u2014 July 2 roundup",
+    "url": "https://agilebrandguide.com/this-week-in-marketing-technology-ai-and-cx-podcasts-july-2-2026/"
+  },
+  {
+    "date": "2026-07-03",
+    "headline": "Tech-Reader AI Digest \u2014 July 2 video briefing",
+    "url": "https://youtu.be/EPzT4ZmBFsQ"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Anthropic moves to shut down Chinese loopholes for accessing Claude",
+    "url": "https://www.investing.com/news/stock-market-news/anthropic-targets-loopholes-used-by-chinese-firms-to-access-claude-ft-reports-4774998"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Zuckerberg tells staff Meta's AI agent progress is slower than expected",
+    "url": "https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Nvidia rolls out compute now, pay later for AI startups",
+    "url": "https://thenextweb.com/news/nvidia-offers-ai-startups-compute-now-payment-later"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Kuaishou's Kling raises $2.8B at ~$18B as AI video heats up",
+    "url": "https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Google loses final appeal against \u20ac4.1B EU Android antitrust fine",
+    "url": "https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Quantum Systems raises $1.2B at $8B as defense AI accelerates",
+    "url": "https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Unitree wins approval for $619M Shanghai IPO",
+    "url": "https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "Claude Enterprise gets spend caps, model entitlements, and usage analytics",
+    "url": "https://claude.com/blog/giving-admins-more-visibility-and-control-over-claude-usage-and-spend"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "June jobs report: 57K added \u2014 lowest since 2024 \u2014 as tech shifts spend to AI",
+    "url": "https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "FTC seeks comment on AI accuracy and manipulated outputs",
+    "url": "https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "MarketingProfs AI Update: the week in AI for marketers",
+    "url": "https://www.marketingprofs.com/opinions/2026/55197/ai-update-july-3-2026-ai-news-and-views-from-the-past-week"
+  },
+  {
+    "date": "2026-07-04",
+    "headline": "The Artificial Intelligence Show \u2014 weekly AI news for marketers (Jun 30 episode)",
+    "url": "https://podcast.smarterx.ai/shownotes"
+  },
+  {
+    "date": "2026-07-05",
+    "headline": "Alibaba bans Claude Code, calls Anthropic's tool \"high-risk spyware\"",
+    "url": "https://techcrunch.com/2026/07/04/alibaba-reportedly-bans-employees-from-using-claude-code/"
+  },
+  {
+    "date": "2026-07-05",
+    "headline": "Tesla caps employee AI spending at $200/week \u2014 but not for Grok",
+    "url": "https://electrek.co/2026/07/02/tesla-caps-employee-ai-spending-200-week/"
+  },
+  {
+    "date": "2026-07-05",
+    "headline": "Update: Samsung's 2nm chip talks widen from Anthropic to Meta",
+    "url": "https://www.sammobile.com/2026/07/04/samsung-talks-make-2nm-ai-chips-anthropic-meta/"
+  },
+  {
+    "date": "2026-07-05",
+    "headline": "Connecticut becomes 4th state to join AI workforce initiative RAISE US",
+    "url": "https://bristoledition.org/blog/2026/07/04/connecticut-joins-national-ai-workforce-initiative/"
+  },
+  {
+    "date": "2026-07-05",
+    "headline": "AI News \u2014 Fri, July 3 2026 daily roundup (video)",
+    "url": "https://www.youtube.com/watch?v=d_t9DD_-7bU"
+  },
+  {
+    "date": "2026-07-05",
+    "headline": "Grant Sanderson (3Blue1Brown) \u2014 AI and the future of math",
+    "url": "https://www.dwarkesh.com/p/grant-sanderson-2"
+  },
+  {
+    "date": "2026-07-06",
+    "headline": "Inaugural UN Global Dialogue on AI Governance opens in Geneva",
+    "url": "https://www.un.org/en/delegate-delegate-gva-delegate-nyc/inaugural-global-dialogue-ai-governance-convenes-geneva"
+  },
+  {
+    "date": "2026-07-06",
+    "headline": "Meta shakes up marketing leadership as it figures out AI's role in the data stack",
+    "url": "https://www.adexchanger.com/daily-news-roundup/monday-06072026/"
+  },
+  {
+    "date": "2026-07-06",
+    "headline": "Opening Sessions \u2014 Global Dialogue on AI Governance, Day 1 (video)",
+    "url": "https://webtv.un.org/en/asset/k1y/k1yd3dlebq"
+  },
+  {
+    "date": "2026-07-06",
+    "headline": "The UN Global Dialogue on AI Governance, Explained (video)",
+    "url": "https://webtv.un.org/en/asset/k1v/k1vqmc2dm7"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "Anthropic finds \"J-Space\" \u2014 the hidden room where Claude thinks before it speaks",
+    "url": "https://www.axios.com/2026/07/06/anthropic-claude-ai-conscious"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "OpenAI ships gpt-realtime-2.1, cuts voice-agent latency 25%",
+    "url": "https://www.marktechpost.com/2026/07/06/openai-gpt-realtime-2-1-mini-reasoning-realtime-api/"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "Claude Fable 5's bundled usage window closes today",
+    "url": "https://www.anthropic.com/news/redeploying-fable-5"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "Even Realities raises $150M, becomes a wearables unicorn",
+    "url": "https://techstartups.com/2026/07/06/apple-veterans-ai-smart-glasses-startup-even-realities-hits-1b-valuation-in-150m-funding-round/"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "Bespoke Labs raises $40M to build training grounds for reliable agents",
+    "url": "https://www.businesswire.com/news/home/20260706827813/en/Bespoke-Labs-Announces-%2440M-to-Build-the-Environments-That-Train-Reliable-Agents"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "Update: UN's first Global Dialogue on AI Governance closes in Geneva",
+    "url": "https://webtv.un.org/en/asset/k1e/k1ejkb0bkv"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "AI-in-advertising spend is set to triple by 2030",
+    "url": "https://www.globenewswire.com/news-release/2026/07/06/3322346/0/en/AI-in-Advertising-Market-Set-to-Skyrocket-From-11-17-Billion-in-2025-to-36-34-Billion-by-2030.html"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "The AI Daily Brief \u2014 Mythos Returns and GPT-5.6 Ships, But Both Stay Locked",
+    "url": "https://aidailybrief.ai/"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "UN Web TV \u2014 Closing Sessions, Global Dialogue on AI Governance Day 2 (video)",
+    "url": "https://webtv.un.org/en/asset/k1e/k1ejkb0bkv"
+  },
+  {
+    "date": "2026-07-07",
+    "headline": "Anthropic's J-Space explainer (video)",
+    "url": "https://x.com/AnthropicAI/status/2074185358678364414"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "Update: OpenAI ends government-gated preview \u2014 GPT-5.6 goes fully public Thursday",
+    "url": "https://www.cnbc.com/2026/07/08/openai-expanding-gpt-5point6-ai-model-release-ending-government-limits.html"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "SpaceXAI confirms Grok 4.5 public launch Thursday, calls it \"Opus-class\"",
+    "url": "https://finance.yahoo.com/technology/ai/articles/spacexai-launch-grok-4-5-105609519.html"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "Update: Anthropic extends Fable 5 in paid plans through July 12",
+    "url": "https://www.androidauthority.com/claude-fable-5-free-extension-3685103/"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "UST partners with Anthropic, will certify 20,000 employees on Claude",
+    "url": "https://www.morningstar.com/news/pr-newswire/20260708io00270/ust-partners-with-anthropic-to-bring-claude-into-usts-platforms-engineering-and-operations-and-train-20000-ust-employees-globally"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "Norm AI raises $120M Series C for AI-native law firms",
+    "url": "https://techstartups.com/2026/07/07/venture-capital-startup-funding-roundup-july-7-2026/"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "Monogram raises $40M seed for a voice-driven AI interface",
+    "url": "https://techstartups.com/2026/07/07/venture-capital-startup-funding-roundup-july-7-2026/"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "Meta brings Muse image AI into Advantage+ ad creative",
+    "url": "https://bestmediainfo.com/mediainfo/mediainfo-digital/meta-brings-muse-image-ai-to-advantage-creative-to-help-advertisers-generate-smarter-ad-creatives-12144269"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "Is AI becoming the CMO's best employee? Inside FMCG's AI rollout",
+    "url": "https://bestmediainfo.com/mediainfo/mediainfo-marketing/is-ai-becoming-cmos-best-employee-in-fmcg-12144204"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "China's AI Ban?!, Qwen 4, GPT-5.6 Thursday, Grok 4.5 Today & Claude AGI (video)",
+    "url": "https://www.youtube.com/watch?v=xjt7ulpGTZ4"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "The AI Daily Brief \u2014 The Job Positions of the AI Future",
+    "url": "https://aidailybrief.ai/e/2026-07-05"
+  },
+  {
+    "date": "2026-07-08",
+    "headline": "The Agile Brand \u2014 ReflexAI's Sam Dorison on AI sales-training gaps",
+    "url": "https://agilebrandguide.com/reflexai-ceo-sam-dorison-on-the-gap-between-sales-training-and-what-happens-in-the-real-world/"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "Update: GPT-5.6 Sol, Terra, and Luna are now fully public",
+    "url": "https://www.engadget.com/2210308/openai-rolls-out-gpt5-6-july-9/"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "Update: Grok 4.5 goes live, trained in part on Cursor's coding data",
+    "url": "https://techcrunch.com/2026/07/08/spacexai-releases-grok-4-5-which-elon-describes-as-an-opus-class-model/"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "New prompt-caching system ships across all three GPT-5.6 tiers",
+    "url": "https://llm-stats.com/llm-updates"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "Prime Intellect raises $130M Series A for its \"open superintelligence stack\"",
+    "url": "https://www.pymnts.com/news/investment-tracker/2026/prime-intellect-raises-130-million-to-help-companies-train-ai-agents/"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "Kaon AI raises $60M to build a \"personalized story engine\"",
+    "url": "https://variety.com/2026/digital/news/ai-startup-kaon-ai-raises-60-million-funding-round-1236803914/"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "Superhuman launches Superhuman Docs, folding Coda into an AI-native collaboration surface",
+    "url": "https://blog.superhuman.com/superhuman-launches-superhuman-docs/"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "Perficient and Gradial partner to bring agentic marketing execution to Fortune 500 brands",
+    "url": "https://www.businesswire.com/news/home/20260708865751/en/Perficient-and-Gradial-Partner-to-Accelerate-Agentic-Marketing-in-the-Enterprise"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "The AI Daily Brief \u2014 EP 615: AI Is Stressing Your Workforce. Are You Managing?",
+    "url": "https://johnsviokla.substack.com/p/ep-615-daily-ai-news-july-8-2026"
+  },
+  {
+    "date": "2026-07-09",
+    "headline": "AI News \u2014 Wed, July 8 2026 daily roundup (video)",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-wed-july-8-2026.html"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "China unveils WAICO, a 29-nation AI governance bloc, as Xi Jinping opens WAIC with first keynote",
+    "url": "https://www.cnbc.com/2026/07/17/x-china-ai-summit-risks-security.html"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Moonshot AI ships Kimi K3, the largest open-weight model ever released",
+    "url": "https://fortune.com/2026/07/16/moonshots-kimi-k3-pushes-chinese-ai-into-fable-level-territory/"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Update: Google scraps and rebuilds Gemini 3.5 Pro, missing its third launch deadline",
+    "url": "https://www.techtimes.com/articles/320736/20260716/rebuilt-gemini-35-pro-misses-third-deadline-google-eyes-stopgap-release.htm"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Apple Intelligence clears China, running on Alibaba's Qwen",
+    "url": "https://techcrunch.com/2026/07/16/apple-intelligence-approved-for-launch-in-china-with-alibabas-qwen-ai/"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Nvidia forms a Japanese physical-AI coalition with Fujitsu, Hitachi, and Kawasaki",
+    "url": "https://www.cnbc.com/2026/07/16/nvidia-reveals-new-ai-model-and-expands-japans-physical-ai-ecosystem.html"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Anthropic and OpenAI split on AI regulation: state ratchet vs. federal preemption",
+    "url": "https://thehill.com/policy/technology/5918733-openai-anthropic-ai-regulation/"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Sable raises $45M, microagi raises $55M seed in a busy funding day",
+    "url": "https://techstartups.com/2026/07/16/venture-capital-startup-funding-roundup-july-16-2026-8vc-accel-ark-invest-gv-khosla-ventures-mark-cuban-and-sequoia-capital/"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Brunner acquires AdSkate, adding AI creative analytics to its agency stack",
+    "url": "https://www.prweb.com/releases/brunner-acquires-adskate-expanding-ai-powered-marketing-intelligence-and-creative-performance-capabilities-302826198.html"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "Coinbase: 95-100% of our code is now AI-written",
+    "url": "https://cointelegraph.com/news/over-95-of-coinbases-code-is-now-written-with-ai"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "DX Today AI Daily Brief \u2014 Jensen Huang declares the beginning of Japanese AI (video)",
+    "url": "https://www.youtube.com/watch?v=Df_aJfqPlLg"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "The AI Daily Brief \u2014 EP 621: 6 Hours of Compliance Work in 15 Minutes",
+    "url": "https://johnsviokla.substack.com/p/ep-621-daily-ai-news-july-16-2026"
+  },
+  {
+    "date": "2026-07-17",
+    "headline": "AI News \u2014 Thu, July 16 2026 daily roundup",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-thu-july-16-2026.html"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "Anthropic is in early talks to lease $10B in compute \u2014 from Meta",
+    "url": "https://www.cnbc.com/2026/07/17/anthropic-meta-ai-compute.html"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "A mystery \"Claude Honeycomb\" briefly surfaced in Cursor \u2014 fueling Opus 5 rumors",
+    "url": "https://aitoolsrecap.com/Blog/fable-5-deadline-july-19-opus-5-fourth-extension-2026"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "Microsoft preps \"Project Perception,\" an AI security tool built to undercut Anthropic's Mythos",
+    "url": "https://www.techrepublic.com/article/news-microsoft-project-perception-ai-security-tool/"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "Suno hack exposes source code confirming mass YouTube, Deezer & Genius scraping",
+    "url": "https://musicnews.com/news/2026-07-17-suno-hack-exposes-massive-scraping-of-streaming-platforms-for-ai-training"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "MarketingProfs: retail leans into agents, Meta's own detector can't catch its own fakes",
+    "url": "https://www.marketingprofs.com/opinions/2026/55273/ai-update-july-17-2026-ai-news-and-views-from-the-past-week"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "The AI Daily Brief \u2014 EP 622: Do You Have an AI Learning Operating System?",
+    "url": "https://johnsviokla.substack.com/p/ep-622-daily-ai-news-july-17-2026"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "AI News \u2014 Fri, July 17 2026 daily roundup",
+    "url": "https://www.tech-reader.blog/2026/07/ai-news-fri-july-17-2026.html"
+  },
+  {
+    "date": "2026-07-18",
+    "headline": "The Agile Brand with Greg Kihlstr\u00f6m \u2014 Marketing Technology, AI & CX",
+    "url": "https://podcasts.apple.com/ie/podcast/the-agile-brand-with-greg-kihlstr%C3%B6m-expert-mode/id1455031182"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "Claude Fable 5's included access closes tonight \u2014 usage credits start tomorrow",
+    "url": "https://chatforest.com/guides/fable-5-july-19-deadline-usage-credits-pricing-guide-2026/"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "How AI could create a fiscal crisis",
+    "url": "https://www.bloomberg.com/news/newsletters/2026-07-19/how-ai-could-create-a-fiscal-crisis"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "The AI Daily Brief \u2014 Is Kimi K3 Really Fable Class?",
+    "url": "https://aidailybrief.ai/e/2026-07-17"
+  },
+  {
+    "date": "2026-07-19",
+    "headline": "The AI Daily Brief \u2014 The New Enterprise Battle Over Who Owns the Model",
+    "url": "https://aidailybrief.ai/e/2026-07-16"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "An autonomous AI agent breached Hugging Face's production pipeline",
+    "url": "https://thehackernews.com/2026/07/worlds-largest-ai-model-repository.html"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "WAIC 2026 closes in Shanghai today",
+    "url": "https://aiii.global/waic-2026/"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Epoch AI refreshes its independent benchmark database",
+    "url": "https://epoch.ai/benchmarks"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Gemini 3.5 Flash logs as the fastest model on BenchLM's latest leaderboard",
+    "url": "https://benchlm.ai/"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Current AI wants to build a \"World Wide Web of AI\" \u2014 and has ~$400M to try",
+    "url": "https://techcrunch.com/2026/07/19/nonprofit-current-ai-is-racing-to-build-the-world-wide-web-of-ai-free-for-all/"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Chinese open models now account for the majority of tokens U.S. AI firms run",
+    "url": "https://www.benzinga.com/markets/tech/26/07/60543652/chinese-ai-models-overtake-us-rivals-as-token-share-among-american-firms-hits-record-58"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "SK Group's Chey Tae-won: AI memory has become an \"economic security\" issue",
+    "url": "https://en.sedaily.com/finance/2026/07/19/chey-tae-won-urges-system-overhaul-for-low-growth-era-chip"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Markets Snapshot: Nvidia, Microsoft, Meta",
+    "url": "https://www.fool.com/investing/2026/07/20/one-date-nvidia-investors-should-not-overlook-this/"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "EU orders Google to open Android \u2014 and its search data \u2014 to rival AI assistants",
+    "url": "https://digital-markets-act.ec.europa.eu/commission-provides-guidance-google-ai-interoperability-android-and-sharing-google-search-data-under-2026-07-16_en"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "New York's \"synthetic performer\" ad-disclosure law is now in force",
+    "url": "https://www.cooley.com/news/insight/2026/2026-01-29-new-york-enacts-synthetic-performer-disclosure-law-for-advertisements-including-those-using-generative-ai"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "Experts warn heavy AI use at work is starting to erode critical thinking",
+    "url": "https://www.benzinga.com/markets/tech/26/07/60543883/experts-warn-ai-could-hurt-critical-thinking-as-workplace-adoption-surges"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "The AI Daily Brief \u2014 The Self-Driving Company",
+    "url": "https://aidailybrief.ai/e/2026-07-18"
+  },
+  {
+    "date": "2026-07-20",
+    "headline": "The Round-Up \u2014 AI, Search & Digital Marketing News",
+    "url": "https://www.youtube.com/watch?v=EuFZAR8k3tw"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "AMD ships Helios, its first rack-scale AI system \u2014 Microsoft signs on",
+    "url": "https://www.cnbc.com/2026/07/20/amd-helios-microsoft-ai-nvidia.html"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Update: Kimi K3 pauses new subscriptions as demand overwhelms Moonshot's capacity",
+    "url": "https://apnews.com/article/kimi-k3-china-ai-model-us-4c66a2e0f557ce79d3cc2d769c9a6226"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Alibaba previews Qwen3.8 Max, claims second-best model behind Claude Fable 5",
+    "url": "https://techstartups.com/2026/07/20/top-tech-news-today-july-20-2026-alibaba-bezos-blackstone-google-moonshot-ai-nvidia-samsung-more/"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Meituan ships LongCat 2.0",
+    "url": "https://llm-stats.com/llm-updates"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Databricks valued at $188B as enterprise AI demand surges",
+    "url": "https://techstartups.com/2026/07/20/databricks-raises-new-funding-at-188-billion-valuation-to-fuel-enterprise-ai-expansion/"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "AI chip startup Etched in talks to quadruple valuation to $20B",
+    "url": "https://www.pymnts.com/news/artificial-intelligence/2026/ai-chip-startup-etched-eyes-20-billion-valuation/"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "TSMC lifts total Arizona commitment to $265B, calls AI chip demand structural",
+    "url": "https://www.newstribune.com/news/2026/jul/20/tsmc-expects-strong-multi-year-demand-for-ai-chips-as-it-ramps-up-arizona-investment/"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Markets Snapshot: Nvidia, Microsoft, Broadcom, Micron",
+    "url": "https://www.fxleaders.com/news/2026/07/20/nvidia-stock-nvda-tests-200-support-as-chinese-ai-competition-shakes-the-chip-rally/"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "FTC seeks comment on AI accuracy / suppression-of-accuracy policy statement",
+    "url": "https://www.ftc.gov/news-events/news/press-releases/2026/07/ftc-seeks-comment-on-ai-accuracy-policy-statement"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "US weighs a FINRA-style watchdog to vet frontier AI models",
+    "url": "https://www.bloomberg.com/news/articles/2026-07-17/us-considers-creating-finra-like-watchdog-to-vet-top-ai-models"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Google gives original recipe-site links more prominence in AI Mode",
+    "url": "https://www.theverge.com/tech/960082/google-ai-mode-is-making-original-recipe-links-more-prominent"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Bloomberg \u2014 How Kimi K3 Is Reshaping AI Investing (video)",
+    "url": "https://www.bloomberg.com/news/videos/2026-07-20/how-kimi-k3-is-reshaping-ai-investing-video"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "CNBC \u2014 AMD launches Helios, its first rack AI system to rival Nvidia (video)",
+    "url": "https://www.cnbc.com/video/2026/07/20/amd-launches-helios-its-first-rack-ai-system-to-rival-nvidia.html"
+  },
+  {
+    "date": "2026-07-21",
+    "headline": "Latent Space \u2014 The Lab of the Future Should Feel Like a Data Center",
+    "url": "https://www.latent.space/podcast"
+  }
 ]
