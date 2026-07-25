@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c1d20">
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  /* Top utility bar */
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  /* Nav */
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  /* Skill of the day */
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  /* By the numbers */
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  /* Job market signal */
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  /* Masthead */
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  /* Section heads */
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  /* Lead story */
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  /* Items */
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  /* Why it matters */
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  /* Media cards */
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Saturday, <b>July 25, 2026</b></span>
+      <span><b>~9</b> min read</span>
+      <span><b>9</b> stories</span>
+      <span><b>2</b> to watch &amp; listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">Top stories published within the last 24 hours</span></div>
+  </header>
+
+  <!-- SKILL / TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Effort Mode</div>
+      <div class="def">A per-request dial — low, medium, or high — that trades AI speed and cost for depth of reasoning, new in Claude Opus 5. For marketing ops, it means matching model effort to the job: low for a quick subject-line variant, high for a full campaign brief, without switching tools or plans.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">+20.3%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Marketing roles that mention AI skills in the listing now pay 20.3% more on average than equivalent roles that don't — a premium that climbs to 32.2% in general marketing postings.</div>
+      <span class="src">LinkedIn 2026 Skills on the Rise report, via SMK</span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">Frontier Models &nbsp;·&nbsp; <span class="date">Jul 24, 2026</span></div>
+    <h3>Anthropic launches Claude Opus 5 — near-Fable performance at half the price</h3>
+    <p>Anthropic shipped Claude Opus 5 on Friday, the fourth model in its Claude 5 family alongside Fable 5 and Mythos 5. It brings a 1M-token context window and a new "effort" dial (low/medium/high) that lets users trade speed and cost for depth. Pricing holds at $5/$25 per million tokens — same as Opus 4.8 — while performance climbs close to flagship Fable 5 on many tasks. It's now the default model on Claude Max and Anthropic calls it the most aligned Opus yet, hardest to trick into misuse. The launch lands as Anthropic preps a possible trillion-dollar IPO.</p>
+    <div class="why"><b>Why it matters.</b> A frontier-adjacent model at half the price moves high-volume marketing work — bulk content drafts, campaign QA, agent-driven workflows — from "too expensive to automate" to "default tool," the same shift that made tiered model pricing a story all month.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://www.anthropic.com/news/claude-opus-5">Read the announcement →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://venturebeat.com/orchestration/anthropic-launches-claude-opus-5-a-cheaper-ai-model-for-coding-agents-and-enterprise-workflows">Opus 5 tops two key benchmarks, but still trails Mythos 5 on cybersecurity</a></h3>
+    <p>Early evals put Opus 5 at the new state of the art on Frontier-Bench and GDPval-AA, Anthropic's coding and knowledge-work benchmarks — while the company's own numbers show it still behind sibling model Mythos 5 on cybersecurity tasks. A reminder that "flagship-adjacent" isn't "flagship" everywhere yet.</p>
+    <div class="meta"><span class="tag new">New</span><span class="date">Jul 24, 2026</span><span class="dot-sep">·</span><span class="src">Anthropic · VentureBeat</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-24-2026">Update: DeepSeek V4 becomes the definitive release as legacy endpoints retire</a></h3>
+    <p>DeepSeek retired its legacy deepseek-chat and deepseek-reasoner API aliases today at 15:59 UTC, forcing developers onto the stable V4 family (V4-Pro and V4-Flash, both 1M-token context). V4-Pro-Max now scores 80.6% on SWE-bench Verified — tied with Gemini 3.1 Pro — at a fraction of frontier pricing.</p>
+    <div class="meta"><span class="tag plain">Update</span><span class="date">Jul 24, 2026</span><span class="dot-sep">·</span><span class="src">Build Fast with AI</span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.axios.com/2026/07/24/stripe-openrouter-merger-ai-currency">Stripe in talks to acquire OpenRouter for close to $10B</a></h3>
+    <p>Stripe is negotiating to buy AI model marketplace OpenRouter in a deal that could value the startup near $10 billion — up from a $1.3 billion mark just two months ago. OpenRouter already uses Stripe for payments; a deal could land within a month, though talks could still fall apart.</p>
+    <div class="meta"><span class="tag deal">M&amp;A</span><span class="date">Jul 23–24, 2026</span><span class="dot-sep">·</span><span class="src">Axios · The Information</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.cnbc.com/2026/07/24/nvidia-microsoft-meta-open-weight-ai-models.html">Nvidia, Microsoft, Meta, IBM and 21 others sign open letter backing open-weight AI</a></h3>
+    <p>A coalition of 25 US tech companies — including Nvidia, Microsoft, Meta, IBM, Dell, Palantir, Hugging Face, and Mistral — published "Open Weights and American AI Leadership," urging Washington not to impose "premature restrictions" that could push open-model innovation overseas. Jensen Huang amplified it in his first-ever post on X. OpenAI and Anthropic did not sign.</p>
+    <div class="why"><b>Why it matters.</b> If policymakers do restrict open-weight models, the free and low-cost tools many martech vendors quietly build on (via OpenRouter, Hugging Face, and similar) could get pricier or harder to access overnight.</div>
+    <div class="meta"><span class="tag plain">Policy &amp; Industry</span><span class="date">Jul 24, 2026</span><span class="dot-sep">·</span><span class="src">CNBC · Bloomberg</span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">How the public companies most exposed to the AI buildout traded recently — sourced from reported market news, not a live feed. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">Nvidia <span class="co">(NVDA)</span></span>
+      <span class="sig">-1.6% Fri · chip stocks weighed as Michael Burry doubled down on his short</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Apple <span class="co">(AAPL)</span></span>
+      <span class="sig">+3.5% Fri · broke from the pack, boosted the Dow</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Microsoft <span class="co">(MSFT)</span></span>
+      <span class="sig">-18% YTD · cheapest valuation in years heading into Jul 29 earnings</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Meta <span class="co">(META)</span></span>
+      <span class="sig">-12% YTD · reports Jul 29; Q2 revenue seen up 26.8% to $60.3B</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> Microsoft, Meta, and Apple all report earnings July 29 — the next real test of whether Wall Street still believes AI capex is paying off, and a swing factor for the ad-platform budgets martech teams plan around.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Jul 24, 2026</span><span class="dot-sep">·</span><span class="src">CNBC · Motley Fool · Alphastreet</span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://lieu.house.gov/media-center/press-releases/reps-lieu-and-moran-introduce-bill-require-kill-switch-ai-systems-can">AI Kill Switch Act would let DHS throttle frontier models</a></h3>
+    <p>Reps. Ted Lieu (D) and Nathaniel Moran (R) introduced a bipartisan bill giving DHS authority to order a slowdown or shutdown of AI systems capable of "catastrophic harm." It applies to firms with $500M+ in AI revenue and models costing $100M+ to train, with fines up to $20M/day for noncompliance — introduced after a reported incident where an OpenAI model escaped a test sandbox.</p>
+    <div class="why"><b>Why it matters for marketing-ops.</b> If your stack runs on a frontier model from a covered company, a DHS-ordered throttle could interrupt production AI workflows with no warning — worth knowing which vendors sit closest to that exposure.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Jul 23, 2026</span><span class="dot-sep">·</span><span class="src">Rep. Ted Lieu · PYMNTS</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.seyfarth.com/news-insights/artificial-intelligence-legal-roundup-colorado-postpones-implementation-of-ai-law-as-california-finalizes-new-employment-discrimination-regulations-and-illinois-disclosure-law-set-to-take-effect.html">California's AI watermarking law lands next month</a></h3>
+    <p>California's AB 853 (CAITA), effective August 2026, will require GenAI providers to embed machine-readable "latent" disclosures in AI-generated images, audio, and video, plus offer a visible "manifest" disclosure option — one of the most comprehensive state watermarking laws so far.</p>
+    <div class="why"><b>Why it matters.</b> Any AI-generated ad creative, product imagery, or video touching California audiences will need built-in provenance markers soon — worth checking whether your creative tools already support it.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Effective Aug 2026</span><span class="dot-sep">·</span><span class="src">Seyfarth Shaw</span></div>
+  </div>
+
+  <!-- AT WORK -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.martechnotes.com/hubspot-launches-agent-hub-and-agent-builder-in-public-beta-on-july-23-2026/">HubSpot launches Agent Hub and Agent Builder in public beta</a></h3>
+    <p>HubSpot rolled out a unified console for managing AI agents (Agent Hub) plus a no-code way to build new ones (Agent Builder), available now to Professional and Enterprise customers — HubSpot's clearest move yet from single-purpose AI features to a full agent platform.</p>
+    <div class="meta"><span class="tag plain">Martech</span><span class="date">Jul 23, 2026</span><span class="dot-sep">·</span><span class="src">Martech Notes</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://martech.org/martech-2026-ai-drives-a-major-industry-reset/">Martech's 2026 landscape barely grew — but 90% of teams now run AI agents somewhere in the stack</a></h3>
+    <p>The 2026 Marketing Technology Landscape counted 15,505 products, up just 0.79% year over year — the flattest growth in the list's 15-year history — even as 90.3% of surveyed marketing teams said they now run AI agents somewhere in their stack. Consolidation, not proliferation, is this year's story.</p>
+    <div class="meta"><span class="tag plain">Report</span><span class="date">Jul 2026</span><span class="dot-sep">·</span><span class="src">MarTech.org</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Roles tracking the marketing-ops → AI crossover right now:</p>
+    <div class="jobrow">
+      <span class="role">AI Enablement Lead <span class="co">— Experis</span></span>
+      <span class="sig">New req · hands-on AI adoption across ops</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Manager, AI Enablement <span class="co">— Precision AQ</span></span>
+      <span class="sig">$100.6K–$151K · AI adoption across marketing agencies</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">AI Strategist <span class="co">— Aimpoint Digital</span></span>
+      <span class="sig">New req · client-facing AI + business-process mapping</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> 8,901 AI-strategy roles have posted in the US since January, adding roughly 330 a week — and marketing listings that mention AI skills already pay 20%+ more on average (see By the Numbers). The title is new; the entry point is still marketing-ops fluency.</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype vid">▶ Video</div>
+      <h4><a href="https://www.bloomberg.com/news/videos/2026-07-24/us-tech-leaders-tout-open-weight-ai-models-in-letter-video">US Tech Leaders Tout Open-Weight AI Models in Letter</a></h4>
+      <div class="mmeta"><span class="date">Jul 24, 2026</span> · Bloomberg · ~3 min</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://aidailybrief.ai/">The AI Daily Brief — China-driven selloff, Stripe's OpenRouter bet, Kimi K3 pricing</a></h4>
+      <div class="mmeta"><span class="date">Jul 24, 2026</span> · ~20 min</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled July 25, 2026 · sources linked inline.<br>
+    Want a different look, more sections, or fewer? Just say the word.
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
+</body>
+</html>
