@@ -1148,5 +1148,105 @@
     "date": "2026-07-27",
     "headline": "Paper: Agentic Context Management \u2014 treating agent memory and cost as a lifecycle problem",
     "url": "https://huggingface.co/papers/2607.21503"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Microsoft's Azure crosses $100B, Meta stumbles on AI capex",
+    "url": "https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "OpenAI confirms its rogue test agent breached a second company",
+    "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident/"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Gemini 3 Pro Preview tops the refreshed LiveCodeBench leaderboard",
+    "url": "https://pricepertoken.com/leaderboards/benchmark/livecodebench"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "1,100+ employees at OpenAI, Anthropic, Google and Meta ask Washington to help slow AI down",
+    "url": "https://www.nbcnews.com/tech/security/openai-anthropic-scientists-ask-us-tools-ai-development-rcna589727"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Cyera buys Oasis Security for ~$1B to lock down AI agent identities",
+    "url": "https://techcrunch.com/2026/07/28/cyera-agrees-to-acquire-oasis-security-for-1b-to-safeguard-proliferating-ai-agents/"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Anthropic faces a Silicon Valley backlash over guardrails and open weights",
+    "url": "https://www.wsj.com/tech/ai/anthropic-backlash-silicon-valley"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Markets Snapshot: Microsoft, Meta, Nvidia",
+    "url": "https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Update: EU AI Act Article 50 deadline 3 days out \u2014 grace period only covers pre-existing systems",
+    "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "xAI sues Minnesota over its synthetic intimate imagery law",
+    "url": "https://www.cnbc.com/2026/07/28/spacexs-xai-sues-minnesota-over-law-to-ban-nudify-apps-.html"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "AI didn't fix the marketing bottleneck \u2014 it just moved it (Knak survey)",
+    "url": "https://www.prnewswire.com/news-releases/marketing-teams-adopted-ai-to-move-faster-85-still-missed-a-campaign-launch-date-last-year-302836147.html"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Algolia adds spend guardrails to its agentic commerce product",
+    "url": "https://www.hpcwire.com/bigdatawire/this-just-in/algolia-adds-governance-cost-controls-to-agent-studio/"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "AI Enablement Lead job posting \u2014 Deloitte (Washington, DC)",
+    "url": "https://www.linkedin.com/jobs/view/ai-enablement-lead-at-deloitte-4441297513"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "AI Marketing Specialist, Agentic AI & Automation job posting \u2014 Creative Fabrica",
+    "url": "https://dynamitejobs.com/company/creativefabrica/remote-job/ai-marketing-specialist-agentic-ai-automation"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Marketing Manager, AI-Driven Workflows job posting \u2014 Founder Shield",
+    "url": "https://www.founder-shield.com/careers"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Term of the Day: Non-Human Identity",
+    "url": "internal:term-of-day"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "By the Numbers: 85% of enterprise marketing teams missed a campaign launch date despite AI adoption",
+    "url": "https://www.prnewswire.com/news-releases/marketing-teams-adopted-ai-to-move-faster-85-still-missed-a-campaign-launch-date-last-year-302836147.html"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Bloomberg \u2014 AI Spending in Focus for Meta, Microsoft Earnings (video)",
+    "url": "https://www.bloomberg.com/news/videos/2026-07-29/ai-spending-in-focus-for-meta-microsoft-earnings-video"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "CNBC \u2014 Jefferies' Brent Thill on Meta's AI capex problem (video)",
+    "url": "https://www.cnbc.com/video/2026/07/30/meta-needs-to-fire-up-more-revenue-engines-given-its-massive-ai-capex.html"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "Latent Space \u2014 Databricks' Matei Zaharia & Reynold Xin on agents and data infrastructure",
+    "url": "https://www.latent.space/podcast"
+  },
+  {
+    "date": "2026-07-30",
+    "headline": "The AI Daily Brief \u2014 Big Tech Unites for Open Source AI, and Against Anthropic",
+    "url": "https://aidailybrief.ai/"
   }
 ]
