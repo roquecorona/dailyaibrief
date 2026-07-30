@@ -169,8 +169,8 @@
     <div class="tagline">A daily read on the industry you're building toward.</div>
     <div class="runline">
       <span>Monday, <b>July 27, 2026</b></span>
-      <span><b>~7</b> min read</span>
-      <span><b>7</b> stories</span>
+      <span><b>~8</b> min read</span>
+      <span><b>9</b> stories</span>
       <span><b>2</b> to watch &amp; listen</span>
     </div>
     <div style="margin-top:14px;"><span class="freshpill">Top stories published within the last 24 hours</span></div>
@@ -213,6 +213,23 @@
     <h3><a href="https://startupfortune.com/moonshot-ai-releases-kimi-k3-open-weights-making-the-worlds-largest-open-weight-model-free-to-download/">Update: Kimi K3's full weights go public — free download of the largest open-weight model ever released</a></h3>
     <p>Moonshot AI published the complete 2.8-trillion-parameter Kimi K3 weights on Hugging Face late Sunday, about a day ahead of its planned target, under a Modified-MIT license. The full download runs roughly 1.4 terabytes and needs a minimum of 4–8 H100-class GPUs to load even in quantized form — "open weights" here doesn't mean it runs on a laptop. It's the largest open-weight release to date, a week after the model itself first shipped and briefly paused new subscriptions under demand.</p>
     <div class="meta"><span class="tag plain">Update</span><span class="date">Jul 26, 2026</span><span class="dot-sep">·</span><span class="src">Startup Fortune · explainx.ai</span></div>
+  </div>
+
+  <!-- RESEARCH PAPERS -->
+  <div class="sec"><h2>Research Papers</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://huggingface.co/papers/2607.20734">LLMs Get Lost in Evolving User Intent</a></h3>
+    <p>Microsoft Research found that strong single-turn benchmark performance doesn't transfer once a user's intent shifts mid-conversation — models trained and evaluated on fully-specified prompts show substantial accuracy drops when intent is instead revealed, revised, or redirected turn by turn, a pattern that held across every model family tested.</p>
+    <div class="why"><b>Why it matters.</b> Most marketing chatbots and AI-assisted workflows are exactly this kind of evolving conversation — a customer or teammate rarely states the full ask upfront. Worth testing any AI tool against a realistic, meandering conversation before trusting a clean one-shot demo.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Jul 22, 2026</span><span class="dot-sep">·</span><span class="src">Microsoft Research · arXiv 2607.20734</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://huggingface.co/papers/2607.21503">Agentic Context Management: treating agent memory and cost as a lifecycle problem</a></h3>
+    <p>This paper argues AI agents fail in production less from bad reasoning than from drowning in their own accumulated conversation history — and shows naive context accumulation makes token costs grow quadratically with conversation length. Its reference system claims linear cost with preserved accuracy by actively deciding what an agent should remember, forget, and compact at each turn.</p>
+    <div class="why"><b>Why it matters.</b> This is the research-side explanation for the "agencies capping AI spend" story above — a structural reason long-running AI agents get expensive, and a checklist for what a well-built one should already be doing about it before you commit budget.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Jul 23, 2026</span><span class="dot-sep">·</span><span class="src">arXiv 2607.21503</span></div>
   </div>
 
   <!-- INDUSTRY -->

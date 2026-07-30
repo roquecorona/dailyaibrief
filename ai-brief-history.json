@@ -1138,5 +1138,15 @@
     "date": "2026-07-27",
     "headline": "Daily AI News (John Sviokla) \u2014 EP 627: Why Hasn't AI Increased Unemployment?",
     "url": "https://johnsviokla.substack.com/p/ep-627-daily-ai-news-july-24-2026"
+  },
+  {
+    "date": "2026-07-27",
+    "headline": "Paper: LLMs Get Lost in Evolving User Intent",
+    "url": "https://huggingface.co/papers/2607.20734"
+  },
+  {
+    "date": "2026-07-27",
+    "headline": "Paper: Agentic Context Management \u2014 treating agent memory and cost as a lifecycle problem",
+    "url": "https://huggingface.co/papers/2607.21503"
   }
 ]
