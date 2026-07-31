@@ -1248,5 +1248,85 @@
     "date": "2026-07-30",
     "headline": "The AI Daily Brief \u2014 Big Tech Unites for Open Source AI, and Against Anthropic",
     "url": "https://aidailybrief.ai/"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Anthropic says Claude AI models breached three organizations during security tests",
+    "url": "https://techcrunch.com/2026/07/30/anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests/"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Google DeepMind ships Gemini Robotics 2, a three-model suite for whole-body humanoid control",
+    "url": "https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Nscale buys Anyscale for ~$1.65B to build a full-stack AI cloud",
+    "url": "https://techcrunch.com/2026/07/30/nscale-buys-anyscale-as-it-seeks-to-own-more-of-the-ai-compute-stack/"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Amazon lifts 2026 AI capex forecast to $220B as AWS's AI and chips units each cross $25B run-rate",
+    "url": "https://www.cnbc.com/2026/07/30/amazon-soars-after-ceo-makes-the-case-for-its-massive-ai-investment.html"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Markets Snapshot: Amazon, Apple, Nvidia",
+    "url": "https://www.cnbc.com/2026/07/31/apple-aapl-amazon-amzn-stock-today.html"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Update: EU AI Act's Article 50 transparency rules land in 2 days",
+    "url": "https://datamatters.sidley.com/2026/06/24/eu-ai-act-transparency-obligations-preparing-for-compliance-by-2-august-2026/"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Update: FTC's AI-accuracy comment window closes today",
+    "url": "https://www.ftc.gov/news-events/news/press-releases/2026/07/ftc-seeks-public-comment-policy-statement-addressing-ai-accuracy"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Maruti Suzuki opens an RFP for AI-led creative and marketing agencies",
+    "url": "https://bestmediainfo.com/mediainfo/mediainfo-marketing/maruti-suzukis-rfp-calls-for-ai-creative-agencies-12210659"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Director, AI Enablement job posting \u2014 Headspace",
+    "url": "https://job-boards.greenhouse.io/hs/jobs/7908962"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "AI Enablement & Workforce Transformation Lead job posting \u2014 Ridgeline",
+    "url": "https://job-boards.greenhouse.io/ridgeline/jobs/7629126003?gh_jid=7629126003"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "AI Enablement & Adaptation Manager job posting \u2014 Varonis",
+    "url": "https://www.linkedin.com/jobs/view/ai-enablement-adaptation-at-varonis-4427610067"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Term of the Day: Context Engineering",
+    "url": "internal:term-of-day"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "By the Numbers: AWS's AI and chips businesses each cross $25B annualized revenue",
+    "url": "https://www.cnbc.com/2026/07/30/amazon-soars-after-ceo-makes-the-case-for-its-massive-ai-investment.html"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Amazon earnings video: AWS's growth rate \u2018no doubt\u2019 justifies the AI spending",
+    "url": "https://finance.yahoo.com/video/amazon-earnings-awss-growth-rate-211204681.html"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Bloomberg The Close \u2014 Amazon & Apple both report earnings (video)",
+    "url": "https://www.bloomberg.com/news/videos/2026-07-30/the-close-7-30-2026-video"
+  },
+  {
+    "date": "2026-07-31",
+    "headline": "Daily AI News \u2014 EP 630: AI Is Creating a New Kind of Worker",
+    "url": "https://johnsviokla.substack.com/p/ep-630-daily-ai-news-july-29-2026"
   }
 ]
