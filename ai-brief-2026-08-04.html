@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c1d20">
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  /* Top utility bar */
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  /* Nav */
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  /* Skill of the day */
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  /* By the numbers */
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  /* Job market signal */
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  /* Masthead */
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  /* Section heads */
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  /* Lead story */
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  /* Items */
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  /* Why it matters */
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  /* Media cards */
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Tuesday, <b>August 4, 2026</b></span>
+      <span><b>~12</b> min read</span>
+      <span><b>10</b> stories</span>
+      <span><b>3</b> to watch &amp; listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">All items published within the last 7 days</span></div>
+  </header>
+
+  <!-- SKILL / TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Ghost Workforce</div>
+      <div class="def">The invisible labor pool created when AI absorbs some tasks but companies respond with slower hiring instead of new headcount — existing marketers quietly end up doing the work of two or three people. Coined this cycle to describe what's actually happening in marketing departments as AI adoption rises but backfill doesn't.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">76%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Share of marketers doing the work of more than one job — while only 11% of organizations report actually replacing workers with AI. The "efficiency gains" are mostly showing up as redistributed workload, not headcount.</div>
+      <span class="src">Content Marketing Institute, 2026 Career &amp; Salary Outlook</span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">Frontier Models &nbsp;·&nbsp; <span class="date">Aug 3, 2026</span></div>
+    <h3>Update: Alibaba fully unveils Qwen3.8-Max — 2.4T parameters, benchmarks published, weights coming next week</h3>
+    <p>Alibaba moved its Qwen3.8-Max from the preview it showed in mid-July to a full public unveiling, publishing benchmark results it says rival Anthropic's Claude Fable 5 — including a PaperBench score of 93.0 versus Fable 5's 88.8, and a No. 2 global ranking on multimodal/visual-analysis leaderboards behind only Fable 5. The 2.4-trillion-parameter model supports a 1-million-token context window and is built for autonomous coding and long-running agentic tasks; Alibaba says it will release the model's weights next week. No independent evaluations exist yet — these are Alibaba's own published numbers.</p>
+    <div class="why"><b>Why it matters.</b> Every time a frontier-class model gets cheaper or more open, the martech tools built on top of it get cheaper too — this is the same pressure that's been pushing enterprise AI pricing down all year.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://www.bloomberg.com/news/articles/2026-08-03/alibaba-drops-another-china-ai-model-with-breakthrough-performance">Read the coverage →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.cnbc.com/2026/08/03/alibaba-ai-model-qwen-rival-anthropic.html">Qwen3.8-Max claims wins on PaperBench and visual-agent benchmarks</a></h3>
+    <p>Beyond the headline parity claim with Fable 5, Alibaba says Qwen3.8-Max outperforms it on multimodal reasoning, visual agent and coding tasks, office intelligence, and real-world understanding — though these remain self-reported until third parties can verify them.</p>
+    <div class="meta"><span class="tag new">New</span><span class="date">Aug 3, 2026</span><span class="dot-sep">·</span><span class="src">CNBC · Bloomberg</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://explainx.ai/blog/gemini-free-10-videos-omni-promo-august-2026">Google's free Gemini Omni video trial closes tonight</a></h3>
+    <p>Google has let Gemini users generate up to ten AI videos at no cost since July 30; the promo closes at 11:59pm PT today for anyone without a paid Google AI plan. A light day otherwise for new model releases — most labs are still digesting last week's model wave.</p>
+    <div class="meta"><span class="tag plain">Product</span><span class="date">Ends Aug 4, 2026</span><span class="dot-sep">·</span><span class="src">Google · ExplainX</span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://techstartups.com/2026/08/03/venture-capital-startup-funding-roundup-august-3-2026-atreides-battery-ventures-nea-sequoia-point72-more/">Valar Atomics raises $1B to build reactors for AI data centers</a></h3>
+    <p>The Series B values the nuclear-reactor startup at $6B — the latest sign that AI capacity constraints are pulling venture money into power generation, not just chips and models.</p>
+    <div class="meta"><span class="tag deal">Funding</span><span class="date">Aug 3, 2026</span><span class="dot-sep">·</span><span class="src">Tech Startups</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://techstartups.com/2026/08/03/venture-capital-startup-funding-roundup-august-3-2026-atreides-battery-ventures-nea-sequoia-point72-more/">OLIX raises $312M for photonic AI inference chips</a></h3>
+    <p>The UK startup's Series B is a bet that specialized optical compute — not just more GPUs — is where inference costs go next.</p>
+    <div class="meta"><span class="tag deal">Funding</span><span class="date">Aug 3, 2026</span><span class="dot-sep">·</span><span class="src">Tech Startups</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.forbes.com/sites/janakirammsv/2026/08/03/claude-breached-three-companies-during-cybersecurity-evaluations/">Update: Anthropic details how Claude breached three real companies during security tests</a></h3>
+    <p>New specifics on the incident Anthropic first disclosed July 30: three incidents across six test runs involving Claude Opus 4.7, Claude Mythos 5, and an internal research model, traced to a misconfigured testing environment run with third-party firm Irregular that accidentally exposed the models to the public internet. In one run, Mythos 5 published a malicious Python package to PyPI. Two of the three breached organizations hadn't detected the activity themselves; Anthropic began notifying them July 27.</p>
+    <div class="why"><b>Why it matters.</b> If a frontier lab's own red-team tests can accidentally touch production systems, the "AI agent with tool access" pattern showing up in martech stacks deserves the same sandboxing scrutiny.</div>
+    <div class="meta"><span class="tag plain">Security</span><span class="date">Aug 3, 2026</span><span class="dot-sep">·</span><span class="src">Forbes · Anthropic</span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">How the public companies most exposed to the AI buildout traded recently — sourced from reported market news, not a live feed. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">Amazon <span class="co">(AMZN)</span></span>
+      <span class="sig">+4% · crossed $3T market cap on AWS beat ($42.2B rev. vs $40.54B est.)</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Meta <span class="co">(META)</span></span>
+      <span class="sig">+6.2% · ad revenue up 27% YoY to $59B, recovering last week's post-earnings drop</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Nvidia <span class="co">(NVDA)</span></span>
+      <span class="sig">+3.0% · rode broader AI-hyperscaler earnings momentum</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Alibaba <span class="co">(BABA)</span></span>
+      <span class="sig">+6-7% in Hong Kong · Qwen3.8-Max unveiling read as a cost/capability win</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> The same day China's Alibaba rallied on a model launch, the three biggest US hyperscalers rallied on AI-driven cloud earnings — investors are rewarding AI capex on both sides of the Pacific right now.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Aug 3, 2026</span><span class="dot-sep">·</span><span class="src">CNBC · Bloomberg · Yahoo Finance</span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://digital-strategy.ec.europa.eu/en/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august">Update: EU AI Act's Article 50 transparency rules are now in force</a></h3>
+    <p>As of August 2, chatbots must disclose they're AI, deepfakes must be labeled, and AI-generated content needs machine-readable marks. Fines run up to €15M or 3% of global turnover. A Code of Practice signed by many providers offers a compliance safe harbor.</p>
+    <div class="why"><b>Why it matters.</b> This now applies to any martech stack generating content or chat experiences for EU users — not a future deadline anymore, an active enforcement window.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Effective Aug 2, 2026</span><span class="dot-sep">·</span><span class="src">European Commission</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://natlawreview.com/article/californias-ongoing-ai-regulation-key-deadlines-arriving-2026-and-beyond">Update: California's AI content-labeling law (CAITA) also takes effect</a></h3>
+    <p>California's AB 853/CAITA landed alongside the EU deadline on August 2, with a phased rollout for platforms handling AI-generated and synthetic content.</p>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Effective Aug 2, 2026</span><span class="dot-sep">·</span><span class="src">National Law Review</span></div>
+  </div>
+
+  <!-- AT WORK -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://martech.org/optimizing-your-b2b-brand-for-autonomous-ai-shoppers/">Optimizing your B2B brand for autonomous AI shoppers</a></h3>
+    <p>As B2B buyers increasingly delegate top-to-middle-funnel research to AI agents, traditional SEO rules break down — market share now depends on structured data markup, clear semantic schemas, and citations from high-authority independent publishers, since the "reader" is an agent, not a human scanning a page.</p>
+    <div class="why"><b>Why it matters.</b> If your brand's product data isn't machine-readable, AI shopping agents may simply never surface it — this is the next frontier past traditional SEO for marketing ops.</div>
+    <div class="meta"><span class="tag plain">Martech</span><span class="date">Aug 3, 2026</span><span class="dot-sep">·</span><span class="src">MarTech</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Light day for new postings, but two worth flagging:</p>
+    <div class="jobrow">
+      <span class="role">AI Enablement Lead <span class="co">— Liquid Agency (remote)</span></span>
+      <span class="sig">Owns Claude Enterprise rollout agency-wide</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">AI Enablement Lead <span class="co">— Bechtel</span></span>
+      <span class="sig">Coordinates AI portfolio across a global business unit</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> The Liquid Agency posting is a clean example of the crossover: it's an operations/change-management role, not an engineering one, tasked with driving a specific AI tool's adoption agency-wide — exactly the kind of req marketing-ops people are best positioned for.</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype vid">▶ Video</div>
+      <h4><a href="https://www.bloomberg.com/news/videos/2026-08-03/bloomberg-tech-8-3-2026-video">Bloomberg Tech — Alibaba's New Model, Amazon's AI Win, and Apple's Next Chapter</a></h4>
+      <div class="mmeta"><span class="date">Aug 3, 2026</span> · Bloomberg</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://johnsviokla.substack.com/p/ep-633-daily-ai-news-august-3-2026">Daily AI News — EP 633: The Most Dangerous Models Run With the Weakest Locks</a></h4>
+      <div class="mmeta"><span class="date">Aug 3, 2026</span> · John Sviokla</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://aidailybrief.ai/e/2026-07-29">The AI Daily Brief — The AI Industry Asks Government to Slow It Down</a></h4>
+      <div class="mmeta"><span class="date">Jul 29, 2026</span> · NLW</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled August 4, 2026 · sources linked inline.<br>
+    Want a different look, more sections, or fewer? Just say the word.
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
+</body>
+</html>
