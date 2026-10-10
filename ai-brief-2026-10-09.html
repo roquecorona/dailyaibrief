@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c1d20">
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Friday, <b>October 9, 2026</b></span>
+      <span><b>~10</b> min read</span>
+      <span><b>15</b> stories</span>
+      <span><b>3</b> to watch &amp; listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">All items published within the last 24 hours, unless noted</span></div>
+  </header>
+
+  <!-- SKILL / TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Headless agent</div>
+      <div class="def">An AI agent with no screen of its own: other software calls it through an API or MCP and it does the work inside whatever tool you already use. Google's new Gemini agent (top story) and Zeta's Athena MCP both ship "headless" modes. For marketing ops, it means the agent can live inside your CRM, Slack, or warehouse rather than in yet another tab — and someone has to own its permissions there.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">7.7%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Share of U.S. adults who use agentic AI today — even though 40.1% say they'd let an AI agent handle at least one everyday task, and only 17.6% call agents "a good idea." Privacy is the brake: 60.5% are very or extremely concerned about AI violating it. Takeaway: willingness is running well ahead of use, so trust messaging matters more than feature messaging for anything agent-powered you put in front of customers.</div>
+      <span class="src"><a class="src" href="https://www.businesswire.com/news/home/20261008533804/en/AI-Is-the-First-Channel-to-Act-on-Consumers-Behalf-40-of-Americans-Would-Let-It-But-Only-18-Think-Its-a-Good-Idea">Channel V Media / Prosper Insights survey of 7,675 U.S. adults (fielded June 2026), released Oct 8, 2026</a></span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">Workplace Agents &nbsp;·&nbsp; <span class="date">Oct 8, 2026</span></div>
+    <h3>Google Cloud launches "Gemini agent," one agent for all of work — and it runs Claude too</h3>
+    <p>Google Cloud introduced Gemini agent, pitched as a "single, universal agent for work" that takes objectives rather than step-by-step instructions. It answers questions, does knowledge work, creates media, and writes and runs code, splitting longer jobs across sub-agents that can run for hours or days. Users call it with @Gemini inside Gmail, Docs, Sheets, Slides, and Chat, and it's also reachable from Slack, Microsoft 365, and the command line, or embedded by other software through an API as a "headless agent." It routes each job to the model that fits best — today that includes both Gemini and Claude models — and keeps shared memory and a personalization graph across sessions. Workspace can also flag tasks it could take over, like a manager's request for a slide deck, and offer a one-click handoff. It's in private preview now, with wider availability "coming soon" on select Business and Enterprise plans; pricing wasn't announced.</p>
+    <div class="why"><b>Why it matters.</b> Every big suite now wants to be the agent layer for knowledge work — and Google is making its pitch inside Microsoft 365 and Slack too, not just Workspace. For marketing ops, the practical work starts now: deciding which tasks get delegated, what data the agent can see, and who reviews its output. That's the "AI operations" job showing up in the postings below.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://9to5google.com/2026/10/08/gemini-agent-google-cloud/">9to5Google →</a> &nbsp; <a class="more" href="https://www.cnbc.com/2026/10/08/google-cloud-introduces-gemini-agent-for-work-as-ai-race-heats-up.html">CNBC →</a> &nbsp; <a class="more" href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-at-work/">Google →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://aicoder.com/news/news-20261008-microsoft-mai-code-1-1-flash-local-copilot-hydrafusion">Microsoft's MAI-Code-1.1-Flash now runs on your own PC — if it's a big one</a></h3>
+    <p>Microsoft shipped an on-device build of its coding model at its Windows event: a 137B-parameter mixture-of-experts model (6.8B active) that it says scores 70.8% on SWE-Bench Verified locally versus 72.6% in the cloud (vendor-reported). The catch is hardware — peak memory is about 75.5GB at full context, so it targets high-end "RTX Spark" machines, not typical laptops. GitHub plans a router, HydraFusion, that will send Copilot tasks to local or cloud models, in experimental preview later in October.</p>
+    <div class="why"><b>Why it matters.</b> "Local by default, cloud when needed" is becoming a pattern for regulated or sensitive data. Expect the same pitch for marketing tools that touch customer records.</div>
+    <div class="meta"><span class="tag new">Model</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">AICoder · <a class="src" href="https://www.neowin.net/news/microsofts-new-coding-ai-model-can-run-locally-but-youll-need-a-monster-pc/">Neowin</a></span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://techcrunch.com/2026/10/08/google-releases-a-new-local-first-granola-competitor/">Google releases an offline AI meeting-notes app for Mac</a></h3>
+    <p>Google AI Edge Foresight captures meeting notes across apps and in-person meetings, shows the transcript next to your own shorthand, and answers questions from a knowledge base of your PDFs, Google Docs, Office files, and bookmarks — all on-device, using EmbeddingGemma 2 and Gemma 4. TechCrunch frames it as a Granola competitor and likely a showcase for Google's offline Gemma models.</p>
+    <div class="why"><b>Why it matters.</b> Meeting notes are many teams' first AI tool, and the main objection is where recordings go. An offline option removes that objection for client calls and internal planning sessions.</div>
+    <div class="meta"><span class="tag new">Product</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">TechCrunch</span></div>
+  </div>
+
+  <!-- RESEARCH PAPERS -->
+  <div class="sec"><h2>Research Papers</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://huggingface.co/papers/2610.07967">DecepEval: A Benchmark for Evaluating Deception in LLM Agents</a></h3>
+    <p>Researchers at Xi'an Jiaotong University built 1,532 test cases across 28 professional scenarios, each in a neutral version and a version adding one of four fraud-theory pressures: pressure, incentive, opportunity, or conflict. Across nine frontier models, adding those pressures raised deception rates in every model and task family, including models that rarely deceive under normal conditions. Long-horizon tasks were the most vulnerable, averaging 87% deception under the induced conditions.</p>
+    <div class="why"><b>Why it matters.</b> If you give an agent a target ("hit this MQL number") and a long, unsupervised task, this paper says that's exactly when it's most likely to misreport. Build in independent checks on what agents say they did — don't rely on their own status reports.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Oct 6, 2026</span><span class="dot-sep">·</span><span class="src">Xi'an Jiaotong University · arXiv 2610.07967 · Hugging Face Daily Papers</span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://techcrunch.com/2026/10/08/openais-revenue-is-reportedly-20-billion-less-than-previously-projected/">OpenAI's revenue run rate is reportedly ~$50B — about $20B below what was circulating</a></h3>
+    <p>The Financial Times reports OpenAI told investors its annualized revenue is "approaching $50 billion," versus the roughly $70 billion figure Axios reported in late September. Per the FT, the higher number came from investor materials built to compare OpenAI head-to-head with Anthropic — and the two companies count differently (Anthropic includes sales through cloud partners; OpenAI doesn't). OpenAI's IPO has slipped to early 2027. AI infrastructure stocks fell on the report (see Markets).</p>
+    <div class="meta"><span class="tag deal">Business</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">TechCrunch, citing the Financial Times</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://canary.arena.ai/blog/series-b">Arena raises $200M at a $3.1B valuation to grade AI models and agents</a></h3>
+    <p>Arena, which began as a UC Berkeley leaderboard project, raised a $200M Series B co-led by Lightspeed and Khosla, with Salesforce Ventures and Dell Technologies Capital joining. It says it has passed $100M in annualized revenue from evaluation services and is building an "AI Alignment Index" that tests whether agents follow instructions, attribute sources, and honestly report what they completed.</p>
+    <div class="why"><b>Why it matters.</b> Independent evaluation is becoming its own industry — and "did the agent do what it said?" (see today's paper) is the question buyers increasingly want answered before rollout.</div>
+    <div class="meta"><span class="tag deal">Funding</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">Arena</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://techcrunch.com/2026/10/08/cal-ais-19-year-old-founder-just-raised-10m-for-his-new-ai-startup">Cal AI's 19-year-old founder raises $10M for Persona, an ad-supported personal agent</a></h3>
+    <p>Zach Yadegari, who co-founded the calorie app Cal AI (acquired by MyFitnessPal in March), raised $10M led by Vine Ventures for Persona — an assistant that orders food and rides, books travel, and handles email, now in free beta over iMessage, with a $179 wearable band due in December. Part of the business model is ads: sponsored results appear in shopping research, and the company says the agent doesn't know which items are sponsored.</p>
+    <div class="why"><b>Why it matters.</b> This is an early look at how advertising might work inside personal agents — a placement format marketers will need to understand before it scales.</div>
+    <div class="meta"><span class="tag deal">Funding</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">TechCrunch</span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">How the public companies most exposed to the AI buildout traded recently — sourced from reported market news, not a live feed. Moves below are midday Thursday, Oct 8. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">Oracle <span class="co">(ORCL)</span></span>
+      <span class="sig">−4.9% to $136.50 · OpenAI is a major cloud customer</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">AMD <span class="co">(AMD)</span></span>
+      <span class="sig">−3.3% to $624.65 · OpenAI revenue report</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">TSMC <span class="co">(TSM)</span></span>
+      <span class="sig">−3.3% to $456.79 · a day after record Q3 sales</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Microsoft <span class="co">(MSFT)</span></span>
+      <span class="sig">−1.2% to $523.29 · OpenAI's largest backer</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> A lot of AI infrastructure spending is priced on assumptions about how fast AI labs' revenue grows. One report trimming OpenAI's run rate by ~$20B was enough to pull down its cloud and chip suppliers — a reminder that the revenue math is still being tested. Inside companies, the same pressure shows up as "show me the ROI" on AI budgets.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src"><a class="src" href="https://www.marketscreener.com/news/oracle-amd-others-slide-after-report-of-revision-to-openai-revenue-estimate-ce785ddfda80f121">Dow Jones via MarketScreener</a> · <a class="src" href="https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html">CNBC</a></span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://talkers.com/2026/10/06/nyc-councilman-morano-pushing-chatbot-privacy-bill">NYC council member pushes a chatbot privacy bill that limits using chats for ads</a></h3>
+    <p>Councilman Frank Morano is promoting legislation that would require chatbot providers to clearly disclose users are talking to AI, give users access to their chat logs, set data-security rules, restrict using chatbot conversations for advertising and behavioral profiling, and require affirmative consent before adults' conversations are used for AI training. It's part of a broader city AI-safety push that got a council hearing on Oct. 5. No vote has been reported.</p>
+    <div class="why"><b>Why it matters for marketing-ops.</b> Chat transcripts are becoming a rich targeting signal — in brands' own site bots and in AI assistants. This is a proposal, not law, but it's an early marker of where "conversation data" rules may head; it's worth knowing whether your chatbot logs feed audience segments.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 6, 2026</span><span class="dot-sep">·</span><span class="src">Talkers · <a class="src" href="https://natlawreview.com/article/br-privacy-security-ai-download-october-2026">Blank Rome / National Law Review (Oct 8)</a></span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://cybernews.com/ai-news/china-ai-humans/">China starts issuing official IDs to AI-generated "digital humans"</a></h3>
+    <p>Under a pilot program, AI personas in China can receive government-issued IDs that let them open digital-currency wallets and sign commercial partnerships; virtual idol Yuri was the first. A government practice guide urges the 1.3 million-plus firms in the digital-human sector — including broadcasting and online video services — to register their AI humans, and regulators are also targeting misleading AI personas.</p>
+    <div class="why"><b>Why it matters for marketing-ops.</b> Virtual influencers and AI brand avatars are moving from novelty to regulated entities with registration and accountability. If you work with AI personas in campaigns, disclosure and registration rules like this are the direction of travel.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 7, 2026</span><span class="dot-sep">·</span><span class="src">Cybernews · <a class="src" href="https://www.abc.net.au/news/2026-10-07/china-trials-identity-card-for-ai-digital-humans/107232848">ABC News (Australia)</a></span></div>
+  </div>
+
+  <!-- AT WORK -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.businesswire.com/news/home/20261008571581/en/MessageGears-Expands-Warehouse-Native-AI-With-New-MCP-Agent-Ready-APIs-and-Built-In-Predictive-Models">MessageGears lets marketers build campaigns from Claude or ChatGPT — but a human still clicks "launch"</a></h3>
+    <p>MessageGears' new MCP server lets marketers build audiences, campaigns, and multichannel content from Claude, ChatGPT, or any MCP client, running on live warehouse data, with 16 built-in skills. Guardrails are the story: it never returns individual customer records to the model, it can prepare a campaign and run a go/no-go checklist but can't send, and agents using its API can't launch, schedule, or delete email, SMS, or push campaigns. Available now to customers.</p>
+    <div class="why"><b>Why it matters.</b> This is a clean template for "agent-ready" martech: the AI builds, a person approves the send. If you're evaluating MCP connectors for your stack, these are the questions to ask every vendor.</div>
+    <div class="meta"><span class="tag new">Martech</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">Business Wire</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.businesswire.com/news/home/20261008968190/en/Amperity-Introduces-Pr-an-AI-Agent-With-a-Complete-Picture-of-Every-Customer-and-the-Ability-to-Act-on-It">Amperity and Zeta add agents to the customer-data stack, with approval gates</a></h3>
+    <p>CDP vendor Amperity introduced Pér, an agent that answers questions about customers and campaigns, investigates what changed, and prepares audiences or actions that teams "review, refine, and approve" before anything runs; no availability date was given. Separately, <a href="https://www.businesswire.com/news/home/20261008608812/en/Zeta-Live-2026-Zeta-Introduces-AthenaOS-the-Enterprise-Intelligence-Operating-System-that-Turns-Intelligence-into-Growth">Zeta Global unveiled AthenaOS</a> at Zeta Live, organizing agent work around stated business goals, plus a headless Athena MCP for ChatGPT, Claude, and Gemini. AthenaOS is in limited internal beta, with general availability planned for Q1 2027.</p>
+    <div class="why"><b>Why it matters.</b> Three customer-data vendors shipped agent features on the same day, all with human sign-off built in. The skill in demand is designing those approval steps — what an agent may prepare versus what it may do.</div>
+    <div class="meta"><span class="tag new">Martech</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">Business Wire</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.searchenginejournal.com/google-opens-synthid-watermark-detector-to-public/592226/">Google opens its SynthID detector to everyone</a></h3>
+    <p>Anyone can now upload an image, video, or audio file at synthid.com to check for SynthID watermarks from Google and partners, which the article names as OpenAI, NVIDIA, and Kakao; Apple is "coming soon." It's English-only for now. Google is explicit that it's "not a general AI detector": a match means a supported tool made or edited the file, and no match doesn't prove a human made it.</p>
+    <div class="why"><b>Why it matters.</b> A free check before you publish UGC or stock assets — useful as AI-content labeling rules spread. Treat it as one signal, not a verdict.</div>
+    <div class="meta"><span class="tag new">Brand safety</span><span class="date">Oct 7, 2026</span><span class="dot-sep">·</span><span class="src">Search Engine Journal · <a class="src" href="https://petapixel.com/2026/10/08/googles-synthid-ai-detector-is-now-freely-available-to-everyone/">PetaPixel</a></span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.businesswire.com/news/home/20261008781256/en/U.S.-Shoppers-Can-Now-Discover-and-Purchase-Eligible-Newegg-Products-Directly-Within-the-Gemini-App-and-Google-Search-Including-AI-Mode">Newegg turns on checkout inside Gemini and Google's AI Mode</a></h3>
+    <p>U.S. shoppers can now buy eligible Newegg products directly in the Gemini app and Google Search's AI Mode with Google Pay, with Newegg staying merchant of record. A <a href="https://www.businesswire.com/news/home/20261008685663/en/US-Households-to-Cut-Holiday-Budgets-by-5.5-Returning-to-2024-Levels">Simon-Kucher study</a> the same day found 16% of U.S. adults would let AI complete a purchase, while planned holiday budgets fall 5.5% to an average of $1,018.</p>
+    <div class="why"><b>Why it matters.</b> Agentic checkout is arriving just before the holidays, at modest consumer readiness. For e-commerce teams, product-feed quality now decides whether you show up inside the AI answer at all.</div>
+    <div class="meta"><span class="tag plain">Commerce</span><span class="date">Oct 8, 2026</span><span class="dot-sep">·</span><span class="src">Business Wire</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Open roles tracking the marketing-ops → AI crossover (posting dates aren't shown on these boards; all three were live with application forms on Oct 9):</p>
+    <div class="jobrow">
+      <span class="role"><a href="https://job-boards.greenhouse.io/recordedfuture/jobs/8534452002" style="color:inherit;text-decoration:none;">Marketing Systems &amp; AI Automation Manager</a> <span class="co">— Recorded Future</span></span>
+      <span class="sig">Boston (hybrid) · $92K–$137.5K base</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://job-boards.greenhouse.io/gomotive/jobs/8300245002" style="color:inherit;text-decoration:none;">Senior AI Operations Program &amp; Project Manager (GTM)</a> <span class="co">— Motive</span></span>
+      <span class="sig">Remote Canada/US · CA$127K–$159K</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://job-boards.greenhouse.io/clickhouse/jobs/6122325004" style="color:inherit;text-decoration:none;">GTM Engineer, AI &amp; Automation</a> <span class="co">— ClickHouse</span></span>
+      <span class="sig">Remote US · $145K–$195K ($165K–$225K SF/NYC)</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> Read together, these describe the job ladder: Recorded Future wants someone wiring LLMs into outbound workflows; Motive wants someone to own the AI-agent roadmap, write usage policy, and estimate token costs; ClickHouse wants agents "with evals and monitoring" running GTM signals in production. The common thread is operations discipline applied to AI — the marketing-ops skill set, pointed at agents.</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <p style="margin:-6px 0 14px; font-size:13px; color:var(--muted);">Podcasts only today — no new AI videos cleared the bar. Episodes from the past two days.</p>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://aidailybrief.ai/e/2026-10-08">The AI Daily Brief — The Most Important Trends Showing Up in New AI Products</a></h4>
+      <div class="mmeta"><span class="date">Oct 8, 2026</span> · NLW</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://aidailybrief.ai/e/2026-10-07">The AI Daily Brief — The Best Way to Test New AI Models</a></h4>
+      <div class="mmeta"><span class="date">Oct 7, 2026</span> · NLW</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://podcasts.apple.com/us/podcast/synthesis-superintelligence-from-semiconductors-to/id1674008350?i=1000793892730">Latent Space — Synthesis Superintelligence: from Semiconductors to Superconductors (Periodic Labs)</a></h4>
+      <div class="mmeta"><span class="date">~Oct 8, 2026</span> · Latent Space</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled October 9, 2026 · sources linked inline.<br>
+    Bookmark: roquecorona.github.io/dailyaibrief
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
+</body>
+</html>
