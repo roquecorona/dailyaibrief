@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c1d20">
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Sunday, <b>October 11, 2026</b></span>
+      <span><b>~7</b> min read</span>
+      <span><b>9</b> stories</span>
+      <span><b>2</b> to listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">Weekend edition: items from Oct 10–11 unless noted</span></div>
+  </header>
+
+  <!-- SKILL / TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Reverse acqui-hire</div>
+      <div class="def">A big company hires a startup's key people and licenses its technology, without buying the company itself. It's quicker than a full acquisition and usually avoids a long antitrust review. Two show up below: Apple with podcast startup Huxe, and Nvidia's possible deal for Reflection AI. For your career, it's a sign of what big tech is paying for right now: small teams that have already shipped a working AI product.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">13.47%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Share of AI-crawler requests that got an "access denied" response on Cloudflare-protected sites in Q3 2026, up from 5.98% a year earlier (preliminary Cloudflare Radar data, analyzed by TechnologyChecker.io). Takeaway: before you run an AI-search visibility audit, check your firewall and CDN rules as well as robots.txt. AI tools can't cite a page their crawlers can't reach.</div>
+      <span class="src"><a class="src" href="https://www.globenewswire.com/news-release/2026/10/09/3377984/0/en/ai-crawlers-turned-away-more-than-twice-as-often-a-check-to-run-before-an-ai-visibility-audit.html">Zen Media via GlobeNewswire, Oct 9, 2026 (citing TechnologyChecker.io)</a></span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">AI Safety &amp; Governance &nbsp;·&nbsp; <span class="date">Oct 10, 2026</span></div>
+    <h3>Satya Nadella: AI models need an "emergency brake," and companies should assume a model is already compromised</h3>
+    <p>In a Saturday post on X, Microsoft's CEO said it is time "to step back and assess the trust architecture" of AI. His argument: businesses can't treat AI as "a set of nested black boxes" and just accept or reject what it recommends. Instead, he wants the model kept separate from the "harness" that runs its work, with controls and safeguards outside the model. He also wants "tamper-proof human readable evidence" of every meaningful action, and a way for an authorized person to "pause or shut down a model mid-task." He summed it up: "We must assume a model is compromised and contain it from the start… Think of it like an emergency brake." The post comes one day after Anthropic disclosed its test agents went off-script on real websites, and the White House started requiring AI companies to report incidents.</p>
+    <div class="why"><b>Why it matters.</b> Coming from the CEO of the biggest enterprise software vendor, this reads like a design spec for corporate AI. Expect Copilot, Dynamics, and the tools around them to add kill switches, audit trails, and external guardrails. In marketing ops, that's a concrete checklist for any agent touching your CRM or campaigns: separate permissions, human-readable action logs, and a pause button someone owns. If you can design and run those controls, you have the "AI governance" skill that keeps showing up in job descriptions.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://techcrunch.com/2026/10/10/microsofts-satya-nadella-says-ai-models-need-an-emergency-brake/">TechCrunch →</a> &nbsp; <a class="more" href="https://x.com/satyanadella/status/2108931348857827686">Nadella on X →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+  <p style="margin:-6px 0 4px; font-size:13px; color:var(--muted);">Light weekend for releases.</p>
+
+  <div class="item">
+    <h3><a href="https://commandline.microsoft.com/microsoft-decision-1-model-foundry/">Microsoft-Decision-1: a fast, cheap model that picks from fixed options instead of writing text</a></h3>
+    <p>Microsoft post-trained Alibaba's Qwen3.5-9B into a decision-scoring model. You give it a fixed set of options (yes/no, multiple choice, a rating, or a grading rubric) and it returns a calibrated probability for each one in a single pass. Microsoft says it had the highest accuracy in a 36-benchmark comparison and ran about 35x faster than GPT-6 Sol at median latency. It costs $0.042 per million input tokens, and output is free. It's available in Microsoft Foundry and OpenRouter. Microsoft says it will later rebuild the model on its own MAI models. An Oct 10 update added more accuracy and calibration results.</p>
+    <div class="why"><b>Why it matters.</b> Microsoft is the latest to ship a "decision model," after TypeSafe's Jev and Cloudflare's Clef. Lead routing, ticket triage, list hygiene, and QA checks of agent output are exactly these fixed-choice decisions. They're now cheap enough to run on every record, with no chatbot to prompt and no prose to parse.</div>
+    <div class="meta"><span class="tag new">Model</span><span class="date">Oct 9, 2026 · updated Oct 10</span><span class="dot-sep">·</span><span class="src">Microsoft Command Line</span></div>
+  </div>
+
+  <!-- RESEARCH PAPERS -->
+  <div class="sec"><h2>Research Papers</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://arxiv.org/abs/2610.11087">Beyond Imitation: A Framework and Benchmark for LLM-Assisted Peer Review (Sakana AI)</a></h3>
+    <p>Most AI-reviewer research checks whether AI reviews sound like human ones. This paper checks whether they catch actual mistakes. The authors planted 1,164 logical contradictions in 257 real conference papers. Their three-agent "Multi-Layered Review" system, which reads and understands the whole manuscript before writing anything, caught 73.43% of the errors that undermine a paper's core claims across four reviews, according to MarkTechPost's write-up. The best earlier system caught 14.81%. Each review cost about $0.47. The catch: every AI reviewer they tested could still be fooled by hidden prompt injection.</p>
+    <div class="why"><b>Why it matters.</b> Checking for errors is a different job from writing a summary. If you use AI to check claims in decks, case studies, or campaign copy, a structured multi-pass review (read everything first, then look for contradictions) does much better than a single "review this" prompt. Keep a human sign-off, though, since the injection weakness hasn't been solved.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Oct 8, 2026 (arXiv; TMLR)</span><span class="dot-sep">·</span><span class="src">arXiv · <a class="src" href="https://www.marktechpost.com/2026/10/10/sakana-ais-llm-peer-review-system-catches-73-of-core-claim-errors">MarkTechPost, Oct 10</a></span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.investing.com/news/company-news/nvidia-in-talks-to-acquire-reflection-ai-or-increase-investment-ft-reports-4942324">Nvidia in talks to acquire Reflection AI or invest more in it, per the FT</a></h3>
+    <p>The Financial Times reported Saturday that Nvidia is in early talks to deepen its stake in Reflection AI, the open-weight model startup founded by ex-DeepMind researchers Misha Laskin and Ioannis Antonoglou, or to buy it outright. One option is an acqui-hire, which could avoid a lengthy regulatory review. Nvidia has already invested $800M. A deal could come within weeks, or the talks could still fall apart. Reflection released its first open-weight model, Beam, earlier this week.</p>
+    <div class="why"><b>Why it matters.</b> Nvidia moving from selling chips into owning a U.S. open-weight model lab would add a serious American alternative to DeepSeek and Kimi for companies that want AI they can run and control themselves.</div>
+    <div class="meta"><span class="tag deal">M&amp;A Talks</span><span class="date">Oct 10, 2026</span><span class="dot-sep">·</span><span class="src">Financial Times via Investing.com / Reuters</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://techcrunch.com/2026/10/10/apple-discloses-deal-to-hire-team-and-license-tech-from-personalized-podcast-startup-huxe/">Apple discloses deal to hire the team behind AI podcast startup Huxe</a></h3>
+    <p>A filing with the European Commission shows Apple agreed to offer jobs to "certain employees of Huxe AI" and to take a non-exclusive license to its technology. Huxe was founded by developers who worked on NotebookLM's AI-generated podcast features. It shut down its personalized-audio app in May. No price was disclosed, and the filing doesn't say what Apple plans to do with the team.</p>
+    <div class="why"><b>Why it matters.</b> AI-generated audio briefings are becoming a mainstream format. Spotify and Google already have them, and Apple Podcasts may be next. For content marketers, "turn this report into a personalized audio episode" is close to becoming a built-in distribution channel.</div>
+    <div class="meta"><span class="tag deal">Acqui-hire</span><span class="date">Oct 10, 2026</span><span class="dot-sep">·</span><span class="src">TechCrunch (first reported by MacRumors)</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://techcrunch.com/2026/10/10/cloudflare-acquires-deno-to-improve-its-workers-programming-model/">Cloudflare acquires Deno, Ryan Dahl's JavaScript runtime company</a></h3>
+    <p>The whole Deno team, led by Node.js creator Ryan Dahl, is joining Cloudflare Workers, the platform many companies use to run AI agents and apps at the edge. Standalone runtime development ends, with a year of maintenance updates. Deno Deploy shuts down in six months, with migration help for paying customers. The JSR package registry continues. Terms weren't disclosed.</p>
+    <div class="why"><b>Why it matters.</b> Cloudflare keeps building out its developer platform for AI agents. This week alone it shipped a decision model and bought a runtime team. If your web or martech team hosts on Deno Deploy, the six-month migration deadline is the practical takeaway.</div>
+    <div class="meta"><span class="tag deal">Acquisition</span><span class="date">Oct 10, 2026</span><span class="dot-sep">·</span><span class="src">TechCrunch · <a class="src" href="https://thenewstack.io/cloudflare-acquires-deno-ryan-dahl/">The New Stack</a></span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">Weekly wrap through Friday, Oct. 9, plus what's ahead. Markets were closed this weekend. Sourced from reported market news, not a live feed. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">S&amp;P 500 / Nasdaq</span>
+      <span class="sig">Week: S&amp;P +1.2%, Nasdaq +0.6% (Russell 2000 −0.9%) · Nasdaq +17.7% YTD</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Lumentum <span class="co">(LITE)</span></span>
+      <span class="sig">~+6% early Friday · CEO: AI optical parts "effectively sold out through early 2029"</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Nvidia <span class="co">(NVDA)</span></span>
+      <span class="sig">Weekend FT report: talks to buy or invest more in Reflection AI · first trading reaction Monday</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">TSMC <span class="co">(TSM)</span></span>
+      <span class="sig">Full Q3 results Thu, Oct 15 · already reported record ~NT$1.49T revenue, up ~50%</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> AI stocks ended a jumpy week higher despite the OpenAI revenue scare, and the supply chain is still sold out years ahead. TSMC's call this week is the next big read on whether AI spending is holding up. That's the backdrop when your own leadership asks whether to keep paying for AI tools.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Oct 9–11, 2026</span><span class="dot-sep">·</span><span class="src"><a class="src" href="https://www.washingtonpost.com/business/2026/10/09/wall-street-stocks-dow-nasdaq/63e004dc-c41e-11f1-8170-681419af1cc9_story.html">AP via Washington Post</a> · <a class="src" href="https://www.tikr.com/blog/lumentum-stock-jumps-ai-optical-components-sold-out-2029">TIKR (citing Bloomberg TV)</a> · <a class="src" href="https://whbl.com/2026/10/10/nvidia-in-talks-to-invest-further-in-reflection-ai-or-buy-it-ft-reports/">Reuters</a> · <a class="src" href="https://www.tradingkey.com/analysis/stocks/us-stocks/262210228-weekly-preview-us-september-cpi-ppi-wall-street-banks-earnings-tsmc-tradingkey">TradingKey</a></span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.anthropic.com/news/2026-usage-policy-update">Anthropic's new usage policy bans covert commercial influence campaigns and lifts its blanket ban on political targeting (effective Nov 12)</a></h3>
+    <p>Anthropic's revised rules for Claude add a new section, "Do Not Engage in Deceptive Campaigns or Artificial Activity." It covers commercial as well as political activity and bans hiding who is behind a message, boosting content with fake accounts or posts, and building tools for influence operations. Anthropic says commercial firms, state media, and propaganda offices have used Claude to run fake-account networks and fabricated news sites. The blanket ban on personalized political and campaign targeting is gone. Targeting that relies on deception or misused personal data is still prohibited. The changes take effect November 12.</p>
+    <div class="why"><b>Why it matters for marketing ops.</b> Undisclosed AI-generated reviews, sockpuppet amplification, and astroturfed "creator" accounts now explicitly violate Claude's terms. That's on top of the FTC's existing rules on fake reviews. If your team or agencies use Claude for social or community work, check workflows for anything that hides who the sender is before Nov 12.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 8, 2026 (effective Nov 12)</span><span class="dot-sep">·</span><span class="src">Anthropic · <a class="src" href="https://techcrunch.com/2026/10/08/anthropic-changes-usage-policy-to-ban-model-abuse-and-election-interference/">TechCrunch</a></span></div>
+  </div>
+
+  <!-- AI AT WORK -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.wired.com/story/book-publishers-are-quietly-using-more-ai-staff-are-revolting/">Big book publishers are quietly using AI for marketing copy, and staff are pushing back</a></h3>
+    <p>Wired interviewed more than two dozen workers at HarperCollins, Simon &amp; Schuster, and Hachette. They say back-cover and publicity copy is one of the most common uses of AI so far. They also report AI assets in some cover art, AI-generated marketing videos in one HarperCollins division, and editors using LLMs to email literary agents. HarperCollins licenses Claude, ChatGPT, and Jasper. It has "voluntold" dozens of staff to become "AI Champions," while some teams shrank to five or six people handling two to three times the titles. Hachette says it supports AI for operational work but not creative work. Simon &amp; Schuster says use is not mandatory and unvetted tools are banned. HarperCollins didn't comment.</p>
+    <div class="why"><b>Why it matters.</b> Marketing copy is usually the first thing to get automated. The backlash here is mostly about disclosure and consent, not whether the copy is good. If you lead an AI rollout, an "AI Champions" program without clear rules on what gets disclosed and what stays human-made can damage trust inside the company. Clear use policies are part of the job.</div>
+    <div class="meta"><span class="tag plain">Marketing</span><span class="date">Oct 10, 2026</span><span class="dot-sep">·</span><span class="src">Wired</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://techcrunch.com/2026/10/10/all-the-ai-agents-that-can-live-in-your-text-messages/">TechCrunch maps 22 AI agents that live in your text messages</a></h3>
+    <p>A new roundup lists agents you reach through iMessage, SMS, or WhatsApp. They range from work tools like Town (learns recurring tasks across email, calendar, and Slack; $55M Series A) and Szn (calls, emails, and follow-ups in one thread; 7,500+ businesses) to family organizers and errand runners. Poke, the first AI agent approved on Apple Messages for Business, was acquired by Cognition. Instinct leads the category after a $1B raise at a $10B valuation.</p>
+    <div class="why"><b>Why it matters.</b> Customers' personal agents increasingly sit inside the inbox you market to. Some can book, buy, and follow up on someone's behalf. Lifecycle and SMS teams should expect some "replies" to come from an agent rather than a person, and should make offers and confirmations easy for software to read and act on.</div>
+    <div class="meta"><span class="tag plain">Workplace</span><span class="date">Oct 10, 2026</span><span class="dot-sep">·</span><span class="src">TechCrunch</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Thin weekend: two roles that weren't new this week, but were verified live on Oct 11.</p>
+    <div class="jobrow">
+      <span class="role"><a href="https://jobs.summitpartners.com/companies/ninjaone-2/jobs/92738788-sr-manager-marketing-operations-ai-transformation" style="color:inherit;text-decoration:none;">Sr. Manager, Marketing Operations AI &amp; Transformation</a> <span class="co">— NinjaOne</span></span>
+      <span class="sig">Austin, TX (hybrid) · posted Sep 10 · salary not listed</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://jobs.ashbyhq.com/absorblms/f4df19dc-be3f-4e34-925a-12285d354a9a" style="color:inherit;text-decoration:none;">Staff Marketing Technology Engineer</a> <span class="co">— Absorb Software</span></span>
+      <span class="sig">Remote US · posted Sep 11 · salary not listed</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> NinjaOne's role reads like a marketing-ops-to-AI roadmap: pick AI use cases, define predictive lead scoring, deploy agent workflows for campaign QA and list hygiene "with human checkpoints," and set AI governance standards. Absorb's is the more technical version: build AI agents on Google Cloud so marketing can automate its own work, with guardrails against "prompt injection and data exfiltration." Both put governance in the job description, the same theme as today's top story.</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <p style="margin:-6px 0 14px; font-size:13px; color:var(--muted);">Podcasts only today. No new AI videos cleared the bar.</p>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://podcasts.apple.com/us/podcast/the-5-debates-shaping-ai/id1680633614?i=1000795247408">The AI Daily Brief — The 5 Debates Shaping AI</a></h4>
+      <div class="mmeta"><span class="date">Oct 11, 2026</span> · NLW on revenue, market structure, control, regulation, and data-center opposition</div>
+    </div>
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://podcasts.apple.com/us/podcast/anthropics-quest-to-give-a-i-morals/id1528594034?i=1000794036820">Hard Fork — Anthropic's Quest to Give A.I. Morals</a></h4>
+      <div class="mmeta"><span class="date">~Oct 9, 2026</span> · The New York Times</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled October 11, 2026 · sources linked inline.<br>
+    Bookmark: roquecorona.github.io/dailyaibrief
+  </footer>
+
+</div>
+
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
+</body>
+</html>
