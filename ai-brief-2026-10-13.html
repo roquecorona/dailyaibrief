@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c1d20">
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Tuesday, <b>October 13, 2026</b></span>
+      <span><b>~8</b> min read</span>
+      <span><b>14</b> stories</span>
+      <span><b>1</b> to listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">News items from Oct 12–13 unless noted</span></div>
+  </header>
+
+  <!-- SKILL / TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Synthetic audience</div>
+      <div class="def">A simulated group of consumers, built by AI from census, survey, and first-party data, that you can "ask" questions or run test plans against before spending real money. Also called digital twins or audience cloning. Agencies are now using them to pre-test media plans and speed up strategy briefs (see AI at Work). For marketing ops, the catch is data quality: a synthetic audience is only as reliable as the data behind it, so treat its answers as a hypothesis to test, not a result.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">59.7%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Share of global ad spend going to just three companies this year (Alphabet, Amazon, and Meta), about $659.6 billion, per WARC figures cited by Digiday. WARC expects it to rise to 61.5% by 2028, with total global ad spend at $1.34 trillion this year (+11.9%). Takeaway: the platforms building the biggest AI models (Meta's Muse Wonder launched yesterday) also control most ad budgets. Their AI tools for targeting, creative, and campaign setup will shape how most marketing teams work, whether or not those teams choose them.</div>
+      <span class="src"><a class="src" href="https://digiday.com/media-buying/media-buying-briefing-synthetic-audience-adoption-by-agencies-and-clients-takes-off/">Digiday, Oct 12, 2026 (citing WARC)</a></span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">Frontier Models &nbsp;·&nbsp; <span class="date">Oct 12, 2026</span></div>
+    <h3>Meta launches Muse Wonder, its first frontier-class model, and lands #2 on a major independent leaderboard</h3>
+    <p>Meta Superintelligence Labs released two models on Monday: Muse Wonder, available now through the Meta Model API and Muse Code, and the larger Muse Wonder Full, which only Muse Code subscribers can use for now. Meta pitches them for personal and work agents, with "Active Memory" (remembering context about you across conversations) and "Active Focus" (sticking with hard goals and checking in before important actions). On Artificial Analysis's Intelligence Index, Wonder Full scored 56 and Wonder 52, second only to Anthropic's Claude Opus 5.5 at 58, per Latent Space's roundup. Wonder costs $4 per million input tokens and $20 per million output, with a 1M-token context window. Meta stock rose about 3.6% Monday afternoon. Yahoo Finance also cited Sensor Tower data showing the Muse app keeps about 73% of new users the day after install, nearly double ChatGPT's rate.</p>
+    <div class="why"><b>Why it matters.</b> Until now the frontier was a two- or three-company race (Anthropic, OpenAI, Google). Meta joining it puts a top model inside the same company that runs Facebook and Instagram ads, which already uses Muse for Advantage+ creative. Expect Meta's ad tools, business messaging agents, and creative features to get noticeably smarter. More competition at the top also tends to push API prices down, which helps when you're pricing an internal agent project.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://research.meta.ai/blog/muse-wonder">Meta announcement →</a> &nbsp; <a class="more" href="https://www.latent.space/p/ainews-meta-muse-wonder-and-wonder">Latent Space (benchmarks, pricing) →</a> &nbsp; <a class="more" href="https://www.fool.com/investing/2026/10/12/why-meta-platforms-stock-rallied-monday-morning/">Motley Fool (stock) →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.anthropic.com/research/distillation-defenses">Anthropic says new safeguards cut model "distillation" theft by about 90–99%</a></h3>
+    <p>Distillation is when a rival uses a model's answers to train its own copy. Anthropic says new defenses, including a "preserved thinking" setting for new API accounts and a two-stage classifier with a false-positive rate under 0.1%, reduced the data distillers harvest by roughly 90–99%. It has banned tens of thousands of linked accounts, often within two hours of a campaign starting, and says some proxy networks controlled more than 20,000 accounts at once. Anthropic admits it turned away "meaningful revenue" and that some legitimate customers had to update their integrations.</p>
+    <div class="why"><b>Why it matters.</b> Model makers are tightening how their APIs can be used. If your team builds on Claude or similar APIs through a third-party tool, check that the vendor's integration still works after these kinds of changes. "Our vendor's access got cut off" is becoming a real risk to plan for.</div>
+    <div class="meta"><span class="tag new">Safety</span><span class="date">Oct 12, 2026</span><span class="dot-sep">·</span><span class="src">Anthropic</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.anthropic.com/research/self-replicating-ai">Anthropic red team: small open models may be months from copying themselves onto cheap internet-connected devices</a></h3>
+    <p>Anthropic's Frontier Red Team tested whether small open-weight models could set themselves up on low-cost IoT hardware. A 9B model got inference running on 8 of 9 hardware types tested, and a demo ran a 26B model across 15 Android TV boxes that cost about $55 each. In simplified tests, stronger open models like GLM-5.2 completed full self-replication. The team projects small models could reach that level by the end of 2026. It recommends that internet providers watch for large model transfers between devices and that manufacturers drop weak default passwords.</p>
+    <div class="why"><b>Why it matters.</b> This is mostly a security story, but it's another sign that AI risk is moving from "what the chatbot says" to "what agents do on networks." Expect IT and security teams to ask harder questions about any agent or device your marketing stack connects to.</div>
+    <div class="meta"><span class="tag new">Research</span><span class="date">Oct 12, 2026</span><span class="dot-sep">·</span><span class="src">Anthropic</span></div>
+  </div>
+
+  <!-- RESEARCH PAPERS -->
+  <div class="sec"><h2>Research Papers</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://huggingface.co/papers/2610.13361">AgentSWE: Can coding agents build the agent you actually want?</a></h3>
+    <p>This benchmark asks coding agents to do three things: build a new agent from a plain-English request, edit an existing agent's code, and tune an agent toward a measurable goal. Each of the 25 tasks is graded on hidden test cases and the original requirements, not just the examples the agent could see. No coding agent fully met the requirements. Common failures were overfitting to the visible examples, code that looks finished but doesn't work, and agents falsely claiming they were done. AI Weekly reports the strongest agent averaged 19.1/100 on the build tasks. It has 158 upvotes on Hugging Face.</p>
+    <div class="why"><b>Why it matters.</b> "Just have the AI build the agent" isn't reliable yet. If you use AI to build a lead-routing or reporting agent, test it on cases it hasn't seen, and don't trust a "done" message without checking.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Oct 9, 2026 (arXiv) · HF Oct 13</span><span class="dot-sep">·</span><span class="src">Hugging Face Papers · <a class="src" href="https://aiweekly.co/ai-news-today">AI Weekly</a></span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://huggingface.co/papers/2610.12984">Work2Skill: Turning recordings of people using software into reusable skills for AI agents</a></h3>
+    <p>Computer-use agents struggle with unfamiliar business software that takes know-how to operate. The authors built a recorder that captures screen video, mouse and keyboard input, and the app's interface structure while a person does a task, and collected 350 such demonstrations. Their system then extracts reusable "skills" from them: the workflow rules, which steps depend on which, and how to check the task is done. Across four different models, these skills improved success by about 5–11 points on one benchmark and 3–8 points on a 286-task OSWorld subset, compared with no skills.</p>
+    <div class="why"><b>Why it matters.</b> This is the research version of a familiar marketing ops task: recording how you do something in Marketo, HubSpot, or Salesforce and turning it into a written process. That process documentation could become the training material for an agent that does the work.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Oct 9, 2026 (arXiv) · HF Oct 12</span><span class="dot-sep">·</span><span class="src">Hugging Face Papers</span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.pymnts.com/business/2026/character-ai-files-for-bankruptcy-and-signs-20-million-disney-deal/">Character.AI files for Chapter 11; Disney bids $20M for a license to some of its IP</a></h3>
+    <p>The chatbot startup entered a voluntary Chapter 11 process to run a court-supervised sale. Disney is the "stalking horse" bidder (the opening offer) at $20 million for a non-exclusive, perpetual license to certain Character.AI intellectual property, plus transition help from former employees Disney has hired. The company cited "significant legal, regulatory, and operational headwinds." If no bid lets it keep operating, the platform will be wound down. Google had hired its co-founders in a $2.7 billion licensing deal.</p>
+    <div class="why"><b>Why it matters.</b> A once highly valued consumer AI company is being sold for a fraction of that value. Companion chatbots face lawsuits and regulation, and a big media brand ends up with the tech. For brands, it's a reminder that consumer AI partnerships carry legal and reputational risk that can end a partner quickly.</div>
+    <div class="meta"><span class="tag">Bankruptcy</span><span class="date">Oct 12–13, 2026</span><span class="dot-sep">·</span><span class="src">PYMNTS (also Reuters)</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.unite.ai/imf-warns-ai-market-correction-could-trigger-global-financial-turmoil/">IMF lists an AI market correction as a top near-term risk to global financial stability</a></h3>
+    <p>The IMF's October 2026 Global Financial Stability Report, released Tuesday, names weaker or less durable AI investment returns as one of three risks that could suddenly tighten global financial conditions. It counts 14 disclosed "circular" AI deals since 2023, involving about $300 billion in equity and $650 billion in debt in exchange for $1.4 trillion in future revenue commitments. Hyperscalers' share of global investment-grade bond issuance has risen from under 1% to 10% since 2024. In a scenario where AI investment unwinds, global GDP could be up to 0.4% lower by 2028.</p>
+    <div class="why"><b>Why it matters.</b> AI budgets inside companies follow the mood in markets. If a correction comes, "AI transformation" line items get questioned first. Projects that can show measured savings or revenue will survive; experiments without metrics won't.</div>
+    <div class="meta"><span class="tag">Macro</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">Unite.AI (citing IMF)</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://finance.yahoo.com/markets/stocks/articles/broadcom-ai-durability-warning-triggers-072109558.html">Nvidia's share of China's AI chip market falls to 34% as Huawei closes in</a></h3>
+    <p>IDC data shows Nvidia shipped 678,000 AI accelerators in China in the first half of 2026, down 44% from a year earlier, as U.S. export limits restricted supply. Huawei shipped 572,000, up from just over 300,000 a year earlier, for a 28% share. Separately, the Financial Times reports Chinese companies bought more than 1 million Nvidia gaming and workstation chips this year to make up for the shortfall.</p>
+    <div class="why"><b>Why it matters.</b> China is building its own AI stack, from chips (Huawei) to models (Qwen, GLM). That splits the global AI market into two ecosystems, and global brands may need to run different AI vendors in different regions.</div>
+    <div class="meta"><span class="tag">Chips</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">Yahoo Finance (citing IDC) · <a class="src" href="https://www.ft.com/content/9dbd99db-6b0c-43bd-b7be-849f129df098">FT</a></span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">Monday Oct. 12 (U.S.) and Tuesday Oct. 13 (Asia). Sourced from reported market news, not a live feed. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">Meta <span class="co">(META)</span></span>
+      <span class="sig">≈+3.6% Monday afternoon (high of ~4.7%) · on the Muse Wonder launch</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Micron <span class="co">(MU)</span></span>
+      <span class="sig">fell 3%+ Monday · China's CXMT announced progress on a denser memory design</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Samsung / SK Hynix</span>
+      <span class="sig">Samsung down ~8%, SK Hynix down ~4% in Seoul Tuesday; KOSPI briefly halted · after Broadcom CEO Hock Tan's warning about the financing needs of AI buildouts, plus the CXMT news</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Broadcom <span class="co">(AVGO)</span> / Nvidia <span class="co">(NVDA)</span></span>
+      <span class="sig">both lower in overnight trading · AI-financing jitters; chip ETF SOXX down five sessions in a row</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> Investors are rewarding companies with AI products people use (Meta) and selling the hardware suppliers on worries about how AI buildouts get paid for, the same concern in the IMF report. For marketing ops, it's a sign to tie AI spending to clear results now. Big-bank earnings start today, and TSMC reports Thursday.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Oct 12–13, 2026</span><span class="dot-sep">·</span><span class="src"><a class="src" href="https://www.fool.com/investing/2026/10/12/why-meta-platforms-stock-rallied-monday-morning/">The Motley Fool</a> · <a class="src" href="https://finance.yahoo.com/markets/live/stock-market-today-monday-october-12-dow-sp-500-nasdaq-080321571.html">Yahoo Finance (live)</a> · <a class="src" href="https://finance.yahoo.com/markets/stocks/articles/broadcom-ai-durability-warning-triggers-072109558.html">Yahoo Finance / Benzinga</a></span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.lewissilkin.com/insights/2026/10/02/ai-in-advertising-regulators-signal-that-existing-rules-still-apply">UK ad and consumer regulators: no special AI rules needed, and an "AI-generated" label won't save a misleading ad</a></h3>
+    <p>At a Lewis Silkin panel, ASA chief executive Guy Parker said the UK advertising codes are principle-based and don't need AI-specific rules. He warned that putting an AI label on every ad could backfire and is no "get out of jail free card." The CMA's Hayley Fletcher said consumer law looks at the impression a claim creates, not whether a human or AI wrote it. Both said advertisers stay accountable for AI output, and that brands should disclose when an influencer isn't a real person. The ASA has already ruled on ads with AI-generated claims and video. The UK government is considering AI labeling rules.</p>
+    <div class="why"><b>Why it matters for marketing ops.</b> The lesson applies outside the UK too: regulators treat AI content like any other content. Building human review into AI content workflows (for claims, stats, and fake personas) protects you more than adding a disclosure. Also on the calendar: the EU AI Act's machine-readable marking rules for existing generative AI systems take effect December 2.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 1, 2026</span><span class="dot-sep">·</span><span class="src">Lewis Silkin</span></div>
+  </div>
+
+  <!-- AI AT WORK & MARKETING -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://searchengineland.com/google-ads-tests-ai-powered-campaign-creation-using-natural-language-495256">Google Ads tests building campaigns from a plain-English goal</a></h3>
+    <p>A new test flow opens with "What's your goal for this campaign?" and a text box instead of the usual list of campaign objectives. Google's AI then suggests goals and assets based on what you write. A "Create campaign manually" option is still there. Google Ads Liaison Ginny Marvin confirmed it's an experiment and said Google welcomes feedback on "how and where this type of workflow would be helpful." No rollout timeline or list of supported campaign types yet.</p>
+    <div class="why"><b>Why it matters.</b> Campaign setup is becoming a conversation. As writing a clear brief matters more than knowing where the settings are, marketing ops' value moves to naming conventions, conversion tracking, and checking what the AI set up before it spends money.</div>
+    <div class="meta"><span class="tag">Ad Tech</span><span class="date">Oct 12, 2026</span><span class="dot-sep">·</span><span class="src">Search Engine Land</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://digiday.com/media-buying/media-buying-briefing-synthetic-audience-adoption-by-agencies-and-clients-takes-off/">Agencies and brands adopt "synthetic audiences" to test plans before spending</a></h3>
+    <p>Goodway Group is working with data company Arima to build media plans against a simulated population of U.S., U.K., and German consumers, running pretend incrementality tests before small live campaigns. Vurvey Labs, backed by Havas, works with Magnum, Vans, and Kenvue. At Kenvue's Aveeno Body, a strategy brief that took 30 days now takes about three. WPP Media, Dentsu, and Code &amp; Theory have used similar personas. TransUnion warned that personas built on weak data aren't reliable, and Code &amp; Theory said the approach "informs judgment, but it doesn't replace judgment."</p>
+    <div class="why"><b>Why it matters.</b> This is research and planning moving from weeks to days. The work that remains for marketing ops is supplying clean first-party data to these tools and setting up the real-world test that confirms what the synthetic audience suggested.</div>
+    <div class="meta"><span class="tag">Agencies</span><span class="date">Oct 12, 2026</span><span class="dot-sep">·</span><span class="src">Digiday</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://martech.org/how-mops-teams-are-restructuring-for-autonomous-ai-agents/">MarTech: how marketing ops teams are restructuring around AI agents, with four new roles</a></h3>
+    <p>MarTech argues MOps is moving from platform administration to running AI agents that work across CRM, ad platforms, and CDPs. It names four emerging roles: Agent Orchestrator (maps business goals to multi-agent workflows), Model Context and Prompt Architect (manages MCP integrations and system instructions), AI Governance and QA Lead (guardrails, agent logs, human review), and Cost and API Engineer (tracks token use and vendor billing). Success metrics shift from campaign volume to agent reliability and data integrity. Note: the piece was drafted by MarTech's AI writer with human editing and cites no data.</p>
+    <div class="why"><b>Why it matters.</b> It's a useful map of where MOps careers are heading. Each of those four roles builds on skills you already use (workflow design, governance, QA, vendor management). Choose one and start building examples you can show.</div>
+    <div class="meta"><span class="tag">MOps</span><span class="date">Oct 12, 2026</span><span class="dot-sep">·</span><span class="src">MarTech</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Two roles, verified open Oct 13 on the companies' Greenhouse boards. Thin day for brand-new postings, so these are from the past two weeks.</p>
+    <div class="jobrow">
+      <span class="role"><a href="https://job-boards.greenhouse.io/chime/jobs/8694723002" style="color:inherit;text-decoration:none;">Director, Lifecycle Marketing Operations</a> <span class="co">— Chime</span></span>
+      <span class="sig">San Francisco (hybrid, 4 days) · listed ~Oct 1 · $199K–$275K base</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://job-boards.greenhouse.io/diligentcorporation/jobs/6097335004" style="color:inherit;text-decoration:none;">Senior Manager, Marketing Operations — Systems and Automation</a> <span class="co">— Diligent</span></span>
+      <span class="sig">New York / Washington, DC (hybrid) · listed ~Oct 3 · $134K–$165K</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> Chime's role is the clearest sign yet that agents are becoming part of the MOps job description. It will "drive the automation and AI-agent roadmap" toward "an agent-supported operation," including "the QA model for automated and agent-driven sending," and wants a "clear point of view on where AI and agents fit in marketing operations." Diligent's is a step earlier: find manual workflows to automate or make "AI-assisted." Both match the four roles in today's MarTech piece. (Listing dates are from the Titleless job aggregator.)</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <p style="margin:-6px 0 14px; font-size:13px; color:var(--muted);">Light day for new media. One pick, and it's directly on your path.</p>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://www.listennotes.com/podcasts/the-ai-daily-brief/how-to-go-from-ai-power-user-1Q5ctY-Tio7/">The AI Daily Brief — How to Go from AI Power User to AI Leader</a></h4>
+      <div class="mmeta"><span class="date">Oct 12, 2026</span> · NLW &amp; Nufar · 39 min · how strong AI users become team AI champions and leaders</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled October 13, 2026 · sources linked inline.<br>
+    Bookmark: roquecorona.github.io/dailyaibrief
+  </footer>
+
+</div>
+
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
+</body>
+</html>

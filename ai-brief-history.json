@@ -2593,5 +2593,200 @@
     "date": "2026-10-11",
     "headline": "Hard Fork — Anthropic's Quest to Give A.I. Morals",
     "url": "https://podcasts.apple.com/us/podcast/anthropics-quest-to-give-a-i-morals/id1528594034?i=1000794036820"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Microsoft unveils Maia 300 in-house AI chip",
+    "url": "https://azure.microsoft.com/en-us/blog/deep-dive-into-azure-maia-300-architecture/"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Z.ai unveils GLM-Legal agentic legal model",
+    "url": "https://unite.ai/z-ai-unveils-glm-legal-an-agentic-model-for-legal-workflows"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Linus Torvalds posts Linux kernel page-cache branch written with Claude Code",
+    "url": "https://hwbusters.com/news/linus-torvalds-uses-claude-code-to-rework-the-linux-page-cache-tripling-small-read-throughput/"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Paper: Learn2Play Bench — How Well Do LLM Agents Learn from Experience (NUS)",
+    "url": "https://huggingface.co/papers/2610.08215"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Paper: REMORY — Learning Residual Memory for Context Compaction (Fudan/SII)",
+    "url": "https://huggingface.co/papers/2610.11287"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Microsoft reportedly paying Anthropic $2B+/yr for Copilot models (The Information; Lamanna)",
+    "url": "https://www.theinformation.com/articles/microsofts-new-office-chief-fixed-copilot-won-nadella"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "AMD introduces Helion open rack blueprint for agentic AI (token router)",
+    "url": "https://www.stocktitan.net/news/AMD/introducing-amd-helion-agentic-ai-compute-at-rack-gwl5bzbap050.html"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Former Plaud exec Peter Mo raises $26M for Ambi always-listening AI note-taker",
+    "url": "https://techcrunch.com/2026/10/12/former-plaud-exec-raises-26m-for-ai-app-that-listens-to-you-in-the-background"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "DeepSeek leads seed round in robotics startup Winverse AI (~$400M valuation)",
+    "url": "https://startupfortune.com/deepseek-leads-400-million-funding-round-for-ex-tencent-scientists-robot-ai-startup/"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Markets Snapshot: Microsoft (Maia 300), Nvidia, AMD, Salesforce upgrade / Adobe downgrade",
+    "url": "https://www.thestreet.com/stock-market-today/stock-market-today-oct-12-2026-dow-futures-climb-as-wall-street-gears-up-for-busy-week"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Brad Smith calls for global AI safety rules: incident reports, emergency brakes, independent evaluators",
+    "url": "https://qz.com/microsoft-brad-smith-ai-safety-regulations-101226"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Google opens AI Mode and AI Overviews to prescription drug ads (US test)",
+    "url": "https://www.adweek.com/media/google-opens-ai-mode-to-prescription-drug-ads/"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Hightouch acquires Strata (no-code AI integrations)",
+    "url": "https://martechcube.com/hightouch-acquires-strata-to-expand-integrations-across-marketing-stack"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "LeadDev/CloudBees: AI writes or assists 61% of enterprise code; review is the bottleneck",
+    "url": "https://leaddev.com/leadership/your-engineering-strategy-has-a-new-failure-mode"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Director, Marketing Strategy and AI Transformation job posting — Databricks",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8735590002"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Senior Manager, AI Customer Success job posting — Webflow",
+    "url": "https://job-boards.greenhouse.io/webflow/jobs/8265958"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Term of the Day: Agent harness",
+    "url": ""
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "By the Numbers: ~1 in 10 searches go through standalone AI tools (Similarweb via Adweek GEO startups roundup)",
+    "url": "https://www.adweek.com/media/11-best-funded-geo-startups-racing-to-win-ai-search/"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Latent Space — Why AlphaFold Didn't Solve Protein Folding",
+    "url": "https://podcasts.apple.com/us/podcast/why-alphafold-didnt-solve-protein-folding-pushmeet/id1674008350?i=1000794567743"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Marketing Against the Grain — How to Turn Instagram Into a Sales Machine With Muse AI",
+    "url": "https://podcasts.apple.com/us/podcast/how-to-turn-instagram-into-a-sales-machine-with-muse-ai/id1616700934?i=1000793805448"
+  },
+  {
+    "date": "2026-10-12",
+    "headline": "Marketing Against the Grain — We Tested What AI Personal Assistants Can Actually Do",
+    "url": "https://podcasts.apple.com/us/podcast/we-tested-what-ai-personal-assistants-can-actually-do/id1616700934?i=1000793373828"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Meta launches Muse Wonder / Wonder Full frontier models (#2 on Artificial Analysis)",
+    "url": "https://research.meta.ai/blog/muse-wonder"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Anthropic distillation defenses cut harvested data ~90-99%",
+    "url": "https://www.anthropic.com/research/distillation-defenses"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Anthropic red team: small models near self-replication on IoT devices",
+    "url": "https://www.anthropic.com/research/self-replicating-ai"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Paper: AgentSWE — Can coding agents build the agent you actually want?",
+    "url": "https://huggingface.co/papers/2610.13361"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Paper: Work2Skill — human GUI experience to reusable agent skills",
+    "url": "https://huggingface.co/papers/2610.12984"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Character.AI files Chapter 11; Disney $20M stalking-horse bid",
+    "url": "https://www.pymnts.com/business/2026/character-ai-files-for-bankruptcy-and-signs-20-million-disney-deal/"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "IMF GFSR Oct 2026: AI market correction a top near-term stability risk",
+    "url": "https://www.unite.ai/imf-warns-ai-market-correction-could-trigger-global-financial-turmoil/"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Nvidia China AI chip share falls to 34% as Huawei hits 28% (IDC)",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/broadcom-ai-durability-warning-triggers-072109558.html"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Markets Snapshot: Meta (Muse Wonder), Micron, Samsung/SK Hynix (Hock Tan AI-financing warning), Broadcom/Nvidia",
+    "url": "https://www.fool.com/investing/2026/10/12/why-meta-platforms-stock-rallied-monday-morning/"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "UK ASA/CMA: existing rules apply to AI ads; AI label no 'get out of jail free card' (Lewis Silkin)",
+    "url": "https://www.lewissilkin.com/insights/2026/10/02/ai-in-advertising-regulators-signal-that-existing-rules-still-apply"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Google Ads tests natural-language AI campaign creation",
+    "url": "https://searchengineland.com/google-ads-tests-ai-powered-campaign-creation-using-natural-language-495256"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Digiday: synthetic audience adoption by agencies and clients (Goodway/Arima, Vurvey, Kenvue)",
+    "url": "https://digiday.com/media-buying/media-buying-briefing-synthetic-audience-adoption-by-agencies-and-clients-takes-off/"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "MarTech: how MOps teams are restructuring for autonomous AI agents (four new roles)",
+    "url": "https://martech.org/how-mops-teams-are-restructuring-for-autonomous-ai-agents/"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Director, Lifecycle Marketing Operations job posting — Chime",
+    "url": "https://job-boards.greenhouse.io/chime/jobs/8694723002"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Senior Manager, Marketing Operations — Systems and Automation job posting — Diligent",
+    "url": "https://job-boards.greenhouse.io/diligentcorporation/jobs/6097335004"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "Term of the Day: Synthetic audience",
+    "url": ""
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "By the Numbers: 59.7% of global ad spend to Alphabet, Amazon, Meta (WARC via Digiday)",
+    "url": "https://digiday.com/media-buying/media-buying-briefing-synthetic-audience-adoption-by-agencies-and-clients-takes-off/"
+  },
+  {
+    "date": "2026-10-13",
+    "headline": "The AI Daily Brief — How to Go from AI Power User to AI Leader",
+    "url": "https://www.listennotes.com/podcasts/the-ai-daily-brief/how-to-go-from-ai-power-user-1Q5ctY-Tio7/"
   }
 ]
