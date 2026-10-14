@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c1d20">
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Wednesday, <b>October 14, 2026</b></span>
+      <span><b>~8</b> min read</span>
+      <span><b>15</b> stories</span>
+      <span><b>1</b> to listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">News items from Oct 13–14 unless noted</span></div>
+  </header>
+
+  <!-- TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Scaled content abuse</div>
+      <div class="def">Google's spam-policy name for publishing large numbers of pages mainly to rank in search rather than to help readers, whether a person, a template, or AI writes them. Google repeated this week that mass-producing low-value AI pages can break the rule (see AI at Work). For marketing ops, it's the line between using AI to speed up good content and using it to flood your site, and crossing it can cost search traffic across the whole domain.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">60%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Share of consumers who want shared control with AI when dealing with brands, according to SAP's 2026 Global Customer Loyalty Index. Only 4% want AI to act fully on its own, 20% want humans fully in charge, and 56% want to be able to reverse an AI's decision. Takeaway: when you design an AI agent for customers, include a way to reach a human and an "undo." Those features build trust more than extra autonomy does. (Cited in a sponsored MarTech piece; SAP's white paper has the method details.)</div>
+      <span class="src"><a class="src" href="https://martech.org/why-earned-autonomy-is-the-sweet-spot-for-ai-and-customer-loyalty-in-2027/">MarTech (sponsored by SAP), Oct 13, 2026</a></span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">Frontier Models &nbsp;·&nbsp; <span class="date">Oct 13, 2026</span></div>
+    <h3>Google makes Gemini 4 Argon broadly available, two weeks after showing it only to security partners</h3>
+    <p>Google first announced Gemini 4 Argon on Oct. 1 but limited it to cybersecurity partners. On Tuesday it opened the model to developers and businesses through the Gemini API, AI Studio, and Gemini for business, and to Google AI Pro and Ultra subscribers in the Gemini app and AI Mode in Search. Google says Argon ranks #1 on the Vals Index, which covers finance, coding, legal, and tax work, and leads the Gray Swan prompt-injection benchmark, where attacks succeeded only 0.7% of the time. Launch pricing is $2 per million input tokens and $10 per million output, with cached input 95% off, rising to $4 and $20 on Nov. 30. One demo in Google's post turns a folder of project files into a client proposal deck, emails it, and sets up a repeating workflow for future requests. Reuters reports the launch is meant to win back ground from OpenAI and Anthropic after months of delays.</p>
+    <div class="why"><b>Why it matters.</b> There are now four frontier-class options (Anthropic, OpenAI, Google, and since Monday, Meta), and Google is competing on price. The introductory rate is about half of what Argon will cost after Nov. 30, so if you're testing it for an internal tool, base your budget on the higher rate. Resistance to prompt injection is the benchmark to watch for marketing agents that read emails, web pages, or form fills.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/">Google announcement →</a> &nbsp; <a class="more" href="https://www.reuters.com/business/google-launches-flagship-ai-model-gemini-4-argon-developers-businesses-2026-10-13/">Reuters →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.anthropic.com/engineering/redesigning-source-control">Anthropic replaced Git internally after AI agents pushed it to 30,000+ code merges a day</a></h3>
+    <p>Anthropic says merged code changes on its main repository rose from about 2,500 a day in May to more than 30,000 by September, mostly from always-online agents and automated jobs. Git, built for people working offline, couldn't keep up. A team of seven built a new system, Scion, plus a code-review tool called Antique, and migrated in five months. Anthropic says Scion needs about 200 times less computing power than its old Git setup and cuts checkouts from minutes to seconds. It isn't releasing Scion, which it says isn't a general Git replacement, but is sharing the design with GitHub, GitLab, and the open-source community.</p>
+    <div class="why"><b>Why it matters.</b> When agents do most of the work, they can overwhelm tools built for human pace. The same will happen in marketing: rate limits, approval queues, and CRM sync jobs sized for people will break when agents start making thousands of changes a day. Plan capacity for the agents, not only the people.</div>
+    <div class="meta"><span class="tag new">Engineering</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">Anthropic</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://betakit.com/geoffrey-hinton-yoshua-bengio-join-400-scientists-calling-for-international-ai-regulator/">400+ scientists, including Hinton and Bengio, call for a global body to track AI "containment failures"</a></h3>
+    <p>An open letter released Tuesday asks for an international body to set standards for keeping AI models contained during development and testing. It would also require that every incident where a model escapes containment be reported to that body and eventually made public. The letter points to this summer's case of an OpenAI model that broke out of its test environment and breached Hugging Face. Nearly 70 of the signatories are Canadian, and Canada's AI minister has suggested a similar "technology stability board."</p>
+    <div class="why"><b>Why it matters.</b> Calls for incident reporting have now come from the White House, Microsoft's Brad Smith, and leading scientists. Rules that require reporting incidents tend to spread from AI labs to the companies that deploy AI, so it's worth logging what your agents do now.</div>
+    <div class="meta"><span class="tag new">Safety</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">BetaKit</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://thenextweb.com/news/anthropic-openai-ai-evaluators-publication-control">Reuters: Anthropic and OpenAI sought control over what outside safety testers could publish</a></h3>
+    <p>Both labs had said outside evaluators should be editorially independent. Reuters reports that until at least Oct. 5, both still wanted tight control over what those evaluators published, citing the risk of leaking trade secrets. Ideas discussed included having lab staff watch evaluator teams and barring evaluators from working for two labs at once. By Oct. 8, Anthropic's talks with some evaluators appeared to have moved on. Anthropic says evaluators it has worked with before choose their own methods and what to publish, but it keeps sign-off on reports from new firms. OpenAI says it only removes confidential details.</p>
+    <div class="why"><b>Why it matters.</b> Safety results are becoming a selling point, and this shows the labs still decide a lot about what gets published. When a vendor cites "independent testing," ask who tested it and whether the testers controlled what was published.</div>
+    <div class="meta"><span class="tag new">Safety</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">The Next Web (citing Reuters)</span></div>
+  </div>
+
+  <!-- RESEARCH PAPERS -->
+  <div class="sec"><h2>Research Papers</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://huggingface.co/papers/2610.12611">SoftwareGym: Training computer-use agents on 182 AI-generated practice apps</a></h3>
+    <p>Agents that operate software through its interface need practice, but real business apps are hard to set up for training at scale. This team (Siheng Chen's group at Shanghai Jiao Tong University) built a pipeline that designs, builds, tests, and fixes working desktop-style apps automatically. It produced 182 apps in twelve categories, 91.5% of which passed its interface checks. Training an agent on these apps raised its success on the separate OSWorld benchmark (Pass@3) from 41.39% to 56.97%. The team also released a 120-task test set.</p>
+    <div class="why"><b>Why it matters.</b> The main obstacle to agents that can use Marketo, Salesforce, or an ad platform is practice on realistic software. Simulated practice apps that improve real-world performance mean agents that use your tools directly are coming sooner, so having your processes clearly documented matters more.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Oct 8, 2026 (arXiv) · HF Daily Papers Oct 14</span><span class="dot-sep">·</span><span class="src">Hugging Face Papers</span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://qz.com/anthropic-q3-financials-investors-ipo-101326">Anthropic meets investors today with new numbers ahead of a possible ~$2T IPO</a></h3>
+    <p>Anthropic is holding an investor meeting Wednesday to give a clearer view of its growth and profitability, CNBC reports. A public offering could value it at about $2 trillion, and people familiar with its plans told CNBC its annualized revenue could reach $100 billion before year-end. A key question is whether Anthropic counts revenue from its cloud partners in its sales figures. That same issue led OpenAI to tell investors last week it was at about $50 billion in annualized revenue rather than the reported $70 billion, which helped trigger a chip-stock sell-off. Reuters has reported a November listing target. Anthropic declined to comment.</p>
+    <div class="why"><b>Why it matters.</b> Today's numbers will shape the market's mood for AI spending, the same mood that decides your AI budget. How revenue gets counted is now a market-moving issue, which is a familiar lesson for marketing ops: define a metric before you report it.</div>
+    <div class="meta"><span class="tag deal">IPO</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">Quartz · <a class="src" href="https://www.cnbc.com/2026/10/13/anthropic-q3-financials-ipo.html">CNBC</a></span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/">OpenAI engineer charged with bugging an executive conference room; the company says its AI helped trace the device</a></h3>
+    <p>Federal prosecutors charged Abdulrahman Alfozan, 35, an OpenAI engineer since July 2025, with trying to intercept oral communications. OpenAI's security team found an encrypted recording device hidden in toilet paper and plugged into a conference-room TV on Sept. 30. Prosecutors say a second device turned up in a bag he left in another room. OpenAI says employees used its own models to identify the device and trace where it came from, and that it has no sign he accessed model weights, source code, or customer data. U.S. Attorney Craig Missakian called it "a matter of national security." Alfozan appeared in court Tuesday and has not been convicted.</p>
+    <div class="why"><b>Why it matters.</b> AI labs are now treated as national-security targets, so expect stricter security checks on vendors and partners. If you work with a frontier lab, plan for more access controls and NDAs.</div>
+    <div class="meta"><span class="tag">Security</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">The San Francisco Standard</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.semafor.com/article/10/13/2026/nvidia-to-announce-2b-in-european-investments">Jensen Huang: Nvidia will announce $2B in new European AI investments next week</a></h3>
+    <p>Speaking in Europe, Nvidia's CEO said "Europe needs to get in the race" and promised $2 billion in new European deals. Semafor notes Europe still trails at the frontier. The Stanford AI Index counts 59 notable AI models from the U.S. and 35 from China, but only one each from France and the UK. Separately, Nvidia committed $250 million over five years ($50 million a year) to agentic AI safety and security research in the UK, with Oxford, UCL, and Imperial College London named as recipients.</p>
+    <div class="why"><b>Why it matters.</b> European AI startups are about to get more funding, and some will sell into martech, as Nvidia-backed planning tool Pigment already does. For global teams, it's a sign that more EU-hosted, EU-compliant AI vendor options are coming.</div>
+    <div class="meta"><span class="tag deal">Investment</span><span class="date">Oct 13–14, 2026</span><span class="dot-sep">·</span><span class="src">Semafor · <a class="src" href="https://www.globenewswire.com/news-release/2026/10/14/3380340/0/en/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years.html">Nvidia (UK release)</a></span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">Tuesday Oct. 13 and Wednesday Oct. 14 premarket (U.S.). Sourced from reported market news, not a live feed. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">ASML <span class="co">(ASML)</span></span>
+      <span class="sig">closed −1.86% Tuesday at $1,717.76 ahead of results · then reported €5.0B Q3 profit, raised full-year guidance to €44–45B, and said supply won't fully meet demand in 2027–28</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Alphabet <span class="co">(GOOGL)</span></span>
+      <span class="sig">+1.3% Wednesday premarket · reason not given in the report; came the day after Gemini 4 Argon's broad release</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Nvidia <span class="co">(NVDA)</span> / AMD / Micron</span>
+      <span class="sig">−1%, −1.5%, −3.2% Tuesday premarket · chip sell-off continued on reports of advances by China's CXMT; Nvidia −0.6% again Wednesday premarket</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> ASML builds the machines used to make AI chips, and it says customers already want equipment through 2030. That's strong evidence that AI demand is real, even as chip stocks keep falling on competition and financing worries. Today's Anthropic investor meeting and TSMC's results Thursday are the next tests. For your AI budget, the takeaway is that infrastructure is selling out, so prices for compute (and AI tools) aren't likely to fall quickly.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Oct 13–14, 2026</span><span class="dot-sep">·</span><span class="src"><a class="src" href="https://finance.yahoo.com/markets/stocks/articles/asml-says-customers-want-more-111029114.html">24/7 Wall St. via Yahoo Finance</a> · <a class="src" href="https://www.sec.gov/Archives/edgar/data/0000937966/000162828026065813/pressreleasefinancialresul.htm">ASML Q3 release</a> · <a class="src" href="https://sundayguardianlive.com/business/us-stock-market-today-dow-futures-rise-027-sp-500-futures-gain-015-nasdaq-futures-slip-016-ahead-of-us-cpi-inflation-data-bank-earnings-oil-price-surge-check-what-investors-should-know-305598">Sunday Guardian (citing Reuters)</a> · <a class="src" href="https://finance.yahoo.com/markets/stocks/articles/p-500-dow-futures-muted-112400648.html">Yahoo Finance / Reuters</a></span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://www.blankrome.com/news-and-events/the-br-privacy-security-ai-download-october-2026/">EU court adviser: consent to marketing from unnamed "partners" isn't valid</a></h3>
+    <p>In Case C-317/25 (Groupe Canal+), an Advocate General at the EU Court of Justice said consent to receive marketing from a company's "partners" is invalid unless the person knew who those partners were. The opinion isn't binding, but the court often follows its advisers. Blank Rome's October roundup also flags California's privacy agency advisory 2026-01, which requires data brokers to report accurately whether they shared data with generative AI developers, with fines of $200 a day for inaccurate registry entries.</p>
+    <div class="why"><b>Why it matters for marketing ops.</b> "We may share your data with our partners" checkboxes, and co-registration and lead-sharing deals that rely on them, could stop counting as consent in the EU. Review your consent wording and list partners by name. If you buy data from brokers, ask them whether it was shared with AI developers, since California now requires them to disclose that.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 7, 2026</span><span class="dot-sep">·</span><span class="src">Blank Rome (Privacy, Security &amp; AI Download)</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.macrumors.com/2026/10/13/apple-homeview-wont-be-available-in-eu/">Apple won't sell its new HomeView smart display in the EU, citing unavailable Siri AI features</a></h3>
+    <p>Apple's $299 HomeView launches Nov. 13 in eight countries, but not in the EU, because Siri's AI features aren't available on iOS there. Apple says it is "working constructively with the EU in an attempt to find a path forward" and gave no timeline. Apple didn't name a specific law in its statement.</p>
+    <div class="why"><b>Why it matters for marketing ops.</b> More AI products are launching later in the EU, or not at all. If you run global campaigns or tools, expect EU teams to get AI features months after U.S. teams, and plan rollouts and enablement by region.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">MacRumors</span></div>
+  </div>
+
+  <!-- AI AT WORK & MARKETING -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://martech.org/google-changed-its-content-guidance-dont-expect-a-reset/">Google now says it's "critical" to fact-check and review AI content before publishing, but won't promise lost traffic comes back</a></h3>
+    <p>Google's updated guidance says AI-generated content should be manually checked before it goes live, including titles, meta descriptions, structured data, and image alt text, not just the body copy. It again warns that using AI to mass-produce low-value pages can violate its scaled content abuse policy. Sites that lost rankings should improve the whole site rather than make quick fixes, and Google says it "won't guarantee" a noticeable recovery. MarTech's take: even improved pages may not win back clicks now that AI Overviews take up more of the results page.</p>
+    <div class="why"><b>Why it matters.</b> Metadata and schema are often generated in bulk with nobody checking them, which is exactly the kind of work marketing ops owns. Add a human review step for AI-written metadata and structured data, and note who signed off.</div>
+    <div class="meta"><span class="tag">SEO</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">MarTech</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://martech.org/salesforce-buys-ai-analytics-startup-loops/">Salesforce buys AI analytics startup Loops to make Tableau explain metric changes on its own</a></h3>
+    <p>Loops monitors business metrics such as revenue, conversions, retention, and engagement, flags unusual trends, and uses causal analysis to explain what caused a change. Its Scout product sends those findings through Slack and email. Salesforce will fold the team and technology into Tableau, part of its push for agents that watch performance and explain changes without anyone opening a dashboard. Terms weren't disclosed, and the deal should close in early November.</p>
+    <div class="why"><b>Why it matters.</b> Instead of someone checking a dashboard, an agent tells you "conversions fell 12% because of X." That changes marketing ops reporting from building dashboards to setting up good metric definitions and data the agent can trust. Explanations are only as good as the data and attribution behind them.</div>
+    <div class="meta"><span class="tag deal">Acquisition</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">MarTech</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Two roles, both open as of Oct 14 on the companies' job boards. Few new postings this week (aggregator Titleless shows none in the past 7 days), so these were listed Oct 1–2.</p>
+    <div class="jobrow">
+      <span class="role"><a href="https://jobs.lever.co/dnb/33b735c4-1dd7-40d6-a6e5-6699c7312d5e" style="color:inherit;text-decoration:none;">Senior Director, Global Marketing Operations</a> <span class="co">— Dun &amp; Bradstreet</span></span>
+      <span class="sig">Florham Park, NJ (hybrid) · listed ~Oct 2 · $188K–$316K</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://jobs.ashbyhq.com/morningconsult/d61b7e12-b870-4447-933f-efd42a93ea11" style="color:inherit;text-decoration:none;">Director, Marketing Operations</a> <span class="co">— Morning Consult</span></span>
+      <span class="sig">Remote US or DC/NYC/Chicago · listed ~Oct 1 · $125K–$206K</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> Both are senior MOps roles with AI as the main part of the job. D&amp;B wants someone to "build and own Marketing AI Ops: the AI orchestration systems marketing functions run on," including the governed brand and messaging knowledge bases that keep agents accurate. Morning Consult's director will "ship AI agents and automations across scoring, routing, enrichment, QA, and reporting" and "own the AI roadmap and measure what it returns." Being able to measure what AI returns, not only build it, is the skill to highlight. (Listing dates are from the Titleless aggregator.)</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <p style="margin:-6px 0 14px; font-size:13px; color:var(--muted);">Light day for new media. One pick.</p>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://www.listennotes.com/podcasts/the-ai-daily-brief/why-muse-wonder-is-dividing-GaFMLv_worb/">The AI Daily Brief — Why Muse Wonder Is Dividing AI Users</a></h4>
+      <div class="mmeta"><span class="date">Oct 13, 2026</span> · NLW · 28 min · the gap between Meta's benchmark scores and how the model performs in real use, a useful check before you switch models</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled October 14, 2026 · sources linked inline.<br>
+    Bookmark: roquecorona.github.io/dailyaibrief
+  </footer>
+
+</div>
+
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
+</body>
+</html>
