@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief — Daily Digest</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c1d20">
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --line:#e7e3dc; --line2:#efece6;
+    --ink:#1c1d20; --body:#43464d; --muted:#7a7e87; --faint:#a4a8b0;
+    --accent:#1f5fd6; --accent-soft:#eaf0fd;
+    --gold:#9a7b15; --gold-soft:#f6f0dd;
+    --green:#1f7a4d; --green-soft:#e6f3eb;
+    --chip:#f2efe9; --shadow:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0f1216; --panel:#161a20; --line:#272d37; --line2:#202632;
+    --ink:#f0f1f3; --body:#c4c8d0; --muted:#8b919c; --faint:#646a75;
+    --accent:#7aa7ff; --accent-soft:#1a2438;
+    --gold:#e2bd5a; --gold-soft:#2a2415;
+    --green:#56cc92; --green-soft:#13241a;
+    --chip:#1e242e; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; font-size:12px; color:var(--faint); letter-spacing:.3px;}
+  .toggle{display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:6px 12px; border-radius:30px; font-size:12px; font-weight:600;
+    transition:all .2s ease;}
+  .toggle:hover{color:var(--ink); border-color:var(--faint);}
+  .toggle svg{width:14px; height:14px;}
+
+  .nav{display:flex; gap:16px; justify-content:center; padding:0 0 10px; font-size:12.5px; letter-spacing:.3px;}
+  .nav a{color:var(--muted); text-decoration:none; font-weight:600;}
+  .nav a.active{color:var(--accent);}
+  .nav a:hover{color:var(--accent);}
+
+  .skillcard{background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:14px; align-items:flex-start;}
+  .skillcard .icon{font-size:20px; line-height:1; margin-top:2px;}
+  .skillcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+  .skillcard .term{font-family:var(--serif); font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .skillcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+
+  .statcard{background:var(--gold-soft); border:1px solid var(--line); border-radius:12px;
+    padding:18px 20px; margin:26px 0; display:flex; gap:16px; align-items:center;}
+  .statcard .big{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statcard .label{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); margin-bottom:5px;}
+  .statcard .def{font-size:14px; color:var(--body); line-height:1.55;}
+  .statcard .src{font-size:11.5px; color:var(--faint); margin-top:6px; display:block;}
+
+  .jobrow{display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--line2);}
+  .jobrow:last-child{border-bottom:none;}
+  .jobrow .role{font-size:15px; color:var(--ink); font-weight:600;}
+  .jobrow .co{color:var(--muted); font-weight:400;}
+  .jobrow .sig{font-size:12px; color:var(--faint); white-space:nowrap;}
+
+  header{padding:18px 0 26px; border-bottom:2px solid var(--ink); margin-bottom:6px; text-align:center;}
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .brand{font-family:var(--serif); font-size:46px; font-weight:700; letter-spacing:-1px; color:var(--ink); line-height:1;}
+  .tagline{color:var(--muted); font-size:14.5px; margin-top:14px; font-style:italic; font-family:var(--serif);}
+  .runline{margin-top:16px; font-size:11.5px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase;
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .runline b{color:var(--body); font-weight:600;}
+
+  .sec{margin:42px 0 18px; display:flex; align-items:center; gap:12px;}
+  .sec h2{font-size:12px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .sec .bar{height:1px; background:var(--line); flex:1;}
+
+  .lead{padding:4px 0 6px; margin-bottom:6px;}
+  .kicker{font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+  .lead h3{font-family:var(--serif); font-size:32px; line-height:1.18; letter-spacing:-.6px; color:var(--ink); margin-bottom:14px; font-weight:700;}
+  .lead p{color:var(--body); font-size:17px; line-height:1.62;}
+  a.more{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;}
+  a:hover{text-decoration:underline;}
+
+  .item{padding:20px 0; border-bottom:1px solid var(--line2);}
+  .item:last-child{border-bottom:none;}
+  .item h3{font-family:var(--serif); font-size:21px; line-height:1.28; margin-bottom:7px; letter-spacing:-.2px; font-weight:700;}
+  .item h3 a{color:var(--ink); text-decoration:none;}
+  .item h3 a:hover{color:var(--accent);}
+  .item p{color:var(--body); font-size:15.5px; margin-bottom:10px;}
+  .meta{font-size:12px; color:var(--faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .src{color:var(--faint);}
+  .date{color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums;}
+  .meta .dot-sep{color:var(--line);}
+  .lead .date{font-size:12px; letter-spacing:.3px;}
+  .freshpill{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+    color:var(--green); background:var(--green-soft); padding:4px 11px; border-radius:30px; letter-spacing:.3px;}
+  .freshpill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:5px; text-transform:uppercase;}
+  .tag.new{color:var(--green); background:var(--green-soft);}
+  .tag.deal{color:var(--gold); background:var(--gold-soft);}
+  .tag.plain{color:var(--accent); background:var(--accent-soft);}
+
+  .why{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-top:12px; font-size:14px; color:var(--body); box-shadow:var(--shadow);}
+  .why b{color:var(--ink); font-weight:700; font-style:normal;}
+
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .15s ease, border-color .2s ease;}
+  .mcard:hover{transform:translateY(-2px); border-color:var(--faint);}
+  .mtype{font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:6px;}
+  .mtype.vid{color:#d6446a;} .mtype.pod{color:#7a5cf0;}
+  html[data-theme="dark"] .mtype.vid{color:#fb7185;} html[data-theme="dark"] .mtype.pod{color:#a78bfa;}
+  .mcard h4{font-family:var(--serif); font-size:16px; line-height:1.32; margin-bottom:8px; font-weight:700;}
+  .mcard h4 a{color:var(--ink); text-decoration:none;} .mcard h4 a:hover{color:var(--accent);}
+  .mcard .mmeta{font-size:12px; color:var(--faint); margin-top:auto;}
+
+  footer{margin-top:46px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint); text-align:center; line-height:1.7;}
+
+  @media(max-width:560px){
+    .media{grid-template-columns:1fr;}
+    .brand{font-size:36px;} .lead h3{font-size:25px;} .lead p{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <span>DAILY DIGEST</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <div class="nav">
+    <a class="active" href="index.html">Latest Brief</a>
+    <a href="archive.html">Archive</a>
+  </div>
+
+  <header>
+    <div class="eyebrow">Models · Money · What to Watch</div>
+    <div class="brand">The AI Brief</div>
+    <div class="tagline">A daily read on the industry you're building toward.</div>
+    <div class="runline">
+      <span>Monday, <b>October 19, 2026</b></span>
+      <span><b>~7</b> min read</span>
+      <span><b>13</b> stories</span>
+      <span><b>1</b> to listen</span>
+    </div>
+    <div style="margin-top:14px;"><span class="freshpill">News items from Oct 18–19 unless noted · light day for model releases</span></div>
+  </header>
+
+  <!-- TERM OF THE DAY -->
+  <div class="skillcard">
+    <div class="icon">🔑</div>
+    <div>
+      <div class="label">Term of the Day</div>
+      <div class="term">Agent identity verification</div>
+      <div class="def">Checks that let a website or platform confirm who an AI agent is acting for, and that it's allowed to act, before it buys something or reads data. Three stories today point at it: World ID for Agents, Proof and Circle's verified-agent payments demo, and Meta's bot detection locking out an account that a Claude-linked tool was reading. For marketing ops, it decides whether your own agents (scrapers, social listening, enrichment) get blocked, and how you'll tell real customers' shopping agents apart from bots.</div>
+    </div>
+  </div>
+
+  <!-- BY THE NUMBERS -->
+  <div class="statcard">
+    <div class="big">6.5%</div>
+    <div>
+      <div class="label">By the Numbers</div>
+      <div class="def">Share of marketers who measure AI ROI against defined benchmarks, even though 61.4% now use generative or agentic AI every day (up from 33.6% a year ago). 65.1% either don't measure ROI or don't know if anyone does. Also notable: 51.1% of organizations now deploy AI agents, mostly for reporting and analytics (72.3%), and Claude use jumped to 72.3% of respondents from 17.9% in 2025. Caveat: 184 respondents, run by ad-tech vendor Basis. Takeaway: measuring AI's payoff is the open gap, and it's a marketing-ops problem to own.</div>
+      <span class="src"><a class="src" href="https://www.globenewswire.com/news-release/2026/10/19/3383456/0/en/daily-ai-use-nearly-doubles-among-marketers-as-measurement-lags.html">Basis, "AI and the Future of Marketing" via GlobeNewswire, Oct 19, 2026</a></span>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="sec"><h2>Top Story</h2><div class="bar"></div></div>
+  <div class="lead">
+    <div class="kicker">Labs &amp; Governance &nbsp;·&nbsp; <span class="date">Oct 18, 2026</span></div>
+    <h3>Anthropic pledges 5% of its shares to a new Public Benefit Fund ahead of a planned IPO</h3>
+    <p>Subject to stockholder approval, Anthropic will put 5% of its equity into the Anthropic Public Benefit Fund, and its board can add 2% more for every 50% rise in company value above a baseline it hasn't disclosed yet. With existing founder pledges and the employee equity-match program, Anthropic says about 20% of its shares are now earmarked for the public good. The fund is set up as a wholly owned LLC rather than a charity so it can give in different ways: large nonprofit grants, direct payments to specific groups, and work on AI's effects on jobs, building on a $200M commitment already made. None of the equity can be used for lobbying or political giving. Governance and milestones will come "in the coming months." The news lands as the WSJ examines Anthropic's Long-Term Benefit Trust, which holds no equity but has picked four of seven directors, ahead of a reported November IPO.</p>
+    <div class="why"><b>Why it matters.</b> The company behind Claude, now one of the most-used tools by marketers (see By the Numbers), is setting up money specifically for AI's labor-market effects. For your career, that's a signal the labs expect real job disruption and want to be seen funding transitions. Watch for reskilling programs you could tap. For your company, how AI vendors are governed is becoming part of vendor due diligence.</div>
+    <p style="margin-top:16px;"><a class="more" href="https://www.anthropic.com/news/public-benefit-fund">Anthropic →</a> &nbsp; <a class="more" href="https://www.wsj.com/tech/ai/anthropic-ipo-private-trust-188f41f7">WSJ on the trust →</a></p>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="sec"><h2>Research &amp; Model Releases</h2><div class="bar"></div></div>
+  <p style="font-size:14px; color:var(--muted); margin-bottom:4px;">Light day: release trackers show no major new model in the last 24 hours (DeepSeek V4.1-Flash, covered Saturday, is the latest).</p>
+
+  <div class="item">
+    <h3><a href="https://www.theblock.co/news/ecosystems/2026-10-18-world-launches-world-id-suite-banks-418869">World launches a World ID suite for banks, bundling "World ID for Agents" and a Zoom deepfake check</a></h3>
+    <p>At Money20/20, co-founder Alex Blania unveiled World's first industry-specific product, combining the World ID app, World ID for Zoom (now generally available after an April beta, built to flag deepfaked call participants), and World ID for Agents (AgentKit), which ties an AI agent to a verified human. Design partners are OpenExchange, Bain Capital, VanEck Funds, and Outtake. No bank customer or pricing was named. World says more than 18 million people hold its Proof of Human.</p>
+    <div class="why"><b>Why it matters.</b> "Is this a real person, or a bot acting for one?" is becoming a product category. Expect identity checks for agents to show up in checkout, lead forms, and webinar tools, which will affect how you filter fake sign-ups and count real conversions.</div>
+    <div class="meta"><span class="tag new">Product</span><span class="date">Oct 18, 2026</span><span class="dot-sep">·</span><span class="src">The Block</span></div>
+  </div>
+
+  <!-- RESEARCH PAPERS -->
+  <div class="sec"><h2>Research Papers</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://arxiv.org/abs/2610.18861">Hybrid Reasoning Agents: letting agents "think silently" cuts tokens by up to 55% and costs by about 3x</a></h3>
+    <p>From a team including Stanford's James Zou and Together AI (code is in Together's GitHub), the paper proposes HybridAgents. Instead of writing every reasoning step out as text, the agent switches between internal "latent" reasoning and text only when it needs to call a tool, using a small HybridLink module and a working memory that carries across turns. Across 11 benchmarks in math, science, medicine, search, and agentic tasks, the authors report a 10.4% average performance gain, 35.5–54.7% fewer generated tokens, 1.8–2.6x faster inference, and 2.7–3.7x lower cost compared with frontier-model agents. It's a preprint and not yet peer reviewed.</p>
+    <div class="why"><b>Why it matters.</b> Today's agents are expensive mostly because they "talk to themselves" in tokens you pay for. If this approach holds up, long-running marketing agents (reporting, enrichment, campaign QA) get much cheaper. The trade-off is less visible reasoning, which makes auditing what an agent did harder.</div>
+    <div class="meta"><span class="tag plain">Paper</span><span class="date">Oct 13, 2026</span><span class="dot-sep">·</span><span class="src">arXiv (cs.CL)</span></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="sec"><h2>Industry &amp; Business</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://siliconangle.com/2026/10/19/chip-legend-jim-kellers-tenstorrent-raises-1-5b-to-expand-its-open-compute-ecosystem/">Jim Keller's Tenstorrent raises $1.5B Series E at a $6.2B valuation</a></h3>
+    <p>The Toronto-based AI hardware maker's round was led by Trace Capital and Innovation X, with Morgan Stanley, Fidelity, ARK Invest, and T. Rowe Price taking part. Tenstorrent builds chips on the open RISC-V standard and sells everything from cards to its Galaxy servers, with its own open-source software stack. The money will scale Galaxy production, fund RISC-V research, and expand headcount. Galaxy servers are already used by Virtu Financial and offered to enterprises through Equinix.</p>
+    <div class="why"><b>Why it matters.</b> Investors are still writing very large checks for alternatives to Nvidia, even after last week's chip sell-off. More competition in AI hardware is one of the few forces that can bring down the per-use cost of the AI features in your marketing stack.</div>
+    <div class="meta"><span class="tag deal">Funding</span><span class="date">Oct 19, 2026</span><span class="dot-sep">·</span><span class="src">SiliconANGLE</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.securityweek.com/anthropic-acquires-confidential-ai-startup-opaque-systems/">Anthropic acquires confidential-AI startup Opaque Systems</a></h3>
+    <p>Opaque, a UC Berkeley RISELab spin-out co-founded by Ion Stoica and Raluca Ada Popa, built technology for using sensitive data in AI while it stays protected by the hardware, and more recently "verifiable AI" that proves what an AI system ran, where, and under which policies. Its team is joining Anthropic and the company is winding down. Terms weren't disclosed. Opaque raised a $24M Series B at a $300M valuation earlier this year and listed Anthropic, ServiceNow, and Accenture as customers. It hasn't said what happens to existing customers.</p>
+    <div class="why"><b>Why it matters.</b> The main thing stopping teams from giving AI their CRM and customer data is trust and compliance. Anthropic buying this expertise suggests stronger "your data stays private and provably so" guarantees for enterprise Claude, which is a selling point to bring to your legal and IT teams.</div>
+    <div class="meta"><span class="tag deal">M&amp;A</span><span class="date">Oct 19, 2026</span><span class="dot-sep">·</span><span class="src">SecurityWeek</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://newsletter.semianalysis.com/p/datacenters-2027-the-year-of-acceleration">SemiAnalysis: 2027 will add record data center capacity, with 24GW+ already under advanced construction</a></h3>
+    <p>The research firm counts more than 24GW of data centers in advanced construction across about 40 campuses, all due in 2027. It forecasts +43GW of new capacity next year (the headline says +50GW) and says roughly $1T of binding, non-cancellable data center leases have been signed this year. It also projects US grid headroom turning negative at the end of 2027.</p>
+    <div class="why"><b>Why it matters.</b> This cuts against last week's "AI spending is running out of money" story: the capacity is largely contracted and being built. The real limit is power. Expect AI capacity to keep growing through 2027, with price and availability shaped by electricity rather than demand.</div>
+    <div class="meta"><span class="tag deal">Infrastructure</span><span class="date">Oct 19, 2026</span><span class="dot-sep">·</span><span class="src">SemiAnalysis</span></div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="sec"><h2>Markets Snapshot</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:14px; font-size:14px; color:var(--muted);">Early Monday, Oct. 19, after a rough week for AI stocks. Sourced from reported market news, not a live feed; intraday figures will move. Not investment advice.</p>
+    <div class="jobrow">
+      <span class="role">CoreWeave <span class="co">(CRWV)</span></span>
+      <span class="sig">+6.12% · Goldman upgraded to Buy, target raised to $139 from $106, after a 25%+ drop last week</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Applied Digital <span class="co">(APLD)</span></span>
+      <span class="sig">+8.53% premarket · AI infrastructure names rebounded from last week's sell-off</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Microsoft <span class="co">(MSFT)</span> / Nvidia <span class="co">(NVDA)</span></span>
+      <span class="sig">+0.51% / +0.68% early · little reaction to Microsoft dropping its Nscale UK lease</span>
+    </div>
+    <div class="jobrow">
+      <span class="role">Meta <span class="co">(META)</span></span>
+      <span class="sig">reports Wednesday · its $130–145B 2026 capex guidance is the week's big test of AI spending</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> The Nasdaq fell 4.48% last week after September CPI came in at 3.7% against 3.6% expected, and Nvidia lost about $365B in market value as rising borrowing costs raised doubts about financing data centers. Monday's bounce (Nasdaq futures +1.2%) is a relief rally ahead of Meta, Tesla, and Netflix earnings. Analysts are calling this a financing problem, not a demand problem, which fits the SemiAnalysis data above.</div>
+    <div class="meta" style="margin-top:10px;"><span class="tag plain">Markets</span><span class="date">Oct 19, 2026</span><span class="dot-sep">·</span><span class="src"><a class="src" href="https://thestreet.com/stock-market-today/stock-market-today-oct-19-2026-nasdaq-futures-climb-as-tech-rebound-from-sell-off">TheStreet</a> · <a class="src" href="https://www.fool.com/investing/breakfast-news/2026/10/19/breakfast-news-power-is-ai-s-new-gold-rush/">Motley Fool</a> · <a class="src" href="https://invezz.com/news/2026/10/19/nvidia-stock-loses-365-billion-in-a-week-could-the-ai-boom-be-running-out-of-money/">Invezz</a></span></div>
+  </div>
+
+  <!-- REGULATORY & POLICY WATCH -->
+  <div class="sec"><h2>Regulatory &amp; Policy Watch</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://ppc.land/character-ai-faces-40-attorneys-general-over-who-can-buy-its-users-chats/">40 attorneys general set nine conditions for anyone buying Character.ai's app or user chat data</a></h3>
+    <p>In Character.ai's Chapter 11 case, attorneys general from 39 states and DC filed a notice listing conditions for any buyer: real age assurance, protections for minors, a privacy program with consent for sensitive data, account-level ad opt-outs that honor past choices, limits on using chats for training or advertising, a chance for every user to delete data before any sale, and truthful marketing. They argue chat content is sensitive and can't be reliably de-identified, and that bankruptcy doesn't erase privacy promises. Bids are due Nov. 20, with the sale hearing Nov. 24.</p>
+    <div class="why"><b>Why it matters for marketing ops.</b> Regulators are treating conversations with AI as sensitive data that comes with its original privacy promises attached. If your company collects chatbot or AI-assistant transcripts, plan for consent-based use only, account-level (not device-level) ad opt-outs, and no reuse for ad targeting without permission.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 14, 2026</span><span class="dot-sep">·</span><span class="src">PPC Land</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.insurancejournal.com/magazines/mag-features/2026/10/19/889095.htm">Illinois creates a state AI Cabinet to draft AI safety policy through 2027</a></h3>
+    <p>Gov. JB Pritzker signed an executive order creating an unpaid AI Cabinet of experts and agency representatives. It will assess AI risks to residents and critical infrastructure, review AI incidents, and consider tying data center incentives to safety and transparency standards, adding AI safety rules to state procurement, and whether existing laws can hold AI companies liable for harm. Illinois already passed SB 315 in July, requiring annual audits of the largest models starting in 2028.</p>
+    <div class="why"><b>Why it matters for marketing ops.</b> State procurement rules often become the de facto standard for vendors. If Illinois writes AI safety requirements into contracts, expect AI martech vendors to start offering audit and transparency documentation you can request too.</div>
+    <div class="meta"><span class="tag plain">Policy</span><span class="date">Oct 19, 2026</span><span class="dot-sep">·</span><span class="src">Insurance Journal</span></div>
+  </div>
+
+  <!-- AI AT WORK -->
+  <div class="sec"><h2>AI at Work &amp; Marketing</h2><div class="bar"></div></div>
+
+  <div class="item">
+    <h3><a href="https://thenextweb.com/news/meta-claude-no-kings-instagram-suspension">Meta says a Claude-linked tool reading profiles at 4x human speed triggered an Instagram account suspension</a></h3>
+    <p>Meta comms VP Andy Stone said a tool tied to Anthropic's Claude read the No Kings Coalition's profiles, posts, and hashtags in short, intense bursts at about four times normal speed. That looked like bot traffic, and the account was suspended on Oct. 17 for about 90 minutes in the middle of a nearly 3,000-event get-out-the-vote campaign. An automated review reversed it about an hour later, and Meta apologized. Meta didn't say which tool was involved or who ran it.</p>
+    <div class="why"><b>Why it matters.</b> AI agents browsing social platforms look like bots to anti-abuse systems, and the consequences can land on the account being read, not just the agent. If your team uses agents for social listening, competitor research, or managing your own brand accounts, rate-limit them and use official APIs where you can.</div>
+    <div class="meta"><span class="tag new">Social</span><span class="date">Oct 19, 2026</span><span class="dot-sep">·</span><span class="src">The Next Web</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.upstartsmedia.com/p/data-stripe-link-how-ai-assistants-spend">Stripe Link now powers about 200 shopping AI agents, up from ~70 in September</a></h3>
+    <p>Upstarts Media got a look at Stripe's data on AI agents paying through Link, its saved-payment wallet with about 300 million users. Agents using it include Instinct, Muse, Grok Bot, and Underdog. Stripe's Dan Hill says the volume "is becoming very material." Anthropic and OpenAI use Link but not yet for agent shopping. The full spending breakdown is paywalled.</p>
+    <div class="why"><b>Why it matters.</b> Agent-driven purchases are moving from demos to real volume. For marketers, that means product data, pricing, and checkout need to be readable by agents, and attribution needs a way to tag sales an agent made for a customer.</div>
+    <div class="meta"><span class="tag new">Commerce</span><span class="date">Oct 18, 2026</span><span class="dot-sep">·</span><span class="src">Upstarts Media</span></div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.globenewswire.com/news-release/2026/10/19/3383462/0/en/proof-and-circle-show-how-ai-agents-can-prove-who-they-act-for-and-pay-in-usdc.html">Proof and Circle demo an AI agent that proves who it works for before it pays</a></h3>
+    <p>At Money20/20 (Oct. 19–21), Proof and Circle are showing an agent making an identity-gated purchase. It presents a verified Proof credential over the x401 protocol, then pays the merchant in USDC over x402 from a Circle Agent Wallet. The credential shares only the facts the purchase needs, and the merchant checks it against Proof's public keys without contacting Proof.</p>
+    <div class="why"><b>Why it matters.</b> Together with World ID for Agents, this is the plumbing for "know your agent." Age-gated, regulated, or high-value offers will need a way to accept verified agents and turn away the rest, a new consent and compliance layer for marketing ops to manage.</div>
+    <div class="meta"><span class="tag new">Agents</span><span class="date">Oct 19, 2026</span><span class="dot-sep">·</span><span class="src">GlobeNewswire</span></div>
+  </div>
+
+  <!-- JOB MARKET SIGNAL -->
+  <div class="sec"><h2>AI Job Market Signal</h2><div class="bar"></div></div>
+  <div class="item">
+    <p style="margin-bottom:4px; font-size:14px; color:var(--muted);">Three verified marketing-ops + AI postings and one hiring-data signal.</p>
+    <div class="jobrow">
+      <span class="role"><a href="https://zapply.jobs/jobs/fc8f6c17-9571-4339-adde-0a069621c9d4/" style="color:inherit;text-decoration:none;">AI Marketing Operations Manager</a> <span class="co">— CloudFactory (United States)</span></span>
+      <span class="sig">full-time · posted Oct 7 · salary not listed</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://www.jobleads.com/us/job/director-of-marketing-operations-ai-enablement--united-states--e7ec7ef79672fa4d8b6c4bd6962e2f47b" style="color:inherit;text-decoration:none;">Director of Marketing Operations &amp; AI Enablement</a> <span class="co">— Aviatrix (via Swooped, US)</span></span>
+      <span class="sig">$193k–$227k · owns CRM, automation, and AI tools; "evangelize AI use" · listed 14+ days</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://jobs.lever.co/jobgether/4fbe7cba-41a7-41fe-9cce-64ff1e9ccd74" style="color:inherit;text-decoration:none;">Marketing Operations &amp; AI Specialist</a> <span class="co">— unnamed company via Jobgether (remote, India, US hours)</span></span>
+      <span class="sig">HubSpot/Salesforce hygiene, Clay enrichment, attribution, AI-agent automation · posting undated</span>
+    </div>
+    <div class="jobrow">
+      <span class="role"><a href="https://www.securityweek.com/us-cybersecurity-job-postings-fall-26-as-ai-security-engineer-demand-soars/" style="color:inherit;text-decoration:none;">AI Security Engineer postings up 268% YoY while total cyber postings fall 26.4%</a> <span class="co">— CyberSN via SecurityWeek, Oct 18</span></span>
+      <span class="sig">235,786 US postings Jan–Sep, a four-year low</span>
+    </div>
+    <div class="why" style="margin-top:14px;"><b>Why it matters.</b> The pattern repeats across fields: overall postings shrink while roles with "AI" attached grow fast. All three marketing postings ask for the same mix you already have (CRM, automation, attribution) plus proof you've built AI workflows. The Director role's pay band shows what "AI enablement" is worth when it's added to marketing ops.</div>
+  </div>
+
+  <!-- WATCH / LISTEN -->
+  <div class="sec"><h2>Watch &amp; Listen</h2><div class="bar"></div></div>
+  <p style="font-size:14px; color:var(--muted); margin-bottom:12px;">Thin week for new episodes not already covered here.</p>
+  <div class="media">
+    <div class="mcard">
+      <div class="mtype pod">♪ Podcast</div>
+      <h4><a href="https://podcasts.apple.com/us/podcast/a-potentially-historic-ai-breakthrough/id1680633614?i=1000796918881">The AI Daily Brief — A Potentially Historic AI Breakthrough</a></h4>
+      <div class="mmeta"><span class="date">Oct 18, 2026</span> · on former OpenAI researcher Nick Cammarata's essay arguing neural networks may be easier to interpret than thought, and what that could mean for catching AI deception</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>The AI Brief</b> · assembled October 19, 2026 · sources linked inline.<br>
+    Bookmark: roquecorona.github.io/dailyaibrief
+  </footer>
+
+</div>
+
+
+<script>
+  (function(){
+    var root=document.documentElement, label=document.getElementById('themeLabel'),
+        icon=document.getElementById('themeIcon'), btn=document.getElementById('themeToggle');
+    var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+    function apply(t){
+      root.setAttribute('data-theme',t);
+      label.textContent = t==='dark' ? 'Light' : 'Dark';
+      icon.innerHTML = t==='dark' ? sun : moon;
+      try{localStorage.setItem('aibrief-theme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('aibrief-theme');}catch(e){}
+    apply(saved || 'light');
+    btn.addEventListener('click',function(){
+      apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
+</body>
+</html>
